@@ -1,9 +1,9 @@
 import {defineField, defineType} from 'sanity'
 import {UserIcon} from '@sanity/icons'
 
-export const person = defineType({
+export const runner = defineType({
   type: 'document',
-  name: 'person',
+  name: 'runner',
   title: 'Løbere',
   icon: UserIcon,
   preview: {
@@ -11,7 +11,7 @@ export const person = defineType({
     prepare({firstName, lastName, media}) {
       return {
         title: `${firstName} ${lastName}`,
-        media: media || UserIcon
+        media: media || UserIcon,
       }
     },
   },
@@ -45,27 +45,28 @@ export const person = defineType({
       validation: (rule) => rule.required().error('Slug er påkrævet'),
     }),
     defineField({
-        name: 'age',
-        title: 'Alder',
-        type: 'number',
+      name: 'age',
+      title: 'Alder',
+      type: 'number',
     }),
     defineField({
-        name: 'gender',
-        title: 'Køn',
-        type: 'string',
-        options: {
-          list: [
-             {title: 'Mand', value: 'male'},
-              {title: 'Kvinde', value: 'female'},
-          ]
-        },
+      name: 'gender',
+      title: 'Køn',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Mand', value: 'male'},
+          {title: 'Kvinde', value: 'female'},
+        ],
+      },
     }),
     defineField({
       name: 'image',
       title: 'Billede',
       type: 'image',
       options: {
-    hotspot: true
-  }    }),
+        hotspot: true,
+      },
+    }),
   ],
 })

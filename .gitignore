@@ -18,3 +18,9 @@ logs
 
 # VS Code
 .vscode/
+
+# Sanity
+.sanity/
+sanity/node_modules/
+sanity/.env
+sanity/.env.*

@@ -37,7 +37,7 @@ export const result = defineType({
       name: 'runner',
       title: 'Løber',
       type: 'reference',
-      to: [{type: 'person'}],
+      to: [{type: 'runner'}],
     }),
     defineField({
       name: 'cutoff',
