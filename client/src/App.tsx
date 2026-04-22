@@ -1,8 +1,13 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Runner from './pages/Runner';
+
 function App() {
   return (
-    <>
-      <h1 className="bg-red-50 w-10">Hej</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/runner" element={<Runner />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
