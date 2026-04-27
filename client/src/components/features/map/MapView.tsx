@@ -1,6 +1,8 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { socket } from '../../../services/socket';
+import { useRunners } from '../../../hooks/useRunners';
+import { RunnerIcon } from '../../ui/RunnerIcon';
 
 type RunnerPosition = {
   runnerId: string;
@@ -9,13 +11,19 @@ type RunnerPosition = {
 };
 
 export default function MapView() {
-  const [runners, setRunners] = useState<Record<string, [number, number]>>({});
+  const [positions, setPositions] = useState<Record<string, [number, number]>>(
+    {},
+  );
+
+  const { runners, loading, error } = useRunners();
+
+  const runnerMap = useMemo(() => {
+    return Object.fromEntries(runners.map((runner) => [runner._id, runner]));
+  }, [runners]);
 
   useEffect(() => {
     socket.on('update-runners', (data: RunnerPosition) => {
-      console.log('Modtager:', data);
-
-      setRunners((prev) => ({
+      setPositions((prev) => ({
         ...prev,
         [data.runnerId]: [data.lat, data.lng],
       }));
@@ -28,17 +36,32 @@ export default function MapView() {
 
   const defaultCenter: [number, number] = [55.6761, 12.5683];
 
-  return (
-    <MapContainer
-      center={defaultCenter}
-      zoom={13}
-      style={{ height: '400px', width: '100%' }}
-    >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+  if (loading) return <p>Loading map...</p>;
+  if (error) return <p>{error}</p>;
 
-      {Object.entries(runners).map(([runnerId, position]) => (
-        <Marker key={runnerId} position={position} />
-      ))}
-    </MapContainer>
+  return (
+    <div className="w-full h-125 rounded-xl overflow-hidden shadow-lg">
+      <MapContainer
+        center={defaultCenter}
+        zoom={13}
+        className="w-full h-full z-0"
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+        {Object.entries(positions).map(([runnerId, position]) => {
+          const runner = runnerMap[runnerId];
+
+          if (!runner) return null;
+
+          return (
+            <Marker
+              key={runnerId}
+              position={position}
+              icon={RunnerIcon(runner.imageUrl || '')}
+            />
+          );
+        })}
+      </MapContainer>
+    </div>
   );
 }
