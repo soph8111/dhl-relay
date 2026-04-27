@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { sanityClient } from '../sanity/client';
+import { sanityClient } from '../services/sanityClient';
 import { getRunnersQuery } from '../sanity/queries/runnerQueries';
 
 export interface Runner {
   _id: string;
   firstName: string;
   lastName: string;
+  alias: string;
   imageUrl?: string;
 }
 

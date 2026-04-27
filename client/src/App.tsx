@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Runner from './pages/Runner';
+import RunnerPage from './pages/RunnerPage';
+import ResultPage from './pages/ResultPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/runner" element={<Runner />} />
+        <Route path="/" element={<ResultPage />} />
+        <Route path="/runner" element={<RunnerPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -12,9 +12,12 @@
   "dependencies": {
     "@sanity/client": "^7.21.0",
     "@tailwindcss/vite": "^4.2.2",
+    "leaflet": "^1.9.4",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.14.2",
+    "socket.io-client": "^4.8.3",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
@@ -22,6 +25,7 @@
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@types/react-leaflet": "^2.8.3",
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^9.39.4",
     "eslint-plugin-react": "^7.37.5",
