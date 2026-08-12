@@ -1,0 +1,11 @@
+{
+  "name": "@dhl-relay/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@sanity/client": "^7.21.0",
+    "socket.io-client": "^4.8.3"
+  }
+}

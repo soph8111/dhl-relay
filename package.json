@@ -1,0 +1,10 @@
+{
+  "name": "dhl-relay",
+  "private": true,
+  "workspaces": [
+    "client",
+    "runner-app",
+    "server",
+    "packages/*"
+  ]
+}
