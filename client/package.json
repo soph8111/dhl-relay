@@ -18,7 +18,8 @@
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.14.2",
     "socket.io-client": "^4.8.3",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "@dhl-relay/shared": "*"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

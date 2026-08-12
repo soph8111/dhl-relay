@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { sanityClient } from '../services/sanityClient';
+import { sanityClient } from '../sanityClient';
 import { getRunnersQuery } from '../sanity/queries/runnerQueries';
 
 export interface Runner {
