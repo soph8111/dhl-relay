@@ -1,9 +1,10 @@
-import { useRunners } from '../hooks/useRunners';
+import { useRunners } from '@dhl-relay/ui/src/hooks/useRunners';
 import { useState } from 'react';
-import { socket } from '../services/socket';
+import { sanityClient } from '../sanityClient';
+import { socket } from '../socketClient';
 
 export default function RunnerPage() {
-  const { runners, loading, error } = useRunners();
+  const { runners, loading, error } = useRunners(sanityClient);
 
   const [selectedRunner, setSelectedRunner] = useState<string | null>(
     localStorage.getItem('runnerId'),
@@ -14,7 +15,6 @@ export default function RunnerPage() {
     localStorage.setItem('runnerId', value);
   };
 
-  // Send location to map
   const handleStart = () => {
     if (!selectedRunner) {
       alert('Please select a runner');
@@ -46,8 +46,6 @@ export default function RunnerPage() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
-
-  console.log(runners);
 
   return (
     <>
