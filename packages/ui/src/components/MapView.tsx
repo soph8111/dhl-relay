@@ -1,21 +1,21 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import { useEffect, useState, useMemo } from 'react';
-import { socket } from '../../../services/socket';
-import { useRunners } from '../../../hooks/useRunners';
-import { RunnerIcon } from '../../ui/RunnerIcon';
+import type { Socket } from 'socket.io-client';
+import type { SanityClient } from '@sanity/client';
+import { type RunnerPosition } from '@dhl-relay/shared';
+import { useRunners } from '../hooks/useRunners';
+import { RunnerIcon } from './RunnerIcon';
 
-type RunnerPosition = {
-  runnerId: string;
-  lat: number;
-  lng: number;
-};
+interface MapViewProps {
+  client: SanityClient;
+  socket: Socket;
+}
 
-export default function MapView() {
+export function MapView({ client, socket }: MapViewProps) {
   const [positions, setPositions] = useState<Record<string, [number, number]>>(
     {},
   );
-
-  const { runners, loading, error } = useRunners();
+  const { runners, loading, error } = useRunners(client);
 
   const runnerMap = useMemo(() => {
     return Object.fromEntries(runners.map((runner) => [runner._id, runner]));
@@ -32,7 +32,7 @@ export default function MapView() {
     return () => {
       socket.off('update-runners');
     };
-  }, []);
+  }, [socket]);
 
   const defaultCenter: [number, number] = [55.6761, 12.5683];
 
@@ -46,11 +46,13 @@ export default function MapView() {
         zoom={13}
         className="w-full h-full z-0"
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
 
         {Object.entries(positions).map(([runnerId, position]) => {
           const runner = runnerMap[runnerId];
-
           if (!runner) return null;
 
           return (
