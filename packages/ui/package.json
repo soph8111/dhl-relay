@@ -14,6 +14,8 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.14",
-    "@types/react-leaflet": "^2.8.3"
+    "@types/react-leaflet": "^2.8.3",
+    "@sanity/client": "^7.21.0",
+    "socket.io-client": "^4.8.3"
   }
 }

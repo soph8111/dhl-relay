@@ -40,7 +40,7 @@ export function MapView({ client, socket }: MapViewProps) {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="w-full h-125 rounded-xl overflow-hidden shadow-lg">
+    <div className="w-full h-96 rounded-xl overflow-hidden shadow-lg">
       <MapContainer
         center={defaultCenter}
         zoom={13}
