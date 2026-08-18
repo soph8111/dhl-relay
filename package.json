@@ -6,5 +6,11 @@
     "runner-app",
     "server",
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run sanity\" \"npm run client\" \"npm run runner-app\" \"npm run server\""
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
 }
