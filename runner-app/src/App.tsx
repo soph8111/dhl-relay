@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRunners } from '@dhl-relay/ui/src/hooks/useRunners';
-import { sanityClient } from './sanityClient';
-import { socket } from './socketClient';
+import { sanityClient } from '@/sanityClient';
+import { socket } from '@/socketClient';
 
 export default function App() {
   const { runners, loading, error } = useRunners(sanityClient);
