@@ -8,7 +8,11 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run sanity\" \"npm run client\" \"npm run runner-app\" \"npm run server\""
+    "client": "npm run dev --prefix client",
+    "runner-app": "npm run dev --prefix runner-app",
+    "server": "npm run dev --prefix server",
+    "sanity": "npm run dev --prefix sanity",
+    "start": "concurrently \"npm run sanity\" \"npm run client\" \"npm run runner-app\" \"npm run server\""
   },
   "devDependencies": {
     "concurrently": "^10.0.5"
