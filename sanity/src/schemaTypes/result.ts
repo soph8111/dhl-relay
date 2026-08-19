@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {UserIcon} from '@sanity/icons'
 import {RocketIcon} from '@sanity/icons'
+import {MinutesSecondsInput} from '../components/MinutesSecondsInput'
 
 export const result = defineType({
   type: 'document',
@@ -17,7 +18,9 @@ export const result = defineType({
     prepare({firstName, lastName, media, result}) {
       return {
         title: [firstName, lastName].filter(Boolean).join(' ') || 'Ukendt løber',
-        subtitle: result ? `Resultat: ${result}` : 'Intet resultat',
+        subtitle: result
+          ? `Resultat: ${Math.floor(result / 60)}:${String(result % 60).padStart(2, '0')} minn`
+          : 'Ingen resultat endnu',
         media: media || UserIcon,
       }
     },
@@ -42,15 +45,21 @@ export const result = defineType({
     defineField({
       name: 'cutoff',
       title: 'Forventet tid / Cut-off',
-      type: 'string',
-      description: 'Angiv den tid, som personen forventer at bruge på løbet',
+      type: 'number',
+      components: {
+        input: MinutesSecondsInput,
+      },
+      description: 'Angiv den forventede tid i formatet mm:ss, f.eks. 22:15',
     }),
     defineField({
       name: 'result',
       title: 'Resultat',
-      type: 'string',
+      type: 'number',
+      components: {
+        input: MinutesSecondsInput,
+      },
       description:
-        'Resultatet udfyldes automatisk, når en løber er i mål. Skulle der ske en fejl, kan resultatet indtastes manuelt',
+        'Resultatet udfyldes automatisk, når en løber er i mål. Skulle der ske en fejl, kan resultatet indtastes manuelt i formatet mm:ss, f.eks. 22:15',
     }),
   ],
 })
