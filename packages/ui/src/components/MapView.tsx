@@ -22,6 +22,25 @@ export function MapView({ client, socket }: MapViewProps) {
   }, [runners]);
 
   useEffect(() => {
+    const requestActiveRunners = () => {
+      socket.emit('request-active-runners');
+    };
+
+    socket.on('connect', requestActiveRunners);
+    if (socket.connected) {
+      requestActiveRunners();
+    }
+
+    socket.on('active-runners', (activeRunners: RunnerPosition[]) => {
+      setPositions((prev) => {
+        const next = { ...prev };
+        activeRunners.forEach((runner) => {
+          next[runner.runnerId] = [runner.lat, runner.lng];
+        });
+        return next;
+      });
+    });
+
     socket.on('update-runners', (data: RunnerPosition) => {
       setPositions((prev) => ({
         ...prev,
@@ -29,8 +48,19 @@ export function MapView({ client, socket }: MapViewProps) {
       }));
     });
 
+    socket.on('runner-stopped', ({ runnerId }: { runnerId: string }) => {
+      setPositions((prev) => {
+        const next = { ...prev };
+        delete next[runnerId];
+        return next;
+      });
+    });
+
     return () => {
+      socket.off('connect', requestActiveRunners);
+      socket.off('active-runners');
       socket.off('update-runners');
+      socket.off('runner-stopped');
     };
   }, [socket]);
 
