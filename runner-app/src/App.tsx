@@ -9,6 +9,7 @@ export default function App() {
   const [selectedRunner, setSelectedRunner] = useState<string | null>(
     localStorage.getItem('runnerId'),
   );
+  const [watchId, setWatchId] = useState<number | null>(null);
 
   const handleSelect = (value: string) => {
     setSelectedRunner(value);
@@ -17,11 +18,11 @@ export default function App() {
 
   const handleStart = () => {
     if (!selectedRunner) {
-      alert('Vælg en løber');
+      alert('Vælg en løber først');
       return;
     }
 
-    navigator.geolocation.watchPosition(
+    const id = navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
 
@@ -38,10 +39,25 @@ export default function App() {
         enableHighAccuracy: true,
       },
     );
+
+    setWatchId(id);
+  };
+
+  const handleStop = () => {
+    if (watchId !== null) {
+      navigator.geolocation.clearWatch(watchId);
+      setWatchId(null);
+    }
+
+    if (selectedRunner) {
+      socket.emit('stop', { runnerId: selectedRunner });
+    }
   };
 
   if (loading) return <p>Indlæser løbere...</p>;
   if (error) return <p>{error}</p>;
+
+  const isRunning = watchId !== null;
 
   return (
     <div style={{ padding: '1rem' }}>
@@ -50,6 +66,7 @@ export default function App() {
       <select
         value={selectedRunner || ''}
         onChange={(e) => handleSelect(e.target.value)}
+        disabled={isRunning}
       >
         <option value="">-- vælg --</option>
         {runners.map((runner) => (
@@ -62,7 +79,11 @@ export default function App() {
       </select>
 
       <div style={{ marginTop: '1rem' }}>
-        <button onClick={handleStart}>Start løb</button>
+        {!isRunning ? (
+          <button onClick={handleStart}>Start løb</button>
+        ) : (
+          <button onClick={handleStop}>Stop løb</button>
+        )}
       </div>
     </div>
   );
