@@ -17,6 +17,8 @@ export function MapView({ client, socket }: MapViewProps) {
   );
   const { runners, loading, error } = useRunners(client);
 
+  const [gpsErrors, setGpsErrors] = useState<Record<string, boolean>>({});
+
   const runnerMap = useMemo(() => {
     return Object.fromEntries(runners.map((runner) => [runner._id, runner]));
   }, [runners]);
@@ -35,11 +37,28 @@ export function MapView({ client, socket }: MapViewProps) {
       setPositions((prev) => {
         const next = { ...prev };
         activeRunners.forEach((runner) => {
-          next[runner.runnerId] = [runner.lat, runner.lng];
+          if (runner.lat != null && runner.lng != null) {
+            next[runner.runnerId] = [runner.lat, runner.lng];
+          }
+        });
+        return next;
+      });
+
+      setGpsErrors((prev) => {
+        const next = { ...prev };
+        activeRunners.forEach((runner: any) => {
+          next[runner.runnerId] = runner.hasGpsError ?? false;
         });
         return next;
       });
     });
+
+    socket.on(
+      'gps-error',
+      ({ runnerId, hasError }: { runnerId: string; hasError: boolean }) => {
+        setGpsErrors((prev) => ({ ...prev, [runnerId]: hasError }));
+      },
+    );
 
     socket.on('update-runners', (data: RunnerPosition) => {
       setPositions((prev) => ({
@@ -48,19 +67,29 @@ export function MapView({ client, socket }: MapViewProps) {
       }));
     });
 
-    socket.on('runner-stopped', ({ runnerId }: { runnerId: string }) => {
+    const remove = ({ runnerId }: { runnerId: string }) => {
       setPositions((prev) => {
         const next = { ...prev };
         delete next[runnerId];
         return next;
       });
-    });
+      setGpsErrors((prev) => {
+        const next = { ...prev };
+        delete next[runnerId];
+        return next;
+      });
+    };
+
+    socket.on('runner-stopped', remove);
+    socket.on('runner-timed-out', remove);
 
     return () => {
       socket.off('connect', requestActiveRunners);
       socket.off('active-runners');
       socket.off('update-runners');
-      socket.off('runner-stopped');
+      socket.off('gps-error');
+      socket.off('runner-stopped', remove);
+      socket.off('runner-timed-out', remove);
     };
   }, [socket]);
 
@@ -89,7 +118,10 @@ export function MapView({ client, socket }: MapViewProps) {
             <Marker
               key={runnerId}
               position={position}
-              icon={RunnerIcon(runner.imageUrl || '')}
+              icon={RunnerIcon(
+                runner.imageUrl || '',
+                gpsErrors[runnerId] || false,
+              )}
             />
           );
         })}
