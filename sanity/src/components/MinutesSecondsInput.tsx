@@ -34,12 +34,5 @@ export function MinutesSecondsInput(props: NumberInputProps) {
     onChange(seconds === undefined ? unset() : set(seconds))
   }, [text, onChange])
 
-  return (
-    <TextInput
-      value={text}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      placeholder="mm:ss, f.eks. 22:15"
-    />
-  )
+  return <TextInput value={text} onChange={handleChange} onBlur={handleBlur} placeholder="mm:ss" />
 }

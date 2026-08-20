@@ -19,8 +19,8 @@ export const result = defineType({
       return {
         title: [firstName, lastName].filter(Boolean).join(' ') || 'Ukendt løber',
         subtitle: result
-          ? `Resultat: ${Math.floor(result / 60)}:${String(result % 60).padStart(2, '0')} minn`
-          : 'Ingen resultat endnu',
+          ? `Resultat: ${Math.floor(result / 60)}:${String(result % 60).padStart(2, '0')} min`
+          : 'Intet resultat endnu',
         media: media || UserIcon,
       }
     },
