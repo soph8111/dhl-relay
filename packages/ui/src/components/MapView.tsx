@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import type { Socket } from 'socket.io-client';
 import type { SanityClient } from '@sanity/client';
 import { type RunnerPosition } from '@dhl-relay/shared';
@@ -15,13 +15,23 @@ export function MapView({ client, socket }: MapViewProps) {
   const [positions, setPositions] = useState<Record<string, [number, number]>>(
     {},
   );
-  const { runners, loading, error } = useRunners(client);
-
   const [gpsErrors, setGpsErrors] = useState<Record<string, boolean>>({});
+  const [notifications, setNotifications] = useState<
+    { id: string; text: string }[]
+  >([]);
+
+  const { runners, loading, error } = useRunners(client);
 
   const runnerMap = useMemo(() => {
     return Object.fromEntries(runners.map((runner) => [runner._id, runner]));
   }, [runners]);
+
+  // Always holds the latest runnerMap, so the socket listener (set up once)
+  // never reads a stale/empty version of it.
+  const runnerMapRef = useRef(runnerMap);
+  useEffect(() => {
+    runnerMapRef.current = runnerMap;
+  }, [runnerMap]);
 
   useEffect(() => {
     const requestActiveRunners = () => {
@@ -81,7 +91,27 @@ export function MapView({ client, socket }: MapViewProps) {
     };
 
     socket.on('runner-stopped', remove);
-    socket.on('runner-timed-out', remove);
+
+    socket.on('runner-timed-out', ({ runnerId }: { runnerId: string }) => {
+      remove({ runnerId });
+
+      const runner = runnerMapRef.current[runnerId];
+      const name = runner
+        ? runner.firstName && runner.lastName
+          ? `${runner.firstName} ${runner.lastName}`
+          : runner.alias
+        : 'En løber';
+
+      const notificationId = `${runnerId}-${Date.now()}`;
+      setNotifications((prev) => [
+        ...prev,
+        { id: notificationId, text: `${name} mistede forbindelsen` },
+      ]);
+
+      setTimeout(() => {
+        setNotifications((prev) => prev.filter((n) => n.id !== notificationId));
+      }, 6000);
+    });
 
     return () => {
       socket.off('connect', requestActiveRunners);
@@ -89,7 +119,7 @@ export function MapView({ client, socket }: MapViewProps) {
       socket.off('update-runners');
       socket.off('gps-error');
       socket.off('runner-stopped', remove);
-      socket.off('runner-timed-out', remove);
+      socket.off('runner-timed-out');
     };
   }, [socket]);
 
@@ -99,7 +129,19 @@ export function MapView({ client, socket }: MapViewProps) {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="w-full h-96 rounded-xl overflow-hidden shadow-lg">
+    <div className="relative w-full h-96 rounded-xl overflow-hidden shadow-lg">
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-[1100] flex flex-col gap-2 w-11/12 max-w-sm">
+        {notifications.map((n) => (
+          <div
+            key={n.id}
+            className="bg-white text-gray-900 rounded-lg shadow-lg px-4 py-2 text-sm flex items-center gap-2 border-l-4 border-red-500"
+          >
+            <span className="text-red-600 font-bold">!</span>
+            <span>{n.text}</span>
+          </div>
+        ))}
+      </div>
+
       <MapContainer
         center={defaultCenter}
         zoom={13}
