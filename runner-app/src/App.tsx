@@ -5,7 +5,7 @@ import { socket } from '@/socketClient';
 import type { RunnerPosition } from '@dhl-relay/shared';
 
 // Interval for sending position updates to the server (in milliseconds)
-const POSITION_INTERVAL_MS = 8000;
+const POSITION_INTERVAL_MS = 5000;
 
 export default function App() {
   const { runners, loading, error } = useRunners(sanityClient);
