@@ -1,10 +1,17 @@
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polyline,
+  CircleMarker,
+} from 'react-leaflet';
 import { useEffect, useState, useMemo, useRef } from 'react';
 import type { Socket } from 'socket.io-client';
 import type { SanityClient } from '@sanity/client';
 import { type RunnerPosition } from '@dhl-relay/shared';
 import { useRunners } from '../hooks/useRunners';
 import { RunnerIcon } from './RunnerIcon';
+import { DHL_ROUTE_2026 } from '../data/dhlRoute2026';
 
 interface MapViewProps {
   client: SanityClient;
@@ -130,7 +137,7 @@ export function MapView({ client, socket }: MapViewProps) {
 
   return (
     <div className="relative w-full h-96 rounded-xl overflow-hidden shadow-lg">
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-[1100] flex flex-col gap-2 w-11/12 max-w-sm">
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-1100 flex flex-col gap-2 w-11/12 max-w-sm">
         {notifications.map((n) => (
           <div
             key={n.id}
@@ -150,6 +157,32 @@ export function MapView({ client, socket }: MapViewProps) {
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        {/* DHL Route drawn on map */}
+        <Polyline
+          positions={DHL_ROUTE_2026}
+          pathOptions={{ color: '#f97316', weight: 1.8, opacity: 0.8 }}
+        />
+        <CircleMarker
+          center={DHL_ROUTE_2026[0]}
+          radius={4}
+          pathOptions={{
+            color: '#ffffff',
+            weight: 1,
+            fillColor: '#16a34a',
+            fillOpacity: 1,
+          }}
+        />
+
+        <CircleMarker
+          center={DHL_ROUTE_2026[DHL_ROUTE_2026.length - 1]}
+          radius={4}
+          pathOptions={{
+            color: '#ffffff',
+            weight: 1,
+            fillColor: '#dc2626',
+            fillOpacity: 1,
+          }}
         />
 
         {Object.entries(positions).map(([runnerId, position]) => {
