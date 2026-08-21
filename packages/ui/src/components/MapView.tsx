@@ -130,7 +130,9 @@ export function MapView({ client, socket }: MapViewProps) {
     };
   }, [socket]);
 
-  const defaultCenter: [number, number] = [55.6761, 12.5683];
+  const defaultCenter: [number, number] = [
+    55.70107442646823, 12.568908098436069,
+  ];
 
   if (loading) return <p>Loading map...</p>;
   if (error) return <p>{error}</p>;
@@ -151,7 +153,7 @@ export function MapView({ client, socket }: MapViewProps) {
 
       <MapContainer
         center={defaultCenter}
-        zoom={13}
+        zoom={15}
         className="w-full h-full z-0"
       >
         <TileLayer
