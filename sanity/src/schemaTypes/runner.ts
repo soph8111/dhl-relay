@@ -68,5 +68,41 @@ export const runner = defineType({
         hotspot: true,
       },
     }),
+    defineField({
+      name: 'isReferenceRunner',
+      title: 'Referenceløber',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Markér denne løber som referencen (fx chefen), alle andres tid måles op imod',
+      // Custom validation to ensure only one runner can be marked as reference runner
+      validation: (Rule) =>
+        Rule.custom(async (value, context) => {
+          if (!value) return true
+
+          const client = context.getClient({apiVersion: '2024-01-01'})
+          const publishedId = context.document?._id?.replace(/^drafts\./, '')
+          const draftId = `drafts.${publishedId}`
+
+          const existing = await client.fetch(
+            `*[_type == "runner" && isReferenceRunner == true && !(_id in [$publishedId, $draftId])][0]{
+          firstName,
+          lastName,
+          alias
+        }`,
+            {publishedId, draftId},
+          )
+
+          if (existing) {
+            const name =
+              existing.firstName && existing.lastName
+                ? `${existing.firstName} ${existing.lastName}`
+                : existing.alias || 'en anden løber'
+
+            return `${name} er allerede markeret som referenceløber. Fjern markeringen der først.`
+          }
+
+          return true
+        }),
+    }),
   ],
 })
