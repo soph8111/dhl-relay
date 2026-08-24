@@ -4,7 +4,7 @@ export interface Runner {
   lastName: string;
   alias?: string;
   age: number;
-  gender: 'male' | 'female' | 'non-binary';
+  gender: 'male' | 'female' | 'non-binary' | 'prefer-not-to-say';
   imageUrl?: string;
 }
 

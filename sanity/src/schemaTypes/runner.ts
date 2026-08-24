@@ -58,6 +58,7 @@ export const runner = defineType({
           {title: 'Mand', value: 'male'},
           {title: 'Kvinde', value: 'female'},
           {title: 'Ikke-binær', value: 'non-binary'},
+          {title: 'Ønsker ikke at oplyse', value: 'prefer-not-to-say'},
         ],
       },
     }),
