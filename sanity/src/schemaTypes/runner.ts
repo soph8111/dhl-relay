@@ -57,6 +57,7 @@ export const runner = defineType({
         list: [
           {title: 'Mand', value: 'male'},
           {title: 'Kvinde', value: 'female'},
+          {title: 'Ikke-binær', value: 'non-binary'},
         ],
       },
     }),
