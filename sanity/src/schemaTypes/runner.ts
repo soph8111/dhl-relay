@@ -61,6 +61,7 @@ export const runner = defineType({
           {title: 'Ønsker ikke at oplyse', value: 'prefer-not-to-say'},
         ],
       },
+      validation: (rule) => rule.required().error('Køn er påkrævet'),
     }),
     defineField({
       name: 'image',
