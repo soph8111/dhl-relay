@@ -3,5 +3,7 @@ export const RUNNER_FRAGMENT = /* groq */ `
   firstName,
   lastName,
   alias,
-  "imageUrl": image.asset->url
+  age,
+  gender,
+  "imageUrl": image.asset->url,
 `;

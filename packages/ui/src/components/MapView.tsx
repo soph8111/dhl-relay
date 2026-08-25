@@ -11,7 +11,7 @@ import type { SanityClient } from '@sanity/client';
 import { type RunnerPosition } from '@dhl-relay/shared';
 import { useRunners } from '../hooks/useRunners';
 import { RunnerIcon } from './RunnerIcon';
-import { DHL_ROUTE_2026 } from '../data/dhlRoute2026';
+import { DHL_ROUTE_2026 } from '@dhl-relay/ui';
 
 interface MapViewProps {
   client: SanityClient;

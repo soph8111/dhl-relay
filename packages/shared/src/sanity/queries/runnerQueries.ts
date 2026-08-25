@@ -1,4 +1,4 @@
-import { RUNNER_FRAGMENT } from '../fragements/runnerFragment';
+import { RUNNER_FRAGMENT } from '../fragments/runnerFragment';
 
 export const getRunnersQuery = `
   *[_type == "runner"]{

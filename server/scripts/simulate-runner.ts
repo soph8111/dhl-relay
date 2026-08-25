@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-import { DHL_ROUTE_2026 } from '../../packages/ui/src/data/dhlRoute2026';
+import { DHL_ROUTE_2026 } from '@dhl-relay/ui';
 
 // In terminal: run "npx tsx server/scripts/simulate-runner.ts <RUNNER_ID>" to simulate a runner moving along the DHL route
 // The runner will move at a constant speed of 30 km/h and send its position to the server every 5 seconds

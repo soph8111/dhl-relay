@@ -1,7 +1,12 @@
-import { MapView } from '@dhl-relay/ui/src/components/MapView';
-import { sanityClient } from '@/sanityClient';
+import { MapView, Leaderboard } from '@dhl-relay/ui';
+import { sanityClient, sanityClientFresh } from '@/sanityClient';
 import { socket } from '@/socketClient';
 
 export default function ResultPage() {
-  return <MapView client={sanityClient} socket={socket} />;
+  return (
+    <>
+      <MapView client={sanityClient} socket={socket} />
+      <Leaderboard client={sanityClientFresh} />
+    </>
+  );
 }
