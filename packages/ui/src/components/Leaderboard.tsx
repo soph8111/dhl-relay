@@ -38,7 +38,10 @@ export function Leaderboard({ client }: LeaderboardProps) {
               Løber
             </th>
             <th className="px-4 py-2 text-sm font-semibold text-gray-500 text-right">
-              Tid
+              Faktisk tid
+            </th>
+            <th className="px-4 py-2 text-sm font-semibold text-gray-500 text-right">
+              Direktørtid
             </th>
             <th className="px-4 py-2 text-sm font-semibold text-gray-500 text-center">
               Slog chef
@@ -76,6 +79,9 @@ export function Leaderboard({ client }: LeaderboardProps) {
                 </td>
                 <td className="px-4 py-2 text-right font-mono">
                   {formatTime(entry.resultSeconds)}
+                </td>
+                <td className="px-4 py-2 text-right font-mono">
+                  {isReference ? '—' : formatTime(entry.comparedResultSeconds)}
                 </td>
                 <td className="px-4 py-2 text-center">
                   {!isReference && entry.beatsReference ? '⭐' : ''}

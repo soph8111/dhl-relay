@@ -4,6 +4,7 @@ export interface LeaderboardEntry {
   runner: Runner;
   resultSeconds: number;
   targetSeconds: number;
+  comparedResultSeconds: number;
   beatsReference: boolean;
 }
 
@@ -49,6 +50,15 @@ export function calculateTargetSeconds(
   return (normalizedReferenceSeconds + diff) * runnerFactor;
 }
 
+//
+export function comparedResultSeconds(
+  actualSeconds: number,
+  targetSeconds: number,
+  referenceActualSeconds: number,
+): number {
+  return referenceActualSeconds + (actualSeconds - targetSeconds);
+}
+
 // Check if the runner beats the reference
 export function beatsReference(
   actualSeconds: number,
@@ -81,6 +91,11 @@ export function buildLeaderboard(
         runner,
         resultSeconds,
         targetSeconds,
+        comparedResultSeconds: comparedResultSeconds(
+          resultSeconds,
+          targetSeconds,
+          reference.resultSeconds,
+        ),
         beatsReference: beatsReference(resultSeconds, targetSeconds),
       };
     })
