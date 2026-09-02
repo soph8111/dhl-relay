@@ -5,6 +5,7 @@ export interface LeaderboardEntry {
   resultSeconds: number;
   targetSeconds: number;
   comparedResultSeconds: number;
+  marginSeconds: number;
   beatsReference: boolean;
 }
 
@@ -87,15 +88,18 @@ export function buildLeaderboard(
         reference.gender,
       );
 
+      const comparedSeconds = comparedResultSeconds(
+        resultSeconds,
+        targetSeconds,
+        reference.resultSeconds,
+      );
+
       return {
         runner,
         resultSeconds,
         targetSeconds,
-        comparedResultSeconds: comparedResultSeconds(
-          resultSeconds,
-          targetSeconds,
-          reference.resultSeconds,
-        ),
+        comparedResultSeconds: comparedSeconds,
+        marginSeconds: resultSeconds - targetSeconds,
         beatsReference: beatsReference(resultSeconds, targetSeconds),
       };
     })
