@@ -1,5 +1,6 @@
 import { useLeaderboard } from '../hooks/useLeaderboard';
 import type { SanityClient } from '@sanity/client';
+import { formatSignedSeconds } from '@dhl-relay/shared';
 
 interface LeaderboardProps {
   client: SanityClient;
@@ -87,7 +88,16 @@ export function Leaderboard({ client }: LeaderboardProps) {
                   {formatTime(entry.resultSeconds)}
                 </td>
                 <td className="px-4 py-2 text-right font-mono">
-                  {isReference ? '—' : formatTime(entry.comparedResultSeconds)}
+                  {isReference ? (
+                    '—'
+                  ) : (
+                    <>
+                      <div>{formatTime(entry.comparedResultSeconds)}</div>
+                      <div className="text-xs text-gray-400 font-sans">
+                        {formatSignedSeconds(entry.marginSeconds)}
+                      </div>
+                    </>
+                  )}
                 </td>
                 <td className="px-4 py-2 text-center">
                   {!isReference && entry.beatsReference ? '⭐' : ''}
