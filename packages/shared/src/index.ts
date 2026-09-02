@@ -12,4 +12,10 @@ export {
   getFinishedResultsQuery,
   getTotalRunnersCountQuery,
 } from './sanity/queries/statsQueries';
-export { formatSeconds, formatSignedSeconds } from './formatSeconds';
+export {
+  formatSeconds,
+  formatSignedSeconds,
+  formatDuration,
+} from './formatSeconds';
+export { getTeamStandingsQuery } from './sanity/queries/teamQueries';
+export { buildTeamStandings, type TeamStanding } from './teamStats';
