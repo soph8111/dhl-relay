@@ -2,5 +2,8 @@ export { MapView } from './components/MapView';
 export { RunnerIcon } from './components/RunnerIcon';
 export { useRunners } from './hooks/useRunners';
 export { useLeaderboard } from './hooks/useLeaderboard';
+export { useEventStats } from './hooks/useEventStats';
 export { DHL_ROUTE_2026 } from './data/dhlRoute2026';
 export { Leaderboard } from './components/Leaderboard';
+export { StatCard } from './components/StatCard';
+export { StatsGrid } from './components/StatsGrid';
