@@ -24,7 +24,11 @@ export const team = defineType({
       title: 'Løbere',
       of: [{type: 'reference', to: [{type: 'runner'}]}],
       validation: (rule) =>
-        rule.min(1).max(5).error('Et hold skal have mindst én løber og højst 5 løbere'),
+        rule
+          .length(5)
+          .error(
+            'Et hold skal have præcis 5 løbere. En løber kan godt være på et hold flere gange.',
+          ),
     }),
   ],
 })
