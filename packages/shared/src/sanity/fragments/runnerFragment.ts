@@ -6,4 +6,5 @@ export const RUNNER_FRAGMENT = /* groq */ `
   age,
   gender,
   "imageUrl": image.asset->url,
+  "teamNames": *[_type == "team" && references(^._id)].teamName
 `;

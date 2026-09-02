@@ -1,6 +1,7 @@
 import {StructureResolver} from 'sanity/structure'
 import {runner} from '../schemaTypes/runner'
 import {result} from '../schemaTypes/result'
+import {team} from '../schemaTypes/teams'
 
 export const structure: StructureResolver = (S, context) => {
   const currentYear = new Date().getFullYear()
@@ -11,6 +12,8 @@ export const structure: StructureResolver = (S, context) => {
     .items([
       // Runners
       S.listItem().icon(runner.icon).title('Løbere').child(S.documentTypeList(runner.name)),
+      // Teams
+      S.listItem().icon(team.icon).title('Hold').child(S.documentTypeList(team.name)),
 
       // Results, sortet by year
       S.listItem()

@@ -7,6 +7,7 @@ export interface Runner {
   age: number;
   gender: Gender;
   imageUrl?: string;
+  teamNames?: string[];
 }
 export interface RunnerPosition {
   runnerId: string;
