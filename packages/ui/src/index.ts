@@ -7,3 +7,5 @@ export { DHL_ROUTE_2026 } from './data/dhlRoute2026';
 export { Leaderboard } from './components/Leaderboard';
 export { StatCard } from './components/StatCard';
 export { StatsGrid } from './components/StatsGrid';
+export { TeamStandingsCard } from './components/TeamStandingsCard';
+export { useTeamStandings } from './hooks/useTeamStandings';
