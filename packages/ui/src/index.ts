@@ -11,3 +11,4 @@ export { TeamStandingsCard } from './components/TeamStandingsCard';
 export { useTeamStandings } from './hooks/useTeamStandings';
 export { useTheme } from './hooks/useTheme';
 export { ThemeToggle } from './components/ThemeToggle';
+export { Header } from './components/Header';
