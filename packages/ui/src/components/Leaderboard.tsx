@@ -76,13 +76,11 @@ export function Leaderboard({ client }: LeaderboardProps) {
                   <span>{runnerName(entry.runner)}</span>
                   {entry.runner.teamNames &&
                     entry.runner.teamNames.length > 0 && (
-                      <span className="block text-xs text-gray-400">
+                      <span className="block text-gray-400">
                         {entry.runner.teamNames.join(', ')}
                       </span>
                     )}
-                  {isReference && (
-                    <span className="text-xs opacity-75">(chef)</span>
-                  )}
+                  {isReference && <span className=" opacity-75">(chef)</span>}
                 </td>
                 <td className="px-4 py-2 text-right font-mono">
                   {formatTime(entry.resultSeconds)}
