@@ -45,6 +45,7 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: var(--color-background);
   color: var(--color-gray);
+  line-height: 1.2;
 }
 
 /* Tailwind utilities */
@@ -75,6 +76,9 @@ body {
   /* Border radius */
   --radius-sm: 0.9375rem; /* 15px */
   --radius-l: 1.5625rem; /* 25px */
+
+  /* Fonts */
+  --text-6xl: 3.5rem; /* 56px */
 }
 
 /* Leaflet map styling */

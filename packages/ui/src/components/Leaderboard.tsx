@@ -30,7 +30,7 @@ export function Leaderboard({ client }: LeaderboardProps) {
   if (entries.length === 0) return <p>Ingen resultater endnu.</p>;
 
   return (
-    <div className="w-full h-96 overflow-y-auto rounded-xl shadow-lg bg-white">
+    <div className="h-96 overflow-y-auto rounded-xl shadow-lg bg-white">
       <table className="w-full text-left border-collapse">
         <thead className="sticky top-0 bg-white border-b border-gray-200">
           <tr>
@@ -39,7 +39,7 @@ export function Leaderboard({ client }: LeaderboardProps) {
               Løber
             </th>
             <th className="px-4 py-2 text-sm font-semibold text-gray-500 text-right">
-              Faktisk tid
+              Faktisk tids
             </th>
             <th className="px-4 py-2 text-sm font-semibold text-gray-500 text-right">
               Direktørtid
