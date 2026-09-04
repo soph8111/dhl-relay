@@ -12,16 +12,25 @@ import { type RunnerPosition } from '@dhl-relay/shared';
 import { useRunners } from '../hooks/useRunners';
 import { RunnerIcon } from './RunnerIcon';
 import { DHL_ROUTE_2026 } from '@dhl-relay/ui';
-
+import { useTheme } from '../context/ThemeContext';
 interface MapViewProps {
   client: SanityClient;
   socket: Socket;
+  cartoApiKey: string;
 }
 
-export function MapView({ client, socket }: MapViewProps) {
+export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
+  const { theme } = useTheme();
+
+  const tileUrl =
+    theme === 'dark'
+      ? `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${cartoApiKey}`
+      : `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${cartoApiKey}`;
+
   const [positions, setPositions] = useState<Record<string, [number, number]>>(
     {},
   );
+
   const [gpsErrors, setGpsErrors] = useState<Record<string, boolean>>({});
   const [notifications, setNotifications] = useState<
     { id: string; text: string }[]
@@ -33,8 +42,7 @@ export function MapView({ client, socket }: MapViewProps) {
     return Object.fromEntries(runners.map((runner) => [runner._id, runner]));
   }, [runners]);
 
-  // Always holds the latest runnerMap, so the socket listener (set up once)
-  // never reads a stale/empty version of it.
+  // Always holds the latest runnerMap, so the socket listener (set up once) never reads a stale/empty version of it
   const runnerMapRef = useRef(runnerMap);
   useEffect(() => {
     runnerMapRef.current = runnerMap;
@@ -112,7 +120,7 @@ export function MapView({ client, socket }: MapViewProps) {
       const notificationId = `${runnerId}-${Date.now()}`;
       setNotifications((prev) => [
         ...prev,
-        { id: notificationId, text: `${name} mistede forbindelsen` },
+        { id: notificationId, text: `${name} lost connection` },
       ]);
 
       setTimeout(() => {
@@ -138,71 +146,84 @@ export function MapView({ client, socket }: MapViewProps) {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="relative w-full h-96 rounded-xl overflow-hidden shadow-lg">
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-1100 flex flex-col gap-2 w-11/12 max-w-sm">
-        {notifications.map((n) => (
-          <div
-            key={n.id}
-            className="bg-white text-gray-900 rounded-lg shadow-lg px-4 py-2 text-sm flex items-center gap-2 border-l-4 border-red-500"
-          >
-            <span className="text-red-600 font-bold">!</span>
-            <span>{n.text}</span>
-          </div>
-        ))}
+    <div>
+      <div className="flex items-center gap-2 justify-self-end mb-2 ">
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red opacity-75"></span>
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red"></span>
+        </span>
+        <span className="text-surface-content text-sm font-medium">Live</span>
       </div>
+      <div className="relative w-full h-96 rounded-xl overflow-hidden">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-1100 flex flex-col gap-2 w-11/12 max-w-sm">
+          {notifications.map((n) => (
+            <div
+              key={n.id}
+              className="bg-white text-gray-900 rounded-lg shadow-lg px-4 py-2 text-sm flex items-center gap-2 border-l-4 border-red"
+            >
+              <span className="text-red font-bold">!</span>
+              <span>{n.text}</span>
+            </div>
+          ))}
+        </div>
 
-      <MapContainer
-        center={defaultCenter}
-        zoom={15}
-        className="w-full h-full z-0"
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        {/* DHL Route drawn on map */}
-        <Polyline
-          positions={DHL_ROUTE_2026}
-          pathOptions={{ color: '#f97316', weight: 1.8, opacity: 0.8 }}
-        />
-        <CircleMarker
-          center={DHL_ROUTE_2026[0]}
-          radius={4}
-          pathOptions={{
-            color: '#ffffff',
-            weight: 1,
-            fillColor: '#16a34a',
-            fillOpacity: 1,
-          }}
-        />
+        <MapContainer
+          center={defaultCenter}
+          className="w-full h-full"
+          zoom={15}
+        >
+          <TileLayer
+            url={tileUrl}
+            attribution='&copy; <a href="https://carto.com/attributions">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {/* DHL Route drawn on map */}
+          <Polyline
+            positions={DHL_ROUTE_2026}
+            pathOptions={{
+              color: 'var(--color-purple)',
+              weight: 1.8,
+              opacity: 0.8,
+            }}
+          />
+          <CircleMarker
+            center={DHL_ROUTE_2026[0]}
+            radius={4}
+            pathOptions={{
+              weight: 1,
+              fillColor: '#16a34a',
+              color: '#16a34a',
+              fillOpacity: 1,
+            }}
+          />
 
-        <CircleMarker
-          center={DHL_ROUTE_2026[DHL_ROUTE_2026.length - 1]}
-          radius={4}
-          pathOptions={{
-            color: '#ffffff',
-            weight: 1,
-            fillColor: '#dc2626',
-            fillOpacity: 1,
-          }}
-        />
+          <CircleMarker
+            center={DHL_ROUTE_2026[DHL_ROUTE_2026.length - 1]}
+            radius={4}
+            pathOptions={{
+              color: 'var(--color-red)',
+              weight: 1,
+              fillColor: 'var(--color-red)',
+              fillOpacity: 1,
+            }}
+          />
 
-        {Object.entries(positions).map(([runnerId, position]) => {
-          const runner = runnerMap[runnerId];
-          if (!runner) return null;
+          {Object.entries(positions).map(([runnerId, position]) => {
+            const runner = runnerMap[runnerId];
+            if (!runner) return null;
 
-          return (
-            <Marker
-              key={runnerId}
-              position={position}
-              icon={RunnerIcon(
-                runner.imageUrl || '',
-                gpsErrors[runnerId] || false,
-              )}
-            />
-          );
-        })}
-      </MapContainer>
+            return (
+              <Marker
+                key={runnerId}
+                position={position}
+                icon={RunnerIcon(
+                  runner.imageUrl || '',
+                  gpsErrors[runnerId] || false,
+                )}
+              />
+            );
+          })}
+        </MapContainer>
+      </div>
     </div>
   );
 }
