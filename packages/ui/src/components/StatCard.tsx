@@ -15,22 +15,28 @@ export function StatCard({
 }: StatCardProps) {
   if (variant === 'horizontal') {
     return (
-      <div className="bg-gray-800 rounded-xl px-4 py-3 flex items-center gap-3">
-        <div className="text-4xl font-bold text-white">{value}</div>
-        <div>
-          <div className="text-sm font-semibold text-white">{label}</div>
-          {sublabel && <div className="text-xs text-gray-400">{sublabel}</div>}
+      <div className="flex gap-3 px-6">
+        <div className="w-1/3 text-6xl font-semibold text-right text-surface-content">
+          {value}
+        </div>
+        <div className="w-2/3">
+          <div className="text-surface-content">{label}</div>
+          {sublabel && (
+            <div className="text-surface-content-muted">{sublabel}</div>
+          )}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-800 rounded-xl px-4 py-3">
-      <div className="text-sm text-gray-400">{label}</div>
+    <div className="flex flex-col gap-2">
+      <div className="text-surface-content-muted">{label}</div>
       <div className="flex items-baseline gap-1">
-        <span className="text-4xl font-bold text-white">{value}</span>
-        {unit && <span className="text-sm text-gray-400">{unit}</span>}
+        <span className="text-6xl font-semibold text-surface-content">
+          {value}
+        </span>
+        {unit && <span className="text-surface-content-muted">{unit}</span>}
       </div>
     </div>
   );
