@@ -9,6 +9,7 @@
   --color-gray: oklch(0.6633 0 0); /* #939393 */
   --color-purple: oklch(0.5007 0.2267 292.99); /* #6F34D5 */
   --color-orange: oklch(0.6357 0.2504 30.62); /* #FF1F00 */
+  --color-red: oklch(0.6357 0.2504 30.62); /* #FF1F00 */
 
   --color-light-50: oklch(0 0 0 / 0.07); /* #00000012 */
   --color-light-100: oklch(0.9551 0 0); /* #F0F0F0 */
@@ -69,8 +70,15 @@ body {
   --color-dark-100: var(--color-dark-100);
   --color-purple: var(--color-purple);
   --color-orange: var(--color-orange);
+  --color-red: var(--color-red);
 
   /* Border radius */
   --radius-sm: 0.9375rem; /* 15px */
   --radius-l: 1.5625rem; /* 25px */
+}
+
+/* Leaflet map styling */
+.leaflet-container {
+  background: var(--color-surface) !important;
+  font-family: 'Inter', sans-serif !important;
 }
