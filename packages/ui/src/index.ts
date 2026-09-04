@@ -9,6 +9,6 @@ export { StatCard } from './components/StatCard';
 export { StatsGrid } from './components/StatsGrid';
 export { TeamStandingsCard } from './components/TeamStandingsCard';
 export { useTeamStandings } from './hooks/useTeamStandings';
-export { useTheme } from './hooks/useTheme';
 export { ThemeToggle } from './components/ThemeToggle';
 export { Header } from './components/Header';
+export { ThemeProvider, useTheme } from './context/ThemeContext';

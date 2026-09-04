@@ -1,4 +1,4 @@
-import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../context/ThemeContext';
 import MoonIcon from '../icons/Moon';
 import SunIcon from '../icons/Sun';
 
