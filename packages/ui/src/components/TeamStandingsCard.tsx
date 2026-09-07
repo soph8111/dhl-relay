@@ -16,7 +16,7 @@ export function TeamStandingsCard({ client }: TeamStandingsCardProps) {
     );
 
   return (
-    <div className="bg-surface rounded-xl px-4 py-3">
+    <div className="bg-surface rounded-xl px-4 py-3 h-full">
       <div className="text-sm font-semibold text-white mb-2">Fastest teams</div>
       <div className="flex flex-col gap-1">
         {standings.map((team) => (

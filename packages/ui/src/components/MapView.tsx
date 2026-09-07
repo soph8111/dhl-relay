@@ -146,8 +146,8 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <div className="relative w-full h-96 rounded-xl overflow-hidden">
+    <div className="h-full">
+      <div className="relative w-full h-96 md:h-full rounded-xl overflow-hidden">
         <div className="absolute top-2 left-1/2 -translate-x-1/2 z-1100 flex flex-col gap-2 w-11/12 max-w-sm">
           {notifications.map((n) => (
             <div

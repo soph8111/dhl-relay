@@ -46,7 +46,7 @@ export function Leaderboard({ client }: LeaderboardProps) {
     );
 
   return (
-    <div className="flex flex-col md:-mt-7 md:h-full">
+    <div className="flex flex-col md:h-full">
       <div className="flex items-center px-2 md:px-4 pb-2 text-xs text-surface-content">
         <span className="w-5 md:w-8">#</span>
         <span className="flex-1">Runner</span>

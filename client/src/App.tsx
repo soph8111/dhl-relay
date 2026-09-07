@@ -6,7 +6,7 @@ import { ThemeProvider } from '@dhl-relay/ui';
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen m-4 md:m-5">
+      <div className="m-4 md:m-5">
         <Header />
         <main>
           <BrowserRouter>
