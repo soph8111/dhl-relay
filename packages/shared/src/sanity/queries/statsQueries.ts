@@ -1,5 +1,5 @@
 export const getTotalRunnersCountQuery = /* groq */ `
-  count(*[_type == "runner"])
+  count(*[_type == "team"].runners[])
 `;
 
 export const getFinishedResultsQuery = /* groq */ `
