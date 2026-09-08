@@ -12,10 +12,43 @@ export const structure: StructureResolver = (S, context) => {
     .items([
       // Runners
       S.listItem().icon(runner.icon).title('Løbere').child(S.documentTypeList(runner.name)),
-      // Teams
-      S.listItem().icon(team.icon).title('Hold').child(S.documentTypeList(team.name)),
 
-      // Results, sortet by year
+      // Teams, sorted by year
+      S.listItem()
+        .icon(team.icon)
+        .title('Hold')
+        .child(
+          S.list()
+            .title('Hold')
+            .items([
+              S.listItem()
+                .title('Alle hold')
+                .icon(team.icon)
+                .child(
+                  S.documentList()
+                    .title('Alle hold')
+                    .filter('_type == "team"')
+                    .defaultOrdering([{field: 'year', direction: 'desc'}]),
+                ),
+
+              S.divider(),
+              ...Array.from({length: currentYear - 2015}, (_, i) => {
+                const year = currentYear - i
+                return S.listItem()
+                  .title(`${year}`)
+                  .icon(team.icon)
+                  .child(
+                    S.documentList()
+                      .title(`Hold ${year}`)
+                      .filter('_type == "team" && year == $year')
+                      .params({year})
+                      .defaultOrdering([{field: 'teamName', direction: 'asc'}]),
+                  )
+              }),
+            ]),
+        ),
+
+      // Results, sorted by team's year
       S.listItem()
         .icon(result.icon)
         .title('Resultater')
@@ -30,7 +63,7 @@ export const structure: StructureResolver = (S, context) => {
                   S.documentList()
                     .title('Alle resultater')
                     .filter('_type == "result"')
-                    .defaultOrdering([{field: 'year', direction: 'desc'}]),
+                    .defaultOrdering([{field: 'team->year', direction: 'desc'}]),
                 ),
 
               S.divider(),
@@ -42,7 +75,7 @@ export const structure: StructureResolver = (S, context) => {
                   .child(
                     S.documentList()
                       .title(`Resultater ${year}`)
-                      .filter('_type == "result" && year == $year')
+                      .filter('_type == "result" && team->year == $year')
                       .params({year})
                       .defaultOrdering([{field: 'result', direction: 'asc'}]),
                   )
