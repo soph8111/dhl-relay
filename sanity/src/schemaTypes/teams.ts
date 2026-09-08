@@ -13,6 +13,17 @@ export const team = defineType({
   },
   fields: [
     defineField({
+      name: 'year',
+      title: 'DHL år',
+      type: 'number',
+      validation: (Rule) =>
+        Rule.required()
+          .min(2016)
+          .max(new Date().getFullYear() + 1)
+          .error('Angiv et gyldigt årstal mellem 2016 og frem til næste år, f.eks. 2026.'),
+      description: 'Angiv hvilket år dette hold deltager i (f.eks. 2026)',
+    }),
+    defineField({
       type: 'string',
       name: 'teamName',
       title: 'Holdnavn',
