@@ -33,7 +33,7 @@ export default function ResultPage() {
         </div>
 
         {/* Mobile and tablet: carousel stats, side by side with teams */}
-        <div className="flex flex-col gap-3 2xl:hidden md:[grid-area:side]">
+        <div className="flex flex-col gap-3 2xl:hidden md:[grid-area:side] md:h-full md:min-h-0">
           <StatsCarousel client={sanityClientFresh} />
           <TeamStandingsCard client={sanityClientFresh} />
         </div>
