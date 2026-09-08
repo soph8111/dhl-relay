@@ -1,7 +1,8 @@
 import {defineField, defineType} from 'sanity'
-import {UserIcon} from '@sanity/icons'
-import {RocketIcon} from '@sanity/icons'
+import {UserIcon, RocketIcon} from '@sanity/icons'
 import {MinutesSecondsInput} from '../components/MinutesSecondsInput'
+
+const CURRENT_YEAR = new Date().getFullYear()
 
 export const result = defineType({
   type: 'document',
@@ -27,37 +28,46 @@ export const result = defineType({
   },
   fields: [
     defineField({
-      name: 'year',
-      title: 'DHL år',
-      type: 'number',
-      validation: (Rule) =>
-        Rule.min(2016)
-          .max(new Date().getFullYear())
-          .error('Angiv et gyldigt årstal mellem 2016 og det nuværende år, f.eks. 2026.'),
-      description: 'Angiv gældede DHL år (f.eks. 2026)',
+      name: 'team',
+      title: 'Hold',
+      type: 'reference',
+      to: [{type: 'team'}],
+      validation: (rule) => rule.required(),
+      options: {
+        filter: `year == $year`,
+        filterParams: {year: CURRENT_YEAR},
+      },
     }),
     defineField({
       name: 'runner',
       title: 'Løber',
       type: 'reference',
       to: [{type: 'runner'}],
+      hidden: ({document}) => !(document as any)?.team,
+      validation: (rule) => rule.required(),
+      options: {
+        filter: ({document}) => {
+          const teamRef = (document as any)?.team?._ref
+          if (!teamRef) return {filter: 'false'}
+          return {
+            filter: '_id in *[_type == "team" && _id == $teamId][0].runners[]._ref',
+            params: {teamId: teamRef},
+          }
+        },
+      },
     }),
     defineField({
       name: 'cutoff',
       title: 'Forventet tid / Cut-off',
       type: 'number',
-      components: {
-        input: MinutesSecondsInput,
-      },
+      components: {input: MinutesSecondsInput},
       description: 'Angiv den forventede tid i formatet mm:ss, f.eks. 22:15',
     }),
     defineField({
       name: 'result',
       title: 'Resultat',
       type: 'number',
-      components: {
-        input: MinutesSecondsInput,
-      },
+      components: {input: MinutesSecondsInput},
       description:
         'Resultatet udfyldes automatisk, når en løber er i mål. Skulle der ske en fejl, kan resultatet indtastes manuelt i formatet mm:ss, f.eks. 22:15',
     }),
