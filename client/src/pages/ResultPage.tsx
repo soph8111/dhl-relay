@@ -18,7 +18,7 @@ export default function ResultPage() {
         md:h-[75vh] md:min-h-0
         md:grid md:gap-3
         md:[grid-template-areas:'board_map_side'] md:grid-cols-[2fr_1fr_auto]
-        2xl:[grid-template-areas:'board_map'_'board_bottom'] 2xl:grid-cols-[2fr_3fr] 2xl:grid-rows-[1fr_auto]"
+        2xl:[grid-template-areas:'board_map'_'board_bottom'] 2xl:grid-cols-[2fr_3fr] 2xl:grid-rows-[1fr_296px]"
       >
         <div className="md:[grid-area:map]">
           <MapView

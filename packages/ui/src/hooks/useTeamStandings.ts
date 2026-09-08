@@ -16,8 +16,8 @@ export function useTeamStandings(client: SanityClient) {
     const fetchStandings = () => {
       client
         .fetch(getTeamStandingsQuery, { year })
-        .then((teams) => {
-          setStandings(buildTeamStandings(teams));
+        .then(({ teams, results }) => {
+          setStandings(buildTeamStandings(teams, results));
           setLoading(false);
         })
         .catch((err) => {
