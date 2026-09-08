@@ -1,9 +1,9 @@
 export const getTotalRunnersCountQuery = /* groq */ `
-  count(*[_type == "team"].runners[])
+  count(*[_type == "team" && year == $year].runners[])
 `;
 
 export const getFinishedResultsQuery = /* groq */ `
-  *[_type == "result" && year == $year && defined(result)]{
+  *[_type == "result" && team->year == $year && defined(result)]{
     "resultSeconds": result,
     "cutoffSeconds": cutoff,
     "runnerId": runner._ref,

@@ -1,10 +1,14 @@
 export const getTeamStandingsQuery = /* groq */ `
-  *[_type == "team"]{
-    _id,
-    teamName,
-    "runners": runners[]->{
+  {
+    "teams": *[_type == "team" && year == $year]{
       _id,
-      "resultSeconds": *[_type == "result" && references(^._id) && year == $year][0].result
+      teamName,
+      "runnerIds": runners[]._ref
+    },
+    "results": *[_type == "result" && team->year == $year && defined(result)]{
+      "runnerId": runner._ref,
+      "teamId": team._ref,
+      "resultSeconds": result
     }
   }
 `;
