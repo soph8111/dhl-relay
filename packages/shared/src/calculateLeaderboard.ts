@@ -34,22 +34,18 @@ export function calculateTargetSeconds(
   referenceAge: number,
   referenceGender: Gender,
 ): number {
-  // Age difference in seconds (9 sec/year), positive if runner is older
   const diff = (ageCorrected(runnerAge) - ageCorrected(referenceAge)) * 9;
 
   const runnerFactor = genderFactor(runnerGender);
   const referenceFactor = genderFactor(referenceGender);
 
-  // If either runner or reference is not male/female skip gender entirely - only compare time and age
   if (runnerFactor === null || referenceFactor === null) {
-    return referenceActualSeconds + diff;
+    return Math.round(referenceActualSeconds + diff);
   }
 
-  // Look at the reference's own gender: divide by 1 if male and by 1.165 if female, to get a neutral baseline time
   const normalizedReferenceSeconds = referenceActualSeconds / referenceFactor;
 
-  // Add the age difference, then look at the runner's own gender: multiply by 1 if male and by 1.165 if female
-  return (normalizedReferenceSeconds + diff) * runnerFactor;
+  return Math.round((normalizedReferenceSeconds + diff) * runnerFactor);
 }
 
 //
