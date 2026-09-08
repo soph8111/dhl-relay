@@ -30,8 +30,8 @@ export function useTeamStandings(client: SanityClient) {
 
     const subscription = client
       .listen(
-        `*[_type == "result" && year == $year]`,
-        { year },
+        `*[_type == "result" || _type == "team"]`,
+        {},
         { visibility: 'query' },
       )
       .subscribe(() => fetchStandings());

@@ -67,14 +67,8 @@ export function useLeaderboard(client: SanityClient) {
     fetchLeaderboard();
 
     const subscription = client
-      .listen(
-        `*[_type == "result" && year == $year]`,
-        { year },
-        { visibility: 'query' },
-      )
-      .subscribe(() => {
-        fetchLeaderboard();
-      });
+      .listen(`*[_type == "result"]`, {}, { visibility: 'query' })
+      .subscribe(() => fetchLeaderboard());
 
     return () => subscription.unsubscribe();
   }, [client]);

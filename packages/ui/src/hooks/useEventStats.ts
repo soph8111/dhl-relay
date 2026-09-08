@@ -56,11 +56,7 @@ export function useEventStats(client: SanityClient) {
     fetchStats();
 
     const subscription = client
-      .listen(
-        `*[_type == "result" && year == $year]`,
-        { year },
-        { visibility: 'query' },
-      )
+      .listen(`*[_type == "result"]`, {}, { visibility: 'query' })
       .subscribe(() => fetchStats());
 
     return () => subscription.unsubscribe();
