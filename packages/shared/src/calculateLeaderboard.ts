@@ -1,3 +1,4 @@
+import { keepBestPerRunner } from './personalBest';
 import type { Runner, Gender } from './types';
 
 export interface LeaderboardEntry {
@@ -78,7 +79,13 @@ export function buildLeaderboard(
   results: Array<{ runner: Runner; resultSeconds: number }>,
   reference: ReferenceRunnerInfo,
 ): LeaderboardEntry[] {
-  return results
+  const bestResults = keepBestPerRunner(
+    results,
+    (r) => r.runner._id,
+    (r) => r.resultSeconds,
+  );
+
+  return bestResults
     .map(({ runner, resultSeconds }) => {
       const targetSeconds = calculateTargetSeconds(
         runner.age,
