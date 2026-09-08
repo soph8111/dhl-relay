@@ -10,15 +10,41 @@ export interface TeamStanding {
 interface TeamResult {
   _id: string;
   teamName: string;
-  runners: Array<{ _id: string; resultSeconds: number | null }>;
+  runnerIds: string[];
+}
+interface RunnerResult {
+  runnerId: string;
+  teamId: string;
+  resultSeconds: number;
 }
 
-export function buildTeamStandings(teams: TeamResult[]): TeamStanding[] {
+interface TeamResult {
+  _id: string;
+  teamName: string;
+  runnerIds: string[];
+}
+
+interface RunnerResult {
+  runnerId: string;
+  teamId: string;
+  resultSeconds: number;
+}
+
+export function buildTeamStandings(
+  teams: TeamResult[],
+  results: RunnerResult[],
+): TeamStanding[] {
   const withStats = teams
     .map((team) => {
-      const finished = team.runners.filter((r) => r.resultSeconds != null);
-      const totalSeconds = finished.reduce(
-        (sum, r) => sum + (r.resultSeconds as number),
+      // Only match results that belong to THIS specific team, not just any
+      // result the runner happens to have (relevant now that one runner
+      // can have a separate result per team they're on).
+      const teamResults = results.filter(
+        (r) => r.teamId === team._id && team.runnerIds.includes(r.runnerId),
+      );
+
+      const totalSeconds = teamResults.reduce(
+        (sum, r) => sum + r.resultSeconds,
         0,
       );
 
@@ -26,9 +52,9 @@ export function buildTeamStandings(teams: TeamResult[]): TeamStanding[] {
         teamId: team._id,
         teamName: team.teamName,
         totalSeconds,
-        finishedCount: finished.length,
-        totalRunners: team.runners.length,
-        isComplete: finished.length === team.runners.length,
+        finishedCount: teamResults.length,
+        totalRunners: team.runnerIds.length,
+        isComplete: teamResults.length === team.runnerIds.length,
       };
     })
     .filter((team) => team.finishedCount > 0);
@@ -40,7 +66,5 @@ export function buildTeamStandings(teams: TeamResult[]): TeamStanding[] {
     .filter((t) => !t.isComplete)
     .sort((a, b) => b.finishedCount - a.finishedCount);
 
-  // Complete teams always rank above incomplete ones - comparing a partial
-  // sum to a full team's sum would be misleading, regardless of the numbers.
   return [...complete, ...incomplete];
 }
