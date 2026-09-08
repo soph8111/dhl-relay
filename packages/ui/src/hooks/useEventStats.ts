@@ -29,7 +29,7 @@ export function useEventStats(client: SanityClient) {
           year,
         }),
         client.fetch(getFinishedResultsQuery, { year }),
-        client.fetch<number>(getTotalRunnersCountQuery),
+        client.fetch<number>(getTotalRunnersCountQuery, { year }),
       ])
         .then(([reference, results, totalCount]) => {
           if (!reference || reference.resultSeconds == null) {
