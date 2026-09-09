@@ -10,6 +10,7 @@ import type { RunnerPosition } from '@dhl-relay/shared';
 // so most RunnerPosition fields are optional until the first position comes in.
 interface ActiveRunner extends Partial<RunnerPosition> {
   runnerId: string;
+  teamId: string;
   startedAt: number;
   lastSeenAt: number;
   hasGpsError?: boolean;
@@ -39,22 +40,59 @@ io.on('connection', (socket) => {
   sendActiveRunners();
   socket.on('request-active-runners', sendActiveRunners);
 
-  // Locks the runner in immediately, independent of whether GPS ever succeeds.
-  socket.on('start', ({ runnerId }: { runnerId: string }) => {
-    if (activeRunners.has(runnerId)) return; // already active - locked for others
+  socket.on(
+    'start',
+    async ({ runnerId, teamId }: { runnerId: string; teamId: string }) => {
+      if (activeRunners.has(runnerId)) return; // already active - locked for others
 
-    const now = Date.now();
-    activeRunners.set(runnerId, { runnerId, startedAt: now, lastSeenAt: now });
+      try {
+        // How many of the team's 5 slots belong to this runner (they may occupy
+        // more than one), vs. how many results already exist for them on this team.
+        const [slotsForRunner, existingResults] = await Promise.all([
+          sanityClient.fetch<number>(
+            `count(*[_type == "team" && _id == $teamId][0].runners[_ref == $runnerId])`,
+            { teamId, runnerId },
+          ),
+          sanityClient.fetch<number>(
+            `count(*[_type == "result" && runner._ref == $runnerId && team._ref == $teamId])`,
+            { teamId, runnerId },
+          ),
+        ]);
 
-    io.emit('active-runners', Array.from(activeRunners.values()));
-  });
+        if (existingResults >= slotsForRunner) {
+          socket.emit('start-error', {
+            message:
+              'Denne løber har allerede løbet det maksimale antal gange for dette hold.',
+          });
+          return;
+        }
+      } catch (err) {
+        console.error('Could not verify team slots:', err);
+        socket.emit('start-error', {
+          message: 'Kunne ikke bekræfte hold-status, prøv igen.',
+        });
+        return;
+      }
+
+      const now = Date.now();
+      activeRunners.set(runnerId, {
+        runnerId,
+        teamId,
+        startedAt: now,
+        lastSeenAt: now,
+      });
+
+      io.emit('active-runners', Array.from(activeRunners.values()));
+    },
+  );
 
   socket.on('position', (data: RunnerPosition) => {
     const existing = activeRunners.get(data.runnerId);
+    if (!existing) return;
+
     activeRunners.set(data.runnerId, {
       ...existing,
       ...data,
-      startedAt: existing?.startedAt ?? Date.now(),
       lastSeenAt: Date.now(),
     });
 
@@ -81,23 +119,32 @@ io.on('connection', (socket) => {
     if (runner) {
       const resultSeconds = Math.round((Date.now() - runner.startedAt) / 1000);
 
-      // Deterministic ID avoids duplicate docs if an admin already created one
-      const resultId = `result-${runnerId}-${new Date().getFullYear()}`;
-
       try {
-        await sanityClient.createIfNotExists({
-          _id: resultId,
-          _type: 'result',
-          runner: { _type: 'reference', _ref: runnerId },
-          year: new Date().getFullYear(),
-        });
+        // If admin pre-created a result doc for this runner+team (with only a
+        // cutoff set, awaiting completion), fill that one in. Otherwise this
+        // is a fresh run (possibly a rerun on the same team) - create a new one.
+        const pendingId = await sanityClient.fetch(
+          `*[_type == "result" && runner._ref == $runnerId && team._ref == $teamId && !defined(result)][0]._id`,
+          { runnerId, teamId: runner.teamId },
+        );
 
-        await sanityClient
-          .patch(resultId)
-          .set({ result: resultSeconds })
-          .commit();
+        if (pendingId) {
+          await sanityClient
+            .patch(pendingId)
+            .set({ result: resultSeconds })
+            .commit();
+        } else {
+          await sanityClient.create({
+            _type: 'result',
+            runner: { _type: 'reference', _ref: runnerId },
+            team: { _type: 'reference', _ref: runner.teamId },
+            result: resultSeconds,
+          });
+        }
 
-        console.log(`Saved result for ${runnerId}: ${resultSeconds} seconds`);
+        console.log(
+          `Saved result for ${runnerId} on team ${runner.teamId}: ${resultSeconds} seconds`,
+        );
       } catch (err) {
         console.error('Could not save result in Sanity:', err);
       }
