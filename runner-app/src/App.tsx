@@ -1,18 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
-import { useRunners } from '@dhl-relay/ui/src/hooks/useRunners';
+import { useTeamsForYear } from '@dhl-relay/ui/src/hooks/useTeamsForYear';
+import { useTeamRunners } from '@dhl-relay/ui/src/hooks/useTeamRunners';
 import { sanityClient } from '@/sanityClient';
 import { socket } from '@/socketClient';
 import type { RunnerPosition } from '@dhl-relay/shared';
 
-// Interval for sending position updates to the server (in milliseconds)
-const POSITION_INTERVAL_MS = 5000;
+const POSITION_INTERVAL_MS = 8000;
 
 export default function App() {
-  const { runners, loading, error } = useRunners(sanityClient);
+  const { teams, loading: teamsLoading } = useTeamsForYear(sanityClient);
 
-  const [selectedRunner, setSelectedRunner] = useState<string | null>(
-    localStorage.getItem('runnerId'),
+  const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
+  const { runners, loading: runnersLoading } = useTeamRunners(
+    sanityClient,
+    selectedTeam,
   );
+
+  const [selectedRunner, setSelectedRunner] = useState<string | null>(null);
   const [watchId, setWatchId] = useState<number | null>(null);
   const [takenRunnerIds, setTakenRunnerIds] = useState<Set<string>>(new Set());
   const [hasGpsError, setHasGpsError] = useState(false);
@@ -21,9 +25,7 @@ export default function App() {
   const lastGpsErrorState = useRef(false);
 
   useEffect(() => {
-    const requestActiveRunners = () => {
-      socket.emit('request-active-runners');
-    };
+    const requestActiveRunners = () => socket.emit('request-active-runners');
 
     socket.on('connect', requestActiveRunners);
     if (socket.connected) requestActiveRunners();
@@ -56,19 +58,34 @@ export default function App() {
     };
   }, []);
 
-  const handleSelect = (value: string) => {
-    setSelectedRunner(value);
-    localStorage.setItem('runnerId', value);
+  useEffect(() => {
+    socket.on('start-error', ({ message }: { message: string }) => {
+      alert(message);
+    });
+
+    return () => {
+      socket.off('start-error');
+    };
+  }, []);
+
+  // Choosing a new team invalidates any previously chosen runner - they
+  // belonged to the old team's list, which no longer applies.
+  const handleSelectTeam = (value: string) => {
+    setSelectedTeam(value);
+    setSelectedRunner(null);
   };
 
   const handleStart = () => {
+    if (!selectedTeam) {
+      alert('Vælg et hold først');
+      return;
+    }
     if (!selectedRunner) {
-      alert('Vælg en løber først');
+      alert('Vælg dig selv fra holdet');
       return;
     }
 
-    // Locks the runner in immediately, independent of whether GPS ever succeeds.
-    socket.emit('start', { runnerId: selectedRunner });
+    socket.emit('start', { runnerId: selectedRunner, teamId: selectedTeam });
     setHasGpsError(false);
     lastGpsErrorState.current = false;
 
@@ -95,7 +112,6 @@ export default function App() {
         });
       },
       () => {
-        // Clock keeps running server-side regardless - this is just a heads-up.
         if (!lastGpsErrorState.current) {
           lastGpsErrorState.current = true;
           setHasGpsError(true);
@@ -125,34 +141,70 @@ export default function App() {
     lastGpsErrorState.current = false;
   };
 
-  if (loading) return <p>Indlæser løbere...</p>;
-  if (error) return <p>{error}</p>;
+  if (teamsLoading) return <p>Indlæser hold...</p>;
 
   const isRunning = watchId !== null;
 
   return (
     <div style={{ padding: '1rem' }}>
-      <h1>Vælg løber</h1>
+      <h1>Vælg hold</h1>
 
       <select
-        value={selectedRunner || ''}
-        onChange={(e) => handleSelect(e.target.value)}
+        value={selectedTeam || ''}
+        onChange={(e) => handleSelectTeam(e.target.value)}
         disabled={isRunning}
       >
-        <option value="">-- vælg --</option>
-        {runners.map((runner) => (
-          <option
-            key={runner._id}
-            value={runner._id}
-            disabled={takenRunnerIds.has(runner._id)}
-          >
-            {(runner.firstName && runner.lastName
-              ? `${runner.firstName} ${runner.lastName}`
-              : runner.alias) +
-              (takenRunnerIds.has(runner._id) ? ' (optaget)' : '')}
+        <option value="">-- vælg hold --</option>
+        {teams.map((team) => (
+          <option key={team._id} value={team._id}>
+            {team.teamName}
           </option>
         ))}
       </select>
+
+      {selectedTeam && (
+        <div style={{ marginTop: '1rem' }}>
+          <h2>Vælg dig selv</h2>
+          {runnersLoading ? (
+            <p>Indlæser løbere...</p>
+          ) : (
+            <select
+              value={selectedRunner || ''}
+              onChange={(e) => setSelectedRunner(e.target.value)}
+              disabled={isRunning}
+            >
+              {Array.from(new Map(runners.map((r) => [r._id, r])).values()).map(
+                (runner) => {
+                  const totalOccurrences = runners.filter(
+                    (r) => r._id === runner._id,
+                  ).length;
+
+                  const baseName =
+                    runner.firstName && runner.lastName
+                      ? `${runner.firstName} ${runner.lastName}`
+                      : runner.alias;
+
+                  const label =
+                    totalOccurrences > 1
+                      ? `${baseName} (${totalOccurrences} runder)`
+                      : baseName;
+
+                  return (
+                    <option
+                      key={runner._id}
+                      value={runner._id}
+                      disabled={takenRunnerIds.has(runner._id)}
+                    >
+                      {label +
+                        (takenRunnerIds.has(runner._id) ? ' (optaget)' : '')}
+                    </option>
+                  );
+                },
+              )}
+            </select>
+          )}
+        </div>
+      )}
 
       <div style={{ marginTop: '1rem' }}>
         {!isRunning ? (
