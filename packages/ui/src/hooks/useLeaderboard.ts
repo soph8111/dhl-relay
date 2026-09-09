@@ -48,6 +48,7 @@ export function useLeaderboard(client: SanityClient) {
         }
 
         const leaderboard = buildLeaderboard(results, {
+          _id: reference._id,
           age: reference.age,
           gender: reference.gender,
           resultSeconds: reference.resultSeconds,

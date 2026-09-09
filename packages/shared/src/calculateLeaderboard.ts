@@ -3,6 +3,7 @@ import type { Runner, Gender } from './types';
 
 export interface LeaderboardEntry {
   runner: Runner;
+  isReference: boolean;
   resultSeconds: number;
   targetSeconds: number;
   comparedResultSeconds: number;
@@ -66,13 +67,18 @@ export function beatsReference(
 }
 
 interface ReferenceRunnerInfo {
+  _id: string;
   age: number;
   gender: Gender;
   resultSeconds: number;
 }
 
 export function buildLeaderboard(
-  results: Array<{ runner: Runner; resultSeconds: number }>,
+  results: Array<{
+    runner: Runner;
+    resultSeconds: number;
+    isReference: boolean;
+  }>,
   reference: ReferenceRunnerInfo,
 ): LeaderboardEntry[] {
   const bestResults = keepBestPerRunner(
@@ -101,6 +107,7 @@ export function buildLeaderboard(
         runner,
         resultSeconds,
         targetSeconds,
+        isReference: runner._id === reference._id,
         comparedResultSeconds: comparedSeconds,
         marginSeconds: resultSeconds - targetSeconds,
         beatsReference: beatsReference(resultSeconds, targetSeconds),

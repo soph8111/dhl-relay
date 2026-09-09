@@ -37,9 +37,9 @@ function runnerName(runner: {
 }
 
 export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
-  console.log('entry', entry);
   const isDesktop = useIsDesktop();
   const offscreen = isDesktop ? { x: '100%' } : { y: '100%' };
+  console.log('entry', entry?.isReference);
 
   return (
     <AnimatePresence>
@@ -85,7 +85,7 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
                 <h2 className="text-2xl font-semibold text-surface-content">
                   {runnerName(entry.runner)}
                 </h2>
-                {entry.beatsReference ? (
+                {!entry.isReference && entry.beatsReference ? (
                   <StarFilled className="text-accent" />
                 ) : (
                   <StarOutline className="text-accent" />
@@ -125,15 +125,17 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
                     variant="modal"
                   />
                 </div>
-                <div className="bg-surface rounded-2xl p-4 h-35">
-                  <StatCard
-                    label="Earned a day off?"
-                    value={formatSignedSeconds(entry.marginSeconds)}
-                    accent={entry.beatsReference}
-                    className="text-right"
-                    variant="modal"
-                  />
-                </div>
+                {!entry.isReference && (
+                  <div className="bg-surface rounded-2xl p-4 h-35">
+                    <StatCard
+                      label="Earned a day off?"
+                      value={formatSignedSeconds(entry.marginSeconds)}
+                      accent={entry.beatsReference}
+                      className="text-right"
+                      variant="modal"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
