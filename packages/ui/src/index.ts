@@ -16,3 +16,7 @@ export { LiveIndicator } from './components/LiveIndicator';
 export { StatsCarousel } from './components/StatsCarousel';
 export { useTeamsForYear } from './hooks/useTeamsForYear';
 export { useTeamRunners } from './hooks/useTeamRunners';
+export { useNotifications } from './hooks/useNotifications';
+export { NotificationStack } from './components/NotificationStack';
+export { RunEventNotifications } from './components/RunEventNotifications';
+export { useReferenceRunner } from './hooks/useReferenceRunner';
