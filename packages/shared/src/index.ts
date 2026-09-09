@@ -17,5 +17,9 @@ export {
   formatSignedSeconds,
   formatDuration,
 } from './formatSeconds';
-export { getTeamStandingsQuery } from './sanity/queries/teamQueries';
+export {
+  getTeamStandingsQuery,
+  getTeamsForYearQuery,
+  getTeamRunnersQuery,
+} from './sanity/queries/teamQueries';
 export { buildTeamStandings, type TeamStanding } from './teamStats';
