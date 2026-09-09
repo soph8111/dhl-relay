@@ -3,6 +3,7 @@ import { formatSignedSeconds } from '@dhl-relay/shared';
 import type { SanityClient } from '@sanity/client';
 import StarFilled from '../icons/StarFilled';
 import StarOutline from '../icons/StarOutline';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface LeaderboardProps {
   client: SanityClient;
@@ -59,78 +60,82 @@ export function Leaderboard({ client }: LeaderboardProps) {
       </div>
 
       <div className="relative md:min-h-0">
-        <div className="flex flex-col gap-2 max-h-96 overflow-y-auto md:max-h-full ">
-          {entries.map((entry, index) => {
-            const isReference = entry.runner._id === referenceRunnerId;
+        <div className="flex flex-col gap-2 max-h-96 overflow-y-auto md:max-h-full">
+          <AnimatePresence>
+            {entries.map((entry, index) => {
+              const isReference = entry.runner._id === referenceRunnerId;
 
-            return (
-              <div
-                key={entry.runner._id}
-                style={{
-                  viewTransitionName: `leaderboard-row-${entry.runner._id}`,
-                }}
-                className={`flex items-center rounded-xl px-2 md:px-4 py-2.5 text-xs md:text-sm ${
-                  isReference
-                    ? 'bg-accent text-accent-content'
-                    : 'bg-surface text-surface-content'
-                }`}
-              >
-                <span className="w-5 md:w-8">{index + 1}</span>
-                <div className="flex-1 flex items-center gap-3 min-w-0">
-                  {entry.runner.imageUrl ? (
-                    <img
-                      src={entry.runner.imageUrl}
-                      alt=""
-                      className="block w-8 h-8 rounded-full object-cover shrink-0"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 rounded-full bg-surface-content-muted/30 shrink-0" />
-                  )}
-                  <div className="min-w-0">
-                    <div className="truncate">
-                      <span className="md:hidden">
-                        {firstName(entry.runner)}
-                      </span>
-                      <span className="hidden md:inline">
-                        {runnerName(entry.runner)}
-                      </span>
+              return (
+                <motion.div
+                  key={entry.runner._id}
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+                  className={`flex items-center rounded-xl px-2 md:px-4 py-2.5 text-xs md:text-sm last:mb-9 ${
+                    isReference
+                      ? 'bg-accent text-accent-content'
+                      : 'bg-surface text-surface-content'
+                  }`}
+                >
+                  <span className="w-5 md:w-8">{index + 1}</span>
+                  <div className="flex-1 flex items-center gap-3 min-w-0">
+                    {entry.runner.imageUrl ? (
+                      <img
+                        src={entry.runner.imageUrl}
+                        alt=""
+                        className="block w-8 h-8 rounded-full object-cover shrink-0"
+                      />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-surface-content-muted/30 shrink-0" />
+                    )}
+                    <div className="min-w-0">
+                      <div className="truncate">
+                        <span className="md:hidden">
+                          {firstName(entry.runner)}
+                        </span>
+                        <span className="hidden md:inline">
+                          {runnerName(entry.runner)}
+                        </span>
+                      </div>
+                      {entry.runner.teamNames &&
+                      entry.runner.teamNames.length > 0 ? (
+                        <div className="text-2xs md:text-xs text-surface-content-muted truncate">
+                          {entry.runner.teamNames.join(', ')}
+                        </div>
+                      ) : null}
                     </div>
-                    {entry.runner.teamNames &&
-                    entry.runner.teamNames.length > 0 ? (
-                      <div className="text-2xs md:text-xs text-surface-content-muted truncate">
-                        {entry.runner.teamNames.join(', ')}
-                      </div>
-                    ) : null}
                   </div>
-                </div>
 
-                <div className="w-15 md:w-24 text-right">
-                  {formatTime(entry.resultSeconds)}
-                </div>
-                <div className="w-15 md:w-24 text-right">
-                  {isReference ? (
-                    '—'
-                  ) : (
-                    <>
-                      <div>{formatTime(entry.comparedResultSeconds)}</div>
-                      <div className="text-xs text-surface-content-muted">
-                        {formatSignedSeconds(entry.marginSeconds)}
-                      </div>
-                    </>
-                  )}
-                </div>
-                <div className="w-13 md:w-20 flex justify-end pr-2 md:px-3">
-                  {isReference ? null : entry.beatsReference ? (
-                    <StarFilled className="text-accent" />
-                  ) : (
-                    <StarOutline className="text-accent" />
-                  )}
-                </div>
-              </div>
-            );
-          })}
+                  <div className="w-15 md:w-24 text-right">
+                    {formatTime(entry.resultSeconds)}
+                  </div>
+                  <div className="w-15 md:w-24 text-right">
+                    {isReference ? (
+                      '—'
+                    ) : (
+                      <>
+                        <div>{formatTime(entry.comparedResultSeconds)}</div>
+                        <div className="text-xs text-surface-content-muted">
+                          {formatSignedSeconds(entry.marginSeconds)}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <div className="w-13 md:w-20 flex justify-end pr-2 md:px-3">
+                    {isReference ? null : entry.beatsReference ? (
+                      <StarFilled className="text-accent" />
+                    ) : (
+                      <StarOutline className="text-accent" />
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-background to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-background to-transparent" />
       </div>
     </div>
   );
