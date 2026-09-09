@@ -10,11 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "@tailwindcss/vite": "^4.2.2",
     "@dhl-relay/shared": "*",
-    "@dhl-relay/ui": "*"
+    "@dhl-relay/ui": "*",
+    "@tailwindcss/vite": "^4.2.2",
+    "motion": "^13.2.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
