@@ -23,3 +23,4 @@ export {
   getTeamRunnersQuery,
 } from './sanity/queries/teamQueries';
 export { buildTeamStandings, type TeamStanding } from './teamStats';
+export { getPendingResultQuery } from './sanity/queries/resultQueries';
