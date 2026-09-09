@@ -10,14 +10,12 @@ export interface EventStats {
   averagePaceSecondsPerKm: number | null;
   averageTimeSeconds: number | null;
 }
-
 interface FinishedResult {
   runnerId: string;
   resultSeconds: number;
   cutoffSeconds: number | null;
   runner: { age: number; gender: Gender };
 }
-
 interface ReferenceInfo {
   runnerId: string;
   age: number;
@@ -34,33 +32,47 @@ export function calculateEventStats(
 ): EventStats {
   const finishedCount = results.length;
 
+  const resultsByRunner = new Map<string, FinishedResult[]>();
+  for (const r of results) {
+    const list = resultsByRunner.get(r.runnerId) ?? [];
+    list.push(r);
+    resultsByRunner.set(r.runnerId, list);
+  }
+
   let beatsReferenceCount = 0;
   let beatsCutoffCount = 0;
   let closestMissSeconds: number | null = null;
 
-  for (const { runnerId, resultSeconds, cutoffSeconds, runner } of results) {
-    if (cutoffSeconds != null && resultSeconds <= cutoffSeconds) {
-      beatsCutoffCount++;
+  for (const [runnerId, runnerResults] of resultsByRunner) {
+    for (const r of runnerResults) {
+      if (r.cutoffSeconds != null && r.resultSeconds <= r.cutoffSeconds) {
+        beatsCutoffCount++;
+      }
     }
 
-    // The reference runner can't meaningfully "beat" themselves - skip the
-    // rest of this iteration for their own row.
     if (runnerId === reference.runnerId) continue;
 
+    const { age, gender } = runnerResults[0].runner;
     const targetSeconds = calculateTargetSeconds(
-      runner.age,
-      runner.gender,
+      age,
+      gender,
       reference.resultSeconds,
       reference.age,
       reference.gender,
     );
 
-    if (beatsReference(resultSeconds, targetSeconds)) {
+    const wonDayOff = runnerResults.some((r) =>
+      beatsReference(r.resultSeconds, targetSeconds),
+    );
+
+    if (wonDayOff) {
       beatsReferenceCount++;
     } else {
-      const margin = resultSeconds - targetSeconds;
-      if (closestMissSeconds === null || margin < closestMissSeconds) {
-        closestMissSeconds = margin;
+      const bestMargin = Math.min(
+        ...runnerResults.map((r) => r.resultSeconds - targetSeconds),
+      );
+      if (closestMissSeconds === null || bestMargin < closestMissSeconds) {
+        closestMissSeconds = bestMargin;
       }
     }
   }
