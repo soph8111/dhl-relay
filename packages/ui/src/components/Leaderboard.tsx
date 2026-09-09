@@ -1,12 +1,14 @@
 import { useLeaderboard } from '../hooks/useLeaderboard';
 import { formatSignedSeconds } from '@dhl-relay/shared';
 import type { SanityClient } from '@sanity/client';
+import type { LeaderboardEntry } from '@dhl-relay/shared';
 import StarFilled from '../icons/StarFilled';
 import StarOutline from '../icons/StarOutline';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface LeaderboardProps {
   client: SanityClient;
+  onSelectEntry?: (entry: LeaderboardEntry) => void;
 }
 
 function formatTime(totalSeconds: number): string {
@@ -33,18 +35,14 @@ function firstName(runner: {
   return runner.firstName || runner.alias || 'Ukendt løber';
 }
 
-export function Leaderboard({ client }: LeaderboardProps) {
+export function Leaderboard({ client, onSelectEntry }: LeaderboardProps) {
   const { entries, referenceRunnerId, loading, error } = useLeaderboard(client);
 
   if (loading)
-    return (
-      <p className="text-surface-content-muted">Indlæser leaderboard...</p>
-    );
+    return <p className="text-surface-content-muted">Loading leaderboard...</p>;
   if (error) return <p className="text-surface-content-muted">{error}</p>;
   if (entries.length === 0)
-    return (
-      <p className="text-surface-content-muted">Ingen resultater endnu.</p>
-    );
+    return <p className="text-surface-content-muted">No results yet.</p>;
 
   return (
     <div className="flex flex-col md:h-full">
@@ -73,10 +71,11 @@ export function Leaderboard({ client }: LeaderboardProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+                  onClick={() => onSelectEntry?.(entry)}
                   className={`flex items-center rounded-xl px-2 md:px-4 py-2.5 text-xs md:text-sm last:mb-9 ${
                     isReference
                       ? 'bg-accent text-accent-content'
-                      : 'bg-surface text-surface-content'
+                      : 'bg-surface text-surface-content cursor-pointer'
                   }`}
                 >
                   <span className="w-5 md:w-8">{index + 1}</span>

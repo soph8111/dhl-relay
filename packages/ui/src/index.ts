@@ -20,3 +20,4 @@ export { useNotifications } from './hooks/useNotifications';
 export { NotificationStack } from './components/NotificationStack';
 export { RunEventNotifications } from './components/RunEventNotifications';
 export { useReferenceRunner } from './hooks/useReferenceRunner';
+export { RunnerDetailModal } from './components/RunnerDetailModal';

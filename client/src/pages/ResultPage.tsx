@@ -9,8 +9,15 @@ import {
 } from '@dhl-relay/ui';
 import { sanityClient, sanityClientFresh } from '@/sanityClient';
 import { socket } from '@/socketClient';
+import { RunnerDetailModal } from '@dhl-relay/ui';
+import { useState } from 'react';
+import type { LeaderboardEntry } from '@dhl-relay/shared';
 
 export default function ResultPage() {
+  const [selectedEntry, setSelectedEntry] = useState<LeaderboardEntry | null>(
+    null,
+  );
+
   return (
     <>
       <RunEventNotifications client={sanityClientFresh} socket={socket} />
@@ -30,9 +37,11 @@ export default function ResultPage() {
             cartoApiKey={import.meta.env.VITE_CARTO_API_KEY}
           />
         </div>
-
         <div className="md:[grid-area:board] md:min-h-0 md:max-h-full md:h-full">
-          <Leaderboard client={sanityClientFresh} />
+          <Leaderboard
+            client={sanityClientFresh}
+            onSelectEntry={setSelectedEntry}
+          />
         </div>
 
         {/* Mobile and tablet: carousel stats, side by side with teams */}
@@ -51,6 +60,10 @@ export default function ResultPage() {
           </div>
         </div>
       </div>
+      <RunnerDetailModal
+        entry={selectedEntry}
+        onClose={() => setSelectedEntry(null)}
+      />
     </>
   );
 }
