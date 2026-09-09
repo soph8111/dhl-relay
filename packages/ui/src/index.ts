@@ -14,3 +14,5 @@ export { Header } from './components/Header';
 export { ThemeProvider, useTheme } from './context/ThemeContext';
 export { LiveIndicator } from './components/LiveIndicator';
 export { StatsCarousel } from './components/StatsCarousel';
+export { useTeamsForYear } from './hooks/useTeamsForYear';
+export { useTeamRunners } from './hooks/useTeamRunners';
