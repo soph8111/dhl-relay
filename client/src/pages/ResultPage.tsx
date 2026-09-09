@@ -5,6 +5,7 @@ import {
   TeamStandingsCard,
   LiveIndicator,
   StatsCarousel,
+  RunEventNotifications,
 } from '@dhl-relay/ui';
 import { sanityClient, sanityClientFresh } from '@/sanityClient';
 import { socket } from '@/socketClient';
@@ -12,6 +13,8 @@ import { socket } from '@/socketClient';
 export default function ResultPage() {
   return (
     <>
+      <RunEventNotifications client={sanityClientFresh} socket={socket} />
+
       <LiveIndicator />
       <div
         className="flex flex-col gap-5
