@@ -15,6 +15,14 @@ interface ReferenceRunnerResult {
   resultSeconds: number | null;
 }
 
+function updateWithTransition(update: () => void) {
+  if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+    document.startViewTransition(update);
+  } else {
+    update();
+  }
+}
+
 export function useLeaderboard(client: SanityClient) {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
   const [referenceRunnerId, setReferenceRunnerId] = useState<string | null>(
@@ -55,7 +63,11 @@ export function useLeaderboard(client: SanityClient) {
 
         setError(null);
         setReferenceRunnerId(reference._id);
-        setEntries(leaderboard);
+
+        updateWithTransition(() => {
+          setEntries(leaderboard);
+        });
+
         setLoading(false);
       } catch (err) {
         console.error(err);

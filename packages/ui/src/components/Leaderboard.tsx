@@ -66,7 +66,10 @@ export function Leaderboard({ client }: LeaderboardProps) {
             return (
               <div
                 key={entry.runner._id}
-                className={`flex items-center rounded-xl px-2 md:px-4 py-2.5 text-xs md:text-sm last:mb-9 ${
+                style={{
+                  viewTransitionName: `leaderboard-row-${entry.runner._id}`,
+                }}
+                className={`flex items-center rounded-xl px-2 md:px-4 py-2.5 text-xs md:text-sm ${
                   isReference
                     ? 'bg-accent text-accent-content'
                     : 'bg-surface text-surface-content'

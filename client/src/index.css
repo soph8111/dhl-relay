@@ -87,3 +87,8 @@ body {
   background: var(--color-surface) !important;
   font-family: 'Inter', sans-serif !important;
 }
+
+::view-transition-group(*) {
+  animation-duration: 600ms;
+  animation-timing-function: ease-out;
+}
