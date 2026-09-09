@@ -5,6 +5,7 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import { sanityClient } from '@/sanityClient';
 import type { RunnerPosition } from '@dhl-relay/shared';
+import { getPendingResultQuery } from '@dhl-relay/shared';
 
 // A runner can exist here before any GPS position arrives (locked in via 'start'),
 // so most RunnerPosition fields are optional until the first position comes in.
@@ -120,17 +121,14 @@ io.on('connection', (socket) => {
       const resultSeconds = Math.round((Date.now() - runner.startedAt) / 1000);
 
       try {
-        // If admin pre-created a result doc for this runner+team (with only a
-        // cutoff set, awaiting completion), fill that one in. Otherwise this
-        // is a fresh run (possibly a rerun on the same team) - create a new one.
-        const pendingId = await sanityClient.fetch(
-          `*[_type == "result" && runner._ref == $runnerId && team._ref == $teamId && !defined(result)][0]._id`,
-          { runnerId, teamId: runner.teamId },
-        );
+        const pending = await sanityClient.fetch<{
+          _id: string;
+          cutoff: number | null;
+        } | null>(getPendingResultQuery, { runnerId, teamId: runner.teamId });
 
-        if (pendingId) {
+        if (pending) {
           await sanityClient
-            .patch(pendingId)
+            .patch(pending._id)
             .set({ result: resultSeconds })
             .commit();
         } else {
@@ -145,15 +143,12 @@ io.on('connection', (socket) => {
         console.log(
           `Saved result for ${runnerId} on team ${runner.teamId}: ${resultSeconds} seconds`,
         );
+
+        io.emit('runner-finished', { runnerId, resultSeconds });
       } catch (err) {
         console.error('Could not save result in Sanity:', err);
       }
     }
-  });
-
-  // No disconnect cleanup - dropped connections shouldn't remove a runner, only 'stop' should
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
   });
 });
 
