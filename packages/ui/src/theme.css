@@ -1,0 +1,87 @@
+/* CSS color palette */
+:root {
+  --color-white: oklch(1 0 0); /* #FFFFFF */
+  --color-black: oklch(0 0 0); /* #000000 */
+  --color-gray: oklch(0.6633 0 0); /* #939393 */
+  --color-purple: oklch(0.5007 0.2267 292.99); /* #6F34D5 */
+  --color-orange: oklch(0.6357 0.2504 30.62); /* #FF1F00 */
+  --color-red: oklch(0.6357 0.2504 30.62); /* #FF1F00 */
+
+  --color-light-50: oklch(0 0 0 / 0.07); /* #00000012 */
+  --color-light-100: oklch(0.9551 0 0); /* #F0F0F0 */
+
+  --color-dark-50: oklch(1 0 0 / 0.09); /* #FFFFFF17 */
+  --color-dark-100: oklch(0.23 0 0); /* #1D1D1D */
+
+  /* Styling */
+  --color-surface-content-muted: var(--color-gray);
+  --color-accent: var(--color-purple);
+  --color-accent-content: var(--color-white);
+  --color-live: var(--color-orange);
+
+  /* Default/light theme */
+  --color-background: var(--color-light-100);
+  --color-surface: var(--color-light-50);
+  --color-surface-content: var(--color-dark-100);
+  --color-button-bg: var(--color-black);
+  --color-button-content: transparent;
+}
+
+/* Dark theme */
+.dark {
+  --color-background: var(--color-dark-100);
+  --color-surface: var(--color-dark-50);
+  --color-surface-content: var(--color-white);
+
+  --color-button-bg: var(--color-white);
+  --color-button-content: var(--color-black);
+}
+
+/* Tailwind utilities */
+@theme {
+  /* Theme */
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surface-content: var(--color-surface-content);
+  --color-surface-content-muted: var(--color-gray);
+  --color-accent: var(--color-purple);
+  --color-accent-content: var(--color-white);
+  --color-live: var(--color-orange);
+  --color-button-bg: var(--color-button-bg);
+  --color-button-content: var(--color-button-content);
+
+  /* Colors */
+  --color-white: var(--color-white);
+  --color-black: var(--color-black);
+  --color-gray: var(--color-gray);
+  --color-light-50: var(--color-light-50);
+  --color-light-100: var(--color-light-100);
+  --color-dark-50: var(--color-dark-50);
+  --color-dark-100: var(--color-dark-100);
+  --color-purple: var(--color-purple);
+  --color-orange: var(--color-orange);
+  --color-red: var(--color-red);
+
+  /* Border radius */
+  --radius-sm: 0.9375rem; /* 15px */
+  --radius-l: 1.5625rem; /* 25px */
+
+  /* Fonts */
+  --text-2xs: 0.625rem; /* 10px */
+  --text-6xl: 3.5rem; /* 56px */
+}
+
+/* Leaflet map styling */
+.leaflet-container {
+  background: var(--color-surface) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Transition on theme */
+*:not([class*='transition-']),
+*:not([class*='transition-'])::before,
+*:not([class*='transition-'])::after {
+  transition-property: background-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
