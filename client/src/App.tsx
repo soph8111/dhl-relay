@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ResultPage from '@/pages/ResultPage';
+import { LiveDashboard } from '@dhl-relay/ui';
 import { Header } from '@dhl-relay/ui';
 import { ThemeProvider } from '@dhl-relay/ui';
+import { sanityClient, sanityClientFresh } from './sanityClient';
+import { socket } from './socketClient';
 
 function App() {
   return (
@@ -9,11 +10,12 @@ function App() {
       <div className="m-4 md:m-5">
         <Header />
         <main>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<ResultPage />} />
-            </Routes>
-          </BrowserRouter>
+          <LiveDashboard
+            sanityClient={sanityClient}
+            sanityClientFresh={sanityClientFresh}
+            socket={socket}
+            cartoApiKey={import.meta.env.VITE_CARTO_API_KEY}
+          />
         </main>
       </div>
     </ThemeProvider>

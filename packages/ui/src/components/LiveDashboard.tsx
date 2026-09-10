@@ -1,19 +1,29 @@
-import {
-  MapView,
-  Leaderboard,
-  StatsGrid,
-  TeamStandingsCard,
-  LiveIndicator,
-  StatsCarousel,
-  RunEventNotifications,
-} from '@dhl-relay/ui';
-import { sanityClient, sanityClientFresh } from '@/sanityClient';
-import { socket } from '@/socketClient';
-import { RunnerDetailModal } from '@dhl-relay/ui';
 import { useState } from 'react';
+import type { SanityClient } from '@sanity/client';
+import type { Socket } from 'socket.io-client';
 import type { LeaderboardEntry } from '@dhl-relay/shared';
+import { MapView } from './MapView';
+import { Leaderboard } from './Leaderboard';
+import { StatsGrid } from './StatsGrid';
+import { TeamStandingsCard } from './TeamStandingsCard';
+import { LiveIndicator } from './LiveIndicator';
+import { StatsCarousel } from './StatsCarousel';
+import { RunEventNotifications } from './RunEventNotifications';
+import { RunnerDetailModal } from './RunnerDetailModal';
 
-export default function ResultPage() {
+interface LiveDashboardProps {
+  sanityClient: SanityClient;
+  sanityClientFresh: SanityClient;
+  socket: Socket;
+  cartoApiKey: string;
+}
+
+export function LiveDashboard({
+  sanityClient,
+  sanityClientFresh,
+  socket,
+  cartoApiKey,
+}: LiveDashboardProps) {
   const [selectedEntry, setSelectedEntry] = useState<LeaderboardEntry | null>(
     null,
   );
@@ -34,7 +44,7 @@ export default function ResultPage() {
           <MapView
             client={sanityClient}
             socket={socket}
-            cartoApiKey={import.meta.env.VITE_CARTO_API_KEY}
+            cartoApiKey={cartoApiKey}
           />
         </div>
         <div className="md:[grid-area:board] md:min-h-0 md:max-h-full md:h-full">
@@ -44,13 +54,11 @@ export default function ResultPage() {
           />
         </div>
 
-        {/* Mobile and tablet: carousel stats, side by side with teams */}
         <div className="flex flex-col gap-3 2xl:hidden md:[grid-area:side] md:h-full md:min-h-0">
           <StatsCarousel client={sanityClientFresh} />
           <TeamStandingsCard client={sanityClientFresh} />
         </div>
 
-        {/* Large screen: full stats-grid, side by side with teams */}
         <div className="hidden 2xl:flex 2xl:[grid-area:bottom] gap-5">
           <div className="flex-3">
             <StatsGrid client={sanityClientFresh} />
