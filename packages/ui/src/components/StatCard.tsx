@@ -41,19 +41,20 @@ export function StatCard({
     return (
       <div className="flex flex-col h-full justify-between">
         <div className="text-surface-content-muted">{label}</div>
-        <div className="flex items-baseline gap-1">
+        <div className={`flex items-end flex-col md:gap-1 ${className}`}>
           <span
-            className={`text-4xl w-full md:text-6xl font-medium ${className} ${
+            className={`text-4xl w-full md:text-6xl font-medium ${
               accent ? 'text-accent' : 'text-surface-content'
             }`}
           >
             {value}
           </span>
-        </div>
-        <div className="2xl:max-w-3/5">
+
           {sublabel && (
-            <div className={`text-surface-content-muted text-2xl ${className}`}>
-              {sublabel}
+            <div className="2xl:max-w-3/5">
+              <div className="text-surface-content-muted text-2xl">
+                {sublabel}
+              </div>
             </div>
           )}
         </div>
@@ -62,11 +63,11 @@ export function StatCard({
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className={`flex flex-col gap-2 ${className}`}>
       <div className="text-surface-content-muted">{label}</div>
       <div className="flex items-baseline gap-1">
         <span
-          className={`text-6xl font-medium ${
+          className={`text-4xl md:text-6xl font-medium ${
             accent ? 'text-accent' : 'text-surface-content'
           }`}
         >
