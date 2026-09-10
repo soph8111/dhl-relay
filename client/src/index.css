@@ -87,3 +87,11 @@ body {
   background: var(--color-surface) !important;
   font-family: 'Inter', sans-serif !important;
 }
+
+*:not([class*='transition-']),
+*:not([class*='transition-'])::before,
+*:not([class*='transition-'])::after {
+  transition-property: background-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+}
