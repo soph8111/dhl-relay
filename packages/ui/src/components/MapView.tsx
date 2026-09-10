@@ -5,7 +5,7 @@ import {
   Polyline,
   CircleMarker,
 } from 'react-leaflet';
-import { useEffect, useState, useMemo, useRef } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import type { Socket } from 'socket.io-client';
 import type { SanityClient } from '@sanity/client';
 import { type RunnerPosition } from '@dhl-relay/shared';
@@ -13,6 +13,7 @@ import { useRunners } from '../hooks/useRunners';
 import { RunnerIcon } from './RunnerIcon';
 import { DHL_ROUTE_2026 } from '@dhl-relay/ui';
 import { useTheme } from '../context/ThemeContext';
+
 interface MapViewProps {
   client: SanityClient;
   socket: Socket;
@@ -30,23 +31,13 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
   const [positions, setPositions] = useState<Record<string, [number, number]>>(
     {},
   );
-
   const [gpsErrors, setGpsErrors] = useState<Record<string, boolean>>({});
-  const [notifications, setNotifications] = useState<
-    { id: string; text: string }[]
-  >([]);
 
   const { runners, loading, error } = useRunners(client);
 
   const runnerMap = useMemo(() => {
     return Object.fromEntries(runners.map((runner) => [runner._id, runner]));
   }, [runners]);
-
-  // Always holds the latest runnerMap, so the socket listener (set up once) never reads a stale/empty version of it
-  const runnerMapRef = useRef(runnerMap);
-  useEffect(() => {
-    runnerMapRef.current = runnerMap;
-  }, [runnerMap]);
 
   useEffect(() => {
     const requestActiveRunners = () => {
@@ -106,27 +97,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
     };
 
     socket.on('runner-stopped', remove);
-
-    socket.on('runner-timed-out', ({ runnerId }: { runnerId: string }) => {
-      remove({ runnerId });
-
-      const runner = runnerMapRef.current[runnerId];
-      const name = runner
-        ? runner.firstName && runner.lastName
-          ? `${runner.firstName} ${runner.lastName}`
-          : runner.alias
-        : 'En løber';
-
-      const notificationId = `${runnerId}-${Date.now()}`;
-      setNotifications((prev) => [
-        ...prev,
-        { id: notificationId, text: `${name} lost connection` },
-      ]);
-
-      setTimeout(() => {
-        setNotifications((prev) => prev.filter((n) => n.id !== notificationId));
-      }, 6000);
-    });
+    socket.on('runner-timed-out', remove);
 
     return () => {
       socket.off('connect', requestActiveRunners);
@@ -134,7 +105,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
       socket.off('update-runners');
       socket.off('gps-error');
       socket.off('runner-stopped', remove);
-      socket.off('runner-timed-out');
+      socket.off('runner-timed-out', remove);
     };
   }, [socket]);
 
@@ -147,19 +118,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
 
   return (
     <div className="h-full">
-      <div className="relative w-full h-96 md:h-full rounded-xl overflow-hidden">
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-1100 flex flex-col gap-2 w-11/12 max-w-sm">
-          {notifications.map((n) => (
-            <div
-              key={n.id}
-              className="bg-white text-gray-900 rounded-lg shadow-lg px-4 py-2 text-sm flex items-center gap-2 border-l-4 border-red"
-            >
-              <span className="text-red font-bold">!</span>
-              <span>{n.text}</span>
-            </div>
-          ))}
-        </div>
-
+      <div className="relative w-full h-96 md:h-full rounded-xl overflow-hidden border border-surface dark:border-none">
         <MapContainer
           center={defaultCenter}
           className="w-full h-full"
@@ -169,7 +128,6 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
             url={tileUrl}
             attribution='&copy; <a href="https://carto.com/attributions">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          {/* DHL Route drawn on map */}
           <Polyline
             positions={DHL_ROUTE_2026}
             pathOptions={{
@@ -188,7 +146,6 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
               fillOpacity: 1,
             }}
           />
-
           <CircleMarker
             center={DHL_ROUTE_2026[DHL_ROUTE_2026.length - 1]}
             radius={4}
