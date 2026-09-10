@@ -108,6 +108,7 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
                   <StatCard
                     label="Cut-off"
                     value={formatSeconds(entry.targetSeconds)}
+                    variant="modal"
                     className="flex justify-between"
                   />
                 </div>
@@ -117,7 +118,7 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
                     value={formatSeconds(entry.resultSeconds)}
                     sublabel={formatSeconds(entry.comparedResultSeconds)}
                     variant="modal"
-                    className="text-right"
+                    className="text-right flex-col"
                   />
                 </div>
                 <div className="bg-surface rounded-2xl p-4 h-35 flex justify-between">
@@ -125,6 +126,7 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
                     label="Avg Pace"
                     value={formatSeconds(entry.resultSeconds / 5)}
                     unit="/km"
+                    variant="modal"
                     className="flex justify-between"
                   />
                 </div>
@@ -134,8 +136,8 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
                       label="Earned a day off?"
                       value={formatSignedSeconds(entry.marginSeconds)}
                       accent={entry.beatsReference}
-                      className="text-right"
                       variant="modal"
+                      className="text-right"
                     />
                   </div>
                 )}
