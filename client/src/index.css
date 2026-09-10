@@ -88,6 +88,7 @@ body {
   font-family: 'Inter', sans-serif !important;
 }
 
+/* Transition on theme */
 *:not([class*='transition-']),
 *:not([class*='transition-'])::before,
 *:not([class*='transition-'])::after {

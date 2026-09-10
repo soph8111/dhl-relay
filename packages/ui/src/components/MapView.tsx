@@ -135,6 +135,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
               weight: 1.8,
               opacity: 0.8,
             }}
+            className="pointer-events-none!"
           />
           <CircleMarker
             center={DHL_ROUTE_2026[0]}
@@ -145,6 +146,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
               color: '#16a34a',
               fillOpacity: 1,
             }}
+            className="pointer-events-none!"
           />
           <CircleMarker
             center={DHL_ROUTE_2026[DHL_ROUTE_2026.length - 1]}
@@ -155,6 +157,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
               fillColor: 'var(--color-red)',
               fillOpacity: 1,
             }}
+            className="pointer-events-none!"
           />
 
           {Object.entries(positions).map(([runnerId, position]) => {
@@ -168,6 +171,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
                 icon={RunnerIcon(
                   runner.imageUrl || '',
                   gpsErrors[runnerId] || false,
+                  runner.firstName ? `${runner.firstName}` : runner.alias || '',
                 )}
               />
             );
