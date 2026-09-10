@@ -1,6 +1,7 @@
 @import 'tailwindcss';
-@custom-variant dark (&:where(.dark, .dark *));
 @import '@dhl-relay/ui/src/theme.css';
+@source "../../packages/ui/src";
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
   font-family: 'Inter', sans-serif;
