@@ -1,38 +1,12 @@
 import { useLeaderboard } from '../hooks/useLeaderboard';
-import { formatSignedSeconds } from '@dhl-relay/shared';
 import type { SanityClient } from '@sanity/client';
 import type { LeaderboardEntry } from '@dhl-relay/shared';
-import StarFilled from '../icons/StarFilled';
-import StarOutline from '../icons/StarOutline';
+import { LeaderboardCard } from './LeaderboardCard';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface LeaderboardProps {
   client: SanityClient;
   onSelectEntry?: (entry: LeaderboardEntry) => void;
-}
-
-function formatTime(totalSeconds: number): string {
-  const m = Math.floor(totalSeconds / 60);
-  const s = Math.round(totalSeconds % 60);
-  return `${m}:${String(s).padStart(2, '0')}`;
-}
-
-function runnerName(runner: {
-  firstName: string;
-  lastName: string;
-  alias?: string;
-}): string {
-  return runner.firstName && runner.lastName
-    ? `${runner.firstName} ${runner.lastName}`
-    : runner.alias || 'Ukendt løber';
-}
-
-function firstName(runner: {
-  firstName: string;
-  lastName: string;
-  alias?: string;
-}): string {
-  return runner.firstName || runner.alias || 'Ukendt løber';
 }
 
 export function Leaderboard({ client, onSelectEntry }: LeaderboardProps) {
@@ -58,7 +32,7 @@ export function Leaderboard({ client, onSelectEntry }: LeaderboardProps) {
       </div>
 
       <div className="relative md:min-h-0">
-        <div className="flex flex-col gap-2 max-h-96 overflow-y-auto md:max-h-full">
+        <div className="flex flex-col gap-2 max-h-96 overflow-y-auto md:max-h-full pb-9">
           <AnimatePresence>
             {entries.map((entry, index) => {
               const isReference = entry.runner._id === referenceRunnerId;
@@ -71,64 +45,13 @@ export function Leaderboard({ client, onSelectEntry }: LeaderboardProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ type: 'spring', stiffness: 500, damping: 40 }}
-                  onClick={() => onSelectEntry?.(entry)}
-                  className={`flex items-center rounded-xl px-2 md:px-4 py-2.5 text-xs md:text-sm last:mb-9 ${
-                    isReference
-                      ? 'bg-accent text-accent-content'
-                      : 'bg-surface text-surface-content cursor-pointer'
-                  }`}
                 >
-                  <span className="w-5 md:w-8">{index + 1}</span>
-                  <div className="flex-1 flex items-center gap-3 min-w-0">
-                    {entry.runner.imageUrl ? (
-                      <img
-                        src={entry.runner.imageUrl}
-                        alt=""
-                        className="block w-8 h-8 rounded-full object-cover shrink-0"
-                      />
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-surface-content-muted/30 shrink-0" />
-                    )}
-                    <div className="min-w-0">
-                      <div className="truncate">
-                        <span className="md:hidden">
-                          {firstName(entry.runner)}
-                        </span>
-                        <span className="hidden md:inline">
-                          {runnerName(entry.runner)}
-                        </span>
-                      </div>
-                      {entry.runner.teamNames &&
-                      entry.runner.teamNames.length > 0 ? (
-                        <div className="text-2xs md:text-xs text-surface-content-muted truncate">
-                          {entry.runner.teamNames.join(', ')}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="w-15 md:w-24 text-right">
-                    {formatTime(entry.resultSeconds)}
-                  </div>
-                  <div className="w-15 md:w-24 text-right">
-                    {isReference ? (
-                      '—'
-                    ) : (
-                      <>
-                        <div>{formatTime(entry.comparedResultSeconds)}</div>
-                        <div className="text-xs text-surface-content-muted">
-                          {formatSignedSeconds(entry.marginSeconds)}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <div className="w-13 md:w-20 flex justify-end pr-2 md:px-3">
-                    {isReference ? null : entry.beatsReference ? (
-                      <StarFilled className="text-accent" />
-                    ) : (
-                      <StarOutline className="text-accent" />
-                    )}
-                  </div>
+                  <LeaderboardCard
+                    rank={index + 1}
+                    entry={entry}
+                    isReference={isReference}
+                    onClick={() => onSelectEntry?.(entry)}
+                  />
                 </motion.div>
               );
             })}
