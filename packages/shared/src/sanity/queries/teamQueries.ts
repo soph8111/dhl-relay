@@ -8,12 +8,16 @@ export const getTeamsForYearQuery = /* groq */ `
 
 // Members of a specific team, for the "choose runner" dropdown that appears once a team is selected.
 export const getTeamRunnersQuery = /* groq */ `
-  *[_type == "team" && _id == $teamId][0].runners[]->{
-    _id,
-    firstName,
-    lastName,
-    alias
-  }
+  *[_type == "team" && _id == $teamId][0]{
+    "runners": runners[]->{
+      _id,
+      firstName,
+      lastName,
+      alias,
+      "imgUrl": image.asset->url,
+      "resultCount": count(*[_type == "result" && runner._ref == ^._id && team._ref == $teamId])
+    }
+  }.runners
 `;
 
 export const getTeamStandingsQuery = /* groq */ `
