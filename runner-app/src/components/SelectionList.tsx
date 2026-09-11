@@ -7,7 +7,7 @@ interface SelectionItem {
 }
 
 interface SelectionListProps {
-  title: string;
+  title?: string;
   items: SelectionItem[];
   variant: 'team' | 'runner';
   loading?: boolean;
@@ -25,28 +25,35 @@ export function SelectionList({
 
   if (variant === 'team')
     return (
-      <div className="flex flex-col gap-2">
-        <h2 className="text-sm text-surface-content">{title}</h2>
-        {items.map((item) => (
-          <button
-            key={item.id}
-            disabled={item.disabled}
-            onClick={() => onSelect(item.id)}
-            className={`flex justify-between rounded-xl px-4 py-3 text-left ${
-              item.disabled
-                ? 'bg-surface/50 text-surface-content-muted'
-                : 'bg-surface text-surface-content'
-            }`}
-          >
-            {item.label}
-            {item.sublabel && (
-              <p className="text-sm text-surface-content-muted">
-                {item.sublabel}
-              </p>
-            )}
-          </button>
-        ))}
-      </div>
+      <>
+        {title && <h2 className="text-sm text-surface-content">{title}</h2>}
+
+        <div className="relative">
+          <div className="flex flex-col gap-2 max-h-[62vh] overflow-y-auto pb-12">
+            {items.map((item) => (
+              <button
+                key={item.id}
+                disabled={item.disabled}
+                onClick={() => onSelect(item.id)}
+                className={`flex justify-between rounded-xl px-4 py-3 text-left ${
+                  item.disabled
+                    ? 'bg-surface/50 text-surface-content-muted'
+                    : 'bg-surface text-surface-content'
+                }`}
+              >
+                {item.label}
+                {item.sublabel && (
+                  <p className="text-sm text-surface-content-muted">
+                    {item.sublabel}
+                  </p>
+                )}
+              </button>
+            ))}
+          </div>
+
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 bg-linear-to-t from-background to-transparent" />
+        </div>
+      </>
     );
 
   return (
