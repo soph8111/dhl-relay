@@ -150,6 +150,13 @@ io.on('connection', (socket) => {
       }
     }
   });
+
+  socket.on('cancel', ({ runnerId }: { runnerId: string }) => {
+    activeRunners.delete(runnerId);
+    io.emit('runner-stopped', { runnerId });
+
+    console.log(`Run cancelled for ${runnerId} - nothing saved to Sanity`);
+  });
 });
 
 // Removes runners who've gone silent (crashed app, dead battery, forgot to
