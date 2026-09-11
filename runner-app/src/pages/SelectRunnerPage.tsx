@@ -3,14 +3,17 @@ import { useRunSession } from '../context/RunSessionContext';
 import { SelectionList } from '../components/SelectionList';
 import { BackButton } from '@/components/BackButton';
 
+interface ListItem {
+  id: string;
+  label: string;
+  sublabel?: string;
+  imgUrl?: string;
+  disabled?: boolean;
+}
+
 export default function SelectRunnerPage() {
-  const {
-    runners,
-    runnersLoading,
-    selectedTeamId,
-    selectRunner,
-    takenRunnerIds,
-  } = useRunSession();
+  const { runners, selectedTeamId, selectRunner, takenRunnerIds } =
+    useRunSession();
   const navigate = useNavigate();
 
   if (!selectedTeamId) {
@@ -22,36 +25,81 @@ export default function SelectRunnerPage() {
     new Map(runners.map((r) => [r._id, r])).values(),
   );
 
-  const items = uniqueRunners.map((runner) => {
-    const totalOccurrences = runners.filter((r) => r._id === runner._id).length;
-    const baseName =
+  const available: ListItem[] = [];
+  const active: ListItem[] = [];
+  const finished: ListItem[] = [];
+
+  for (const runner of uniqueRunners) {
+    const slots = runners.filter((r) => r._id === runner._id).length;
+    const used = runner.resultCount ?? 0;
+    const label =
       runner.firstName && runner.lastName
         ? `${runner.firstName} ${runner.lastName}`
         : (runner.alias ?? 'Unknown');
-    const label =
-      totalOccurrences > 1
-        ? `${baseName} (${totalOccurrences} rounds)`
-        : baseName;
+    const sublabel = slots > 1 ? `${used}/${slots} finished` : undefined;
 
-    return {
-      id: runner._id,
-      label,
-      disabled: takenRunnerIds.has(runner._id),
-      disabledLabel: '(taken)',
-    };
-  });
+    if (takenRunnerIds.has(runner._id)) {
+      active.push({
+        id: runner._id,
+        label,
+        sublabel,
+        imgUrl: runner.imgUrl,
+        disabled: true,
+      });
+    } else if (used < slots) {
+      available.push({
+        id: runner._id,
+        label,
+        imgUrl: runner.imgUrl,
+        sublabel,
+      });
+    }
+
+    if (used > 0) {
+      finished.push({
+        id: runner._id,
+        label,
+        sublabel,
+        imgUrl: runner.imgUrl,
+        disabled: true,
+      });
+    }
+  }
 
   return (
     <>
-      <SelectionList
-        title="Select yourself"
-        loading={runnersLoading}
-        items={items}
-        onSelect={(id) => {
-          selectRunner(id);
-          void navigate('/running');
-        }}
-      />
+      <div className="flex flex-col gap-6">
+        {available.length > 0 && (
+          <SelectionList
+            title={`Select Runner (${available.length})`}
+            items={available}
+            onSelect={(id) => {
+              selectRunner(id);
+              void navigate('/running');
+            }}
+            variant="runner"
+          />
+        )}
+
+        {active.length > 0 && (
+          <SelectionList
+            title={`Running (${active.length})`}
+            items={active}
+            onSelect={() => {}}
+            variant="runner"
+          />
+        )}
+
+        {finished.length > 0 && (
+          <SelectionList
+            title={`Finished (${finished.length})`}
+            items={finished}
+            onSelect={() => {}}
+            variant="runner"
+          />
+        )}
+      </div>
+
       <BackButton to="/select-team" />
     </>
   );

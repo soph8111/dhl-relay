@@ -10,11 +10,15 @@ export default function SelectTeamPage() {
     <SelectionList
       title="Select your team"
       loading={teamsLoading}
-      items={teams.map((team) => ({ id: team._id, label: team.teamName }))}
+      items={teams.map((team) => ({
+        id: team._id,
+        label: team.teamName,
+      }))}
       onSelect={(id) => {
         selectTeam(id);
         void navigate('/select-runner');
       }}
+      variant="team"
     />
   );
 }
