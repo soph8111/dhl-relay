@@ -7,18 +7,23 @@ export default function SelectTeamPage() {
   const navigate = useNavigate();
 
   return (
-    <SelectionList
-      title="Select your team"
-      loading={teamsLoading}
-      items={teams.map((team) => ({
-        id: team._id,
-        label: team.teamName,
-      }))}
-      onSelect={(id) => {
-        selectTeam(id);
-        void navigate('/select-runner');
-      }}
-      variant="team"
-    />
+    <>
+      <h1 className="text-2xl font-semibold text-surface-content pb-4 text-center">
+        Select Team
+      </h1>
+
+      <SelectionList
+        loading={teamsLoading}
+        items={teams.map((team) => ({
+          id: team._id,
+          label: team.teamName,
+        }))}
+        onSelect={(id) => {
+          selectTeam(id);
+          void navigate('/select-runner');
+        }}
+        variant="team"
+      />
+    </>
   );
 }
