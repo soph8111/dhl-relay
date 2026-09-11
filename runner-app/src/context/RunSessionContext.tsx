@@ -9,7 +9,9 @@ interface TeamRunner {
   _id: string;
   firstName: string;
   lastName: string;
+  imgUrl?: string;
   alias?: string;
+  resultCount: number;
 }
 
 export interface RunSessionContextValue {
