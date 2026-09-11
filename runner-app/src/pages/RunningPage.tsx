@@ -18,6 +18,7 @@ export default function RunningPage() {
     startedAt,
     start,
     stop,
+    cancel,
   } = useRunSession();
   const navigate = useNavigate();
   const [elapsed, setElapsed] = useState(0);
@@ -75,6 +76,7 @@ export default function RunningPage() {
         }
         confirmLabel={'Quit run'}
         cancelLabel={'Keep running'}
+        onConfirmAction={cancel}
       />
 
       {hasGpsError && (

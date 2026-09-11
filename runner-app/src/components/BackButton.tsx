@@ -8,6 +8,7 @@ interface BackButtonProps {
   confirmMessage?: string;
   confirmLabel?: string;
   cancelLabel?: string;
+  onConfirmAction?: () => void;
 }
 
 export function BackButton({
@@ -15,6 +16,7 @@ export function BackButton({
   confirmMessage,
   confirmLabel,
   cancelLabel,
+  onConfirmAction,
 }: BackButtonProps) {
   const navigate = useNavigate();
   const [showConfirm, setShowConfirm] = useState(false);
@@ -41,7 +43,10 @@ export function BackButton({
         <ConfirmDialog
           message={confirmMessage}
           onCancel={() => setShowConfirm(false)}
-          onConfirm={() => void navigate(to)}
+          onConfirm={() => {
+            onConfirmAction?.();
+            void navigate(to);
+          }}
           open={showConfirm}
           confirmLabel={confirmLabel}
           cancelLabel={cancelLabel}
