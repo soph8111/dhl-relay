@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRunSession } from '../context/RunSessionContext';
+import { BackButton } from '@/components/BackButton';
 
 function formatElapsed(seconds: number): string {
   const m = Math.floor(seconds / 60);
@@ -66,6 +67,15 @@ export default function RunningPage() {
           Stop
         </button>
       )}
+
+      <BackButton
+        to="/select-team"
+        confirmMessage={
+          isRunning ? 'Are you sure you want to quit this run?' : undefined
+        }
+        confirmLabel={'Quit run'}
+        cancelLabel={'Keep running'}
+      />
 
       {hasGpsError && (
         <div className="bg-yellow-100 text-yellow-900 rounded-xl px-4 py-3 text-sm">

@@ -12,7 +12,7 @@ import { BottomNav } from './components/BottomNav';
 export default function App() {
   return (
     <ThemeProvider>
-      <div className="m-4 md:m-5 bg-background min-h-screen">
+      <div className="m-4 bg-background">
         <Header />
         <BrowserRouter>
           <RunSessionProvider>

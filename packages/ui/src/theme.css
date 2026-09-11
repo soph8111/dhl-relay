@@ -9,9 +9,11 @@
 
   --color-light-50: oklch(0 0 0 / 0.07); /* #00000012 */
   --color-light-100: oklch(0.9551 0 0); /* #F0F0F0 */
+  --color-light-200: oklch(0.863 0 0); /* #DBDBDB */
 
   --color-dark-50: oklch(1 0 0 / 0.09); /* #FFFFFF17 */
   --color-dark-100: oklch(0.23 0 0); /* #1D1D1D */
+  --color-dark-200: oklch(0.2727 0 0); /* #272727 */
 
   /* Styling */
   --color-surface-content-muted: var(--color-gray);
@@ -23,6 +25,7 @@
   --color-background: var(--color-light-100);
   --color-surface: var(--color-light-50);
   --color-surface-content: var(--color-dark-100);
+  --color-modal-background: var(--color-light-200);
   --color-button-bg: var(--color-black);
   --color-button-content: transparent;
 }
@@ -32,6 +35,7 @@
   --color-background: var(--color-dark-100);
   --color-surface: var(--color-dark-50);
   --color-surface-content: var(--color-white);
+  --color-modal-background: var(--color-dark-200);
 
   --color-button-bg: var(--color-white);
   --color-button-content: var(--color-black);
@@ -49,6 +53,7 @@
   --color-live: var(--color-orange);
   --color-button-bg: var(--color-button-bg);
   --color-button-content: var(--color-button-content);
+  --color-modal-background: var(--color-modal-background);
 
   /* Colors */
   --color-white: var(--color-white);
@@ -61,6 +66,8 @@
   --color-purple: var(--color-purple);
   --color-orange: var(--color-orange);
   --color-red: var(--color-red);
+  --color-light-200: var(--color-light-200);
+  --color-dark-200: var(--color-dark-200);
 
   /* Border radius */
   --radius-sm: 0.9375rem; /* 15px */
