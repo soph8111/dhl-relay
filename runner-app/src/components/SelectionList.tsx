@@ -1,53 +1,85 @@
 interface SelectionItem {
   id: string;
   label: string;
+  sublabel?: string;
+  imgUrl?: string;
   disabled?: boolean;
-  disabledLabel?: string;
 }
 
 interface SelectionListProps {
   title: string;
   items: SelectionItem[];
+  variant: 'team' | 'runner';
   loading?: boolean;
-  emptyMessage?: string;
   onSelect: (id: string) => void;
 }
 
 export function SelectionList({
   title,
   items,
+  variant,
   loading,
-  emptyMessage,
   onSelect,
 }: SelectionListProps) {
-  if (loading)
-    return <p className="p-4 text-surface-content-muted">Loading...</p>;
-  if (items.length === 0) {
+  if (loading) return <p className="text-surface-content-muted">Loading...</p>;
+
+  if (variant === 'team')
     return (
-      <p className="p-4 text-surface-content-muted">
-        {emptyMessage ?? 'Nothing to show.'}
-      </p>
+      <div className="flex flex-col gap-2">
+        <h2 className="text-sm text-surface-content">{title}</h2>
+        {items.map((item) => (
+          <button
+            key={item.id}
+            disabled={item.disabled}
+            onClick={() => onSelect(item.id)}
+            className={`flex justify-between rounded-xl px-4 py-3 text-left ${
+              item.disabled
+                ? 'bg-surface/50 text-surface-content-muted'
+                : 'bg-surface text-surface-content'
+            }`}
+          >
+            {item.label}
+            {item.sublabel && (
+              <p className="text-sm text-surface-content-muted">
+                {item.sublabel}
+              </p>
+            )}
+          </button>
+        ))}
+      </div>
     );
-  }
 
   return (
-    <div className="p-4 flex flex-col gap-2">
-      <h1 className="text-xl font-semibold text-surface-content mb-2">
-        {title}
-      </h1>
+    <div className="flex flex-col gap-2">
+      <h2 className="text-sm text-surface-content">{title}</h2>
       {items.map((item) => (
         <button
           key={item.id}
           disabled={item.disabled}
           onClick={() => onSelect(item.id)}
-          className={`rounded-xl px-4 py-3 text-left ${
+          className={`flex rounded-xl px-4 py-3 items-center gap-2 ${
             item.disabled
               ? 'bg-surface/50 text-surface-content-muted'
               : 'bg-surface text-surface-content'
           }`}
         >
-          {item.label}
-          {item.disabled && item.disabledLabel ? ` ${item.disabledLabel}` : ''}
+          {item.imgUrl ? (
+            <img
+              src={item.imgUrl}
+              alt=""
+              className="w-8 h-8 rounded-full object-cover shrink-0"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-surface-content-muted/30 shrink-0" />
+          )}
+          <span className="flex justify-between w-full items-center">
+            {item.label}
+            {item.sublabel && (
+              <p className="text-xs text-surface-content-muted">
+                {item.sublabel}
+              </p>
+            )}
+          </span>
         </button>
       ))}
     </div>
