@@ -12,6 +12,8 @@ function formatElapsed(seconds: number): string {
 export default function RunningPage() {
   const {
     selectedRunnerId,
+    teams,
+    selectedTeamId,
     runners,
     isRunning,
     hasGpsError,
@@ -23,12 +25,11 @@ export default function RunningPage() {
   const navigate = useNavigate();
   const [elapsed, setElapsed] = useState(0);
 
-  const runner = runners.find((r) => r._id === selectedRunnerId);
-  const name = runner
-    ? runner.firstName && runner.lastName
-      ? `${runner.firstName} ${runner.lastName}`
-      : runner.alias
-    : '';
+  useEffect(() => {
+    if (!selectedRunnerId) {
+      void navigate('/select-team');
+    }
+  }, [selectedRunnerId, navigate]);
 
   useEffect(() => {
     if (!startedAt) return;
@@ -40,15 +41,49 @@ export default function RunningPage() {
     return () => clearInterval(interval);
   }, [startedAt]);
 
+  if (!selectedRunnerId) {
+    return null;
+  }
+
+  const runner = runners.find((r) => r._id === selectedRunnerId);
+  const name = runner
+    ? runner.firstName && runner.lastName
+      ? `${runner.firstName} ${runner.lastName}`
+      : runner.alias
+    : '';
+  const selectedTeam = teams.find((team) => team._id === selectedTeamId);
+
   const handleStop = () => {
     stop();
     void navigate('/finished');
   };
 
   return (
-    <div className="p-4 flex flex-col items-center gap-6 text-center">
-      <h1 className="text-2xl font-semibold text-surface-content">{name}</h1>
+    <div className="items-center flex flex-col gap-6">
+      <div className="flex flex-col gap-6 text-center bg-surface rounded-3xl w-full p-8">
+        <div>
+          {runner?.imageUrl ? (
+            <img
+              src={runner.imageUrl}
+              alt=""
+              className="block w-20 h-20 rounded-full object-cover mx-auto mb-3"
+            />
+          ) : (
+            <div className="w-20 h-20 rounded-full bg-surface-content-muted/30 mx-auto mb-3" />
+          )}
 
+          <h1 className="text-2xl font-semibold text-surface-content">
+            {name}
+          </h1>
+
+          {runner && (
+            <p className="text-surface-content-muted">
+              Age {runner.age} • {runner.gender}
+            </p>
+          )}
+          {selectedTeam && <p> {selectedTeam.teamName}</p>}
+        </div>
+      </div>
       <div className="text-6xl font-bold text-accent tabular-nums">
         {formatElapsed(elapsed)}
       </div>
@@ -70,12 +105,12 @@ export default function RunningPage() {
       )}
 
       <BackButton
-        to="/select-team"
+        to="/select-runner"
         confirmMessage={
           isRunning ? 'Are you sure you want to cancel this run?' : undefined
         }
-        confirmLabel={'Cancel run'}
-        cancelLabel={'Keep running'}
+        confirmLabel="Cancel run"
+        cancelLabel="Keep running"
         onConfirmAction={cancel}
       />
 
