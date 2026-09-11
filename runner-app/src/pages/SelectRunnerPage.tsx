@@ -13,7 +13,7 @@ interface ListItem {
 }
 
 export default function SelectRunnerPage() {
-  const { runners, selectedTeamId, selectRunner, takenRunnerIds } =
+  const { teams, runners, selectedTeamId, selectRunner, takenRunnerIds } =
     useRunSession();
   const navigate = useNavigate();
 
@@ -24,8 +24,10 @@ export default function SelectRunnerPage() {
   }, [selectedTeamId, navigate]);
 
   if (!selectedTeamId) {
-    return null; // render ingenting, mens useEffect håndterer selve navigationen
+    return null;
   }
+
+  const selectedTeam = teams.find((team) => team._id === selectedTeamId);
 
   const uniqueRunners = Array.from(
     new Map(runners.map((r) => [r._id, r])).values(),
@@ -74,7 +76,11 @@ export default function SelectRunnerPage() {
 
   return (
     <>
-      <h1>Select Runner</h1>
+      {selectedTeam && (
+        <h1 className="text-2xl font-semibold text-surface-content pb-4 text-center">
+          {selectedTeam.teamName}
+        </h1>
+      )}
       <div className="flex flex-col gap-6">
         {available.length > 0 && (
           <SelectionList
