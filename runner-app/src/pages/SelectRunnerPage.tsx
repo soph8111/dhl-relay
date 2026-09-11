@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRunSession } from '../context/RunSessionContext';
 import { SelectionList } from '../components/SelectionList';
@@ -16,9 +17,14 @@ export default function SelectRunnerPage() {
     useRunSession();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!selectedTeamId) {
+      void navigate('/select-team');
+    }
+  }, [selectedTeamId, navigate]);
+
   if (!selectedTeamId) {
-    void navigate('/select-team');
-    return null;
+    return null; // render ingenting, mens useEffect håndterer selve navigationen
   }
 
   const uniqueRunners = Array.from(
@@ -68,6 +74,7 @@ export default function SelectRunnerPage() {
 
   return (
     <>
+      <h1>Select Runner</h1>
       <div className="flex flex-col gap-6">
         {available.length > 0 && (
           <SelectionList
