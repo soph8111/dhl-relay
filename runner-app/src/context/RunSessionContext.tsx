@@ -1,17 +1,8 @@
 import { createContext, useContext } from 'react';
-
+import type { TeamRunner } from '@dhl-relay/ui';
 interface Team {
   _id: string;
   teamName: string;
-}
-
-interface TeamRunner {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  imgUrl?: string;
-  alias?: string;
-  resultCount: number;
 }
 
 export interface RunSessionContextValue {
