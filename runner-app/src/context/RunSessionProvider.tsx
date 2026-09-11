@@ -145,6 +145,21 @@ export function RunSessionProvider({ children }: { children: ReactNode }) {
     lastGpsErrorState.current = false;
   };
 
+  const cancel = () => {
+    if (watchId !== null) {
+      navigator.geolocation.clearWatch(watchId);
+      setWatchId(null);
+    }
+
+    if (selectedRunnerId) {
+      socket.emit('cancel', { runnerId: selectedRunnerId });
+    }
+
+    setHasGpsError(false);
+    lastGpsErrorState.current = false;
+    setStartedAt(null);
+  };
+
   const reset = () => {
     setSelectedTeamId(null);
     setSelectedRunnerId(null);
@@ -170,6 +185,7 @@ export function RunSessionProvider({ children }: { children: ReactNode }) {
         finalResultSeconds,
         start,
         stop,
+        cancel,
         reset,
       }}
     >

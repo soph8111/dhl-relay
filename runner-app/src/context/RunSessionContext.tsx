@@ -30,6 +30,7 @@ export interface RunSessionContextValue {
   finalResultSeconds: number | null;
   start: () => void;
   stop: () => void;
+  cancel: () => void;
   reset: () => void;
 }
 
