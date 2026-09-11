@@ -55,7 +55,7 @@ export function ConfirmDialog({
               <button
                 onClick={onConfirm}
                 className="text-surface-content text-sm px-4 pt-4 items-center fixed bottom-28 left-0 right-0 flex justify-center"
-                aria-label="Quit run"
+                aria-label="Cancel run"
               >
                 <ArrowIcon className="w-6 h-6 inline-block mr-2" />{' '}
                 {confirmLabel}

@@ -72,9 +72,9 @@ export default function RunningPage() {
       <BackButton
         to="/select-team"
         confirmMessage={
-          isRunning ? 'Are you sure you want to quit this run?' : undefined
+          isRunning ? 'Are you sure you want to cancel this run?' : undefined
         }
-        confirmLabel={'Quit run'}
+        confirmLabel={'Cancel run'}
         cancelLabel={'Keep running'}
         onConfirmAction={cancel}
       />
