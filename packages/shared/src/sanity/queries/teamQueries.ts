@@ -14,6 +14,8 @@ export const getTeamRunnersQuery = /* groq */ `
       firstName,
       lastName,
       alias,
+      age,
+      gender,
       "imgUrl": image.asset->url,
       "resultCount": count(*[_type == "result" && runner._ref == ^._id && team._ref == $teamId])
     }

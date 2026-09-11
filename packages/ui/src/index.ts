@@ -15,7 +15,7 @@ export { ThemeProvider, useTheme } from './context/ThemeContext';
 export { LiveIndicator } from './components/LiveIndicator';
 export { StatsCarousel } from './components/StatsCarousel';
 export { useTeamsForYear } from './hooks/useTeamsForYear';
-export { useTeamRunners } from './hooks/useTeamRunners';
+export { useTeamRunners, type TeamRunner } from './hooks/useTeamRunners';
 export { useNotifications } from './hooks/useNotifications';
 export { NotificationStack } from './components/NotificationStack';
 export { RunEventNotifications } from './components/RunEventNotifications';

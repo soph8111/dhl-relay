@@ -1,18 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { SanityClient } from '@sanity/client';
-import { getTeamRunnersQuery } from '@dhl-relay/shared';
+import { getTeamRunnersQuery, type Runner } from '@dhl-relay/shared';
 
-interface TeamRunner {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  alias?: string;
-  imgUrl?: string;
-  resultCount: number;
-}
+export type TeamRunner = Runner & { resultCount: number };
 
-// Fetches members of a specific team - null teamId means "not selected yet".
-// Re-fetches whenever any result changes, so resultCount stays live.
 export function useTeamRunners(client: SanityClient, teamId: string | null) {
   const [runners, setRunners] = useState<TeamRunner[]>([]);
   const [loading, setLoading] = useState(false);
