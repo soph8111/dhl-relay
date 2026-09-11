@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { socket } from '@/socketClient';
-import { sanityClient } from '@/sanityClient';
+import { sanityClient, sanityClientFresh } from '@/sanityClient';
 import { useTeamsForYear } from '@dhl-relay/ui/src/hooks/useTeamsForYear';
 import { useTeamRunners } from '@dhl-relay/ui/src/hooks/useTeamRunners';
 import type { RunnerPosition } from '@dhl-relay/shared';
@@ -13,7 +13,7 @@ export function RunSessionProvider({ children }: { children: ReactNode }) {
 
   const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
   const { runners, loading: runnersLoading } = useTeamRunners(
-    sanityClient,
+    sanityClientFresh,
     selectedTeamId,
   );
 
