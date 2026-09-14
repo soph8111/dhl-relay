@@ -12,9 +12,9 @@ export function ThemeToggle() {
       className="p-2"
     >
       {theme === 'dark' ? (
-        <MoonIcon className="w-4 h-4" />
+        <MoonIcon className="w-4 h-4 hover:opacity-80 cursor-pointer transition-opacity ease-in-out duration-200" />
       ) : (
-        <SunIcon className="w-4 h-4" />
+        <SunIcon className="w-4 h-4 hover:opacity-80 cursor-pointer transition-opacity ease-in-out duration-200" />
       )}
     </button>
   );
