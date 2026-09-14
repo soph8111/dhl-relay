@@ -78,9 +78,9 @@ export default function RunningPage() {
       </div>
 
       {!isRunning ? (
-        <CtaButton label="Start timer" onClick={start} variant="accent" />
+        <CtaButton label="Start timer" onClick={start} variant="start" />
       ) : (
-        <CtaButton label="Stop timer" onClick={handleStop} />
+        <CtaButton label="Stop timer" onClick={handleStop} variant="stop" />
       )}
       <BackButton
         to="/select-runner"
@@ -93,8 +93,17 @@ export default function RunningPage() {
       />
 
       {hasGpsError && (
-        <div className="bg-yellow-100 text-yellow-900 rounded-xl px-4 py-3 text-sm">
-          GPS signal lost – your time is still running
+        <div className="fixed top-5 md:top-10 left-1/2 -translate-x-1/2 z-1100 w-full md:w-lg px-4 pointer-events-none">
+          <div
+            className="relative bg-red text-accent-content rounded-xl shadow-lg px-4 py-3 text-sm pointer-events-auto
+        transition-all duration-300 ease-out
+        starting:opacity-0 starting:-translate-y-4"
+          >
+            <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red border border-white flex items-center justify-center text-white font-bold leading-none">
+              !
+            </div>
+            GPS signal lost – your time is still running
+          </div>
         </div>
       )}
     </div>

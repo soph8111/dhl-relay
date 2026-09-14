@@ -142,8 +142,8 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
             radius={4}
             pathOptions={{
               weight: 1,
-              fillColor: '#16a34a',
-              color: '#16a34a',
+              fillColor: 'var(--color-green)',
+              color: 'var(--color-green)',
               fillOpacity: 1,
             }}
             className="pointer-events-none!"

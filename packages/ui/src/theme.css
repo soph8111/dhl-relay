@@ -6,6 +6,7 @@
   --color-purple: oklch(0.5007 0.2267 292.99); /* #6F34D5 */
   --color-orange: oklch(0.6357 0.2504 30.62); /* #FF1F00 */
   --color-red: oklch(0.6357 0.2504 30.62); /* #FF1F00 */
+  --color-green: oklch(0.6271 0.1699 149.21); /* #16A34A */
 
   --color-light-50: oklch(0 0 0 / 0.07); /* #00000012 */
   --color-light-100: oklch(0.9551 0 0); /* #F0F0F0 */
@@ -26,8 +27,8 @@
   --color-surface: var(--color-light-50);
   --color-surface-content: var(--color-dark-100);
   --color-modal-background: var(--color-light-200);
-  --color-button-bg: var(--color-black);
-  --color-button-content: transparent;
+  --color-button-bg: var(--color-dark-200);
+  --color-button-content: var(--color-white);
 }
 
 /* Dark theme */
@@ -66,6 +67,7 @@
   --color-purple: var(--color-purple);
   --color-orange: var(--color-orange);
   --color-red: var(--color-red);
+  --color-green: var(--color-green);
   --color-light-200: var(--color-light-200);
   --color-dark-200: var(--color-dark-200);
 

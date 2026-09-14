@@ -26,7 +26,7 @@ export function RunnerIcon(
             ? `<div class="absolute -top-1 left-1/2 -translate-x-1/2 -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap bg-accent/60 text-accent-content text-xs px-2 py-1 rounded-md shadow-lg">${name}</div>`
             : ''
         }
-        ${hasGpsError ? `<div class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red-600 border border-white flex items-center justify-center text-white text-2xs font-bold leading-none">!</div>` : ''}
+        ${hasGpsError ? `<div class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-red border border-white flex items-center justify-center text-white text-2xs font-bold leading-none">!</div>` : ''}
       </div>
     `,
     iconSize: [28, 28],

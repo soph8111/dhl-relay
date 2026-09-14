@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
+
 const ArrowIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -11,11 +12,11 @@ const ArrowIcon = (props: SVGProps<SVGSVGElement>) => (
   >
     <g clipPath="url(#ArrowIcon_svg__a)">
       <path
-        fill="white"
+        className="fill-button-bg"
         d="M.533 10.836c0 5.612 4.55 10.161 10.161 10.161 5.612 0 10.162-4.549 10.162-10.16 0-5.613-4.55-10.162-10.162-10.162C5.084.675.534 5.225.534 10.836"
       />
       <path
-        fill="black"
+        className="fill-button-content"
         d="m10.692 15.11.855-.852-2.853-2.826 6.364-.06v-1.2l-6.364.059 2.853-2.88-.855-.835-4.296 4.337z"
       />
     </g>
@@ -26,4 +27,5 @@ const ArrowIcon = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 );
+
 export default ArrowIcon;
