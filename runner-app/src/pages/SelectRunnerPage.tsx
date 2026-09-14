@@ -8,7 +8,6 @@ interface ListItem {
   id: string;
   label: string;
   sublabel?: string;
-  imgUrl?: string;
   disabled?: boolean;
 }
 
@@ -51,14 +50,12 @@ export default function SelectRunnerPage() {
         id: runner._id,
         label,
         sublabel,
-        imgUrl: runner.imgUrl,
         disabled: true,
       });
     } else if (used < slots) {
       available.push({
         id: runner._id,
         label,
-        imgUrl: runner.imgUrl,
         sublabel,
       });
     }
@@ -68,7 +65,6 @@ export default function SelectRunnerPage() {
         id: runner._id,
         label,
         sublabel,
-        imgUrl: runner.imgUrl,
         disabled: true,
       });
     }

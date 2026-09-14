@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import ArrowIcon from '@dhl-relay/ui/src/icons/ArrowIcon';
 import CloseIcon from '@dhl-relay/ui/src/icons/CloseIcon';
+import { CtaButton } from './CtaButton';
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -46,12 +47,11 @@ export function ConfirmDialog({
               {message}
             </p>
             <div className="flex flex-col gap-3">
-              <button
+              <CtaButton
                 onClick={onCancel}
-                className="rounded-full uppercase p-4 bg-accent text-accent-content font-medium"
-              >
-                {cancelLabel}
-              </button>
+                label={cancelLabel || 'Cancel'}
+                variant="accent"
+              />
               <button
                 onClick={onConfirm}
                 className="text-surface-content text-sm px-4 pt-4 items-center fixed bottom-28 left-0 right-0 flex justify-center"

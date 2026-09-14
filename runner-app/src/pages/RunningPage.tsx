@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRunSession } from '../context/RunSessionContext';
+import { RunnerProfileCard } from '@/components/RunnerProfileCard';
 import { BackButton } from '@/components/BackButton';
+import { CtaButton } from '@/components/CtaButton';
 
 function formatElapsed(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
-  return `${m}:${String(s).padStart(2, '0')}`;
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
 }
 
 export default function RunningPage() {
@@ -49,7 +51,7 @@ export default function RunningPage() {
   const name = runner
     ? runner.firstName && runner.lastName
       ? `${runner.firstName} ${runner.lastName}`
-      : runner.alias
+      : (runner.alias ?? '')
     : '';
   const selectedTeam = teams.find((team) => team._id === selectedTeamId);
 
@@ -60,48 +62,21 @@ export default function RunningPage() {
 
   return (
     <div className="items-center flex flex-col gap-6">
-      <div className="flex flex-col gap-6 text-center bg-surface rounded-3xl w-full p-8">
-        <div>
-          {runner?.imageUrl ? (
-            <img
-              src={runner.imageUrl}
-              alt=""
-              className="block w-20 h-20 rounded-full object-cover mx-auto mb-3"
-            />
-          ) : (
-            <div className="w-20 h-20 rounded-full bg-surface-content-muted/30 mx-auto mb-3" />
-          )}
-
-          <h1 className="text-2xl font-semibold text-surface-content">
-            {name}
-          </h1>
-
-          {runner && (
-            <p className="text-surface-content-muted">
-              Age {runner.age} • {runner.gender}
-            </p>
-          )}
-          {selectedTeam && <p> {selectedTeam.teamName}</p>}
-        </div>
-      </div>
+      <RunnerProfileCard
+        name={name}
+        imageUrl={runner?.imageUrl}
+        age={runner?.age}
+        gender={runner?.gender}
+        teamName={selectedTeam?.teamName}
+      />
       <div className="text-6xl font-bold text-accent tabular-nums">
         {formatElapsed(elapsed)}
       </div>
 
       {!isRunning ? (
-        <button
-          onClick={start}
-          className="bg-accent text-accent-content rounded-xl px-8 py-4 text-lg font-semibold"
-        >
-          Start
-        </button>
+        <CtaButton label="Start" onClick={start} variant="accent" />
       ) : (
-        <button
-          onClick={handleStop}
-          className="bg-surface text-surface-content rounded-xl px-8 py-4 text-lg font-semibold"
-        >
-          Stop
-        </button>
+        <CtaButton label="Stop" onClick={handleStop} />
       )}
 
       <BackButton
