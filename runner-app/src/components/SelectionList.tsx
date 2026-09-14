@@ -2,7 +2,7 @@ interface SelectionItem {
   id: string;
   label: string;
   sublabel?: string;
-  imgUrl?: string;
+  imageUrl?: string;
   disabled?: boolean;
 }
 
@@ -70,9 +70,9 @@ export function SelectionList({
               : 'bg-surface text-surface-content'
           }`}
         >
-          {item.imgUrl ? (
+          {item.imageUrl ? (
             <img
-              src={item.imgUrl}
+              src={item.imageUrl}
               alt=""
               className="w-8 h-8 rounded-full object-cover shrink-0"
             />

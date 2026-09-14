@@ -6,6 +6,7 @@ import { BackButton } from '@/components/BackButton';
 
 interface ListItem {
   id: string;
+  imageUrl?: string;
   label: string;
   sublabel?: string;
   disabled?: boolean;
@@ -48,6 +49,7 @@ export default function SelectRunnerPage() {
     if (takenRunnerIds.has(runner._id)) {
       active.push({
         id: runner._id,
+        imageUrl: runner.imageUrl,
         label,
         sublabel,
         disabled: true,
@@ -55,6 +57,7 @@ export default function SelectRunnerPage() {
     } else if (used < slots) {
       available.push({
         id: runner._id,
+        imageUrl: runner.imageUrl,
         label,
         sublabel,
       });
@@ -63,6 +66,7 @@ export default function SelectRunnerPage() {
     if (used > 0) {
       finished.push({
         id: runner._id,
+        imageUrl: runner.imageUrl,
         label,
         sublabel,
         disabled: true,

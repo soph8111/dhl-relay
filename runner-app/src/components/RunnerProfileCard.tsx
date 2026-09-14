@@ -23,21 +23,23 @@ export function RunnerProfileCard({
         <img
           src={imageUrl}
           alt=""
-          className="w-20 h-20 rounded-full object-cover mx-auto"
+          className="w-25 h-25 rounded-full object-cover mx-auto"
         />
       ) : (
-        <div className="w-20 h-20 rounded-full bg-surface-content-muted/30 mx-auto" />
+        <div className="w-25 h-25 rounded-full bg-surface-content-muted/30 mx-auto" />
       )}
 
       <div className="flex flex-col gap-3">
-        <h1 className="text-2xl font-semibold text-surface-content">{name}</h1>
+        <h1 className="text-xl font-semibold text-surface-content">{name}</h1>
 
         {age != null && gender && (
-          <p className="text-surface-content-muted text-sm">
+          <p className="text-surface-content-muted text-sm capitalize">
             Age {age} • {gender}
           </p>
         )}
-        {teamName && <p className="text-surface-content">{teamName}</p>}
+        {teamName && (
+          <p className="text-surface-content capitalize">{teamName}</p>
+        )}
       </div>
 
       {children}
