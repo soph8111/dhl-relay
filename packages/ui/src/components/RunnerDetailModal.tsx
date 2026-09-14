@@ -44,7 +44,7 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
   return (
     <AnimatePresence>
       {entry && (
-        <div className="fixed inset-0 z-2000">
+        <div className="fixed inset-0 z-2000 ">
           {/* Backdrop */}
           <motion.div
             onClick={onClose}
@@ -52,7 +52,7 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="absolute inset-0 bg-background/70 backdrop-blur-xs transition-opacity duration-300 ease-out"
+            className="absolute inset-0 bg-background/70 backdrop-blur-xs transition-opacity duration-300 ease-outs"
           />
 
           {/* Panel: bottom sheet på mobil, side-panel på desktop */}
@@ -62,14 +62,14 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
             exit={offscreen}
             transition={{ type: 'spring', stiffness: 500, damping: 40 }}
             className="
-              absolute bg-background shadow-2xl inset-x-0 bottom-0 h-full max-h-fit 
-              md:left-auto md:w-xl"
+              absolute bg-background shadow-2xl inset-x-0 bottom-0 h-full max-h-fit rounded-t-3xl
+              md:left-auto md:w-xl md:mr-8"
           >
-            <div className="relative bg-accent h-28 md:h-50 md:mt-0 rounded-t-3xl">
+            <div className="relative bg-accent h-35 md:h-50 md:mt-0 rounded-t-3xl">
               <button
                 onClick={onClose}
                 aria-label="X"
-                className="absolute top-6 right-4 w-10 h-10 text-white rounded-full  flex items-center justify-center hover:opacity-80 transition-opacity hover:cursor-pointer"
+                className="absolute top-5 right-4 w-10 h-10 text-white rounded-full flex items-center justify-center hover:opacity-80 transition-opacity hover:cursor-pointer"
               >
                 <CloseIcon />
               </button>
@@ -77,14 +77,14 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
                 <img
                   src={entry.runner.imageUrl}
                   alt=""
-                  className="w-23 h-23 rounded-full object-cover absolute -bottom-11 left-6"
+                  className="w-28 h-28 md:w-30 md:h-30 rounded-full object-cover absolute -bottom-14 md:-bottom-14.5 left-6"
                 />
               )}
             </div>
 
-            <div className="pt-14 px-6 pb-8">
-              <div className="flex items-center gap-2">
-                <h2 className="text-2xl font-semibold text-surface-content w-full">
+            <div className="pt-18 px-6 pb-8">
+              <div className="flex items-center">
+                <h2 className="text-3xl font-semibold text-surface-content w-full">
                   {runnerName(entry.runner)}
                 </h2>
                 {!entry.isReference &&
@@ -94,15 +94,15 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
                     <StarOutline className="text-accent w-8 h-8" />
                   ))}
               </div>
-              <p className="text-surface-content-muted my-2">
+              <p className="text-surface-content-muted my-2 text-sm md:text-base capitalize">
                 Age {entry.runner.age} • {entry.runner.gender}
               </p>
-              <p className="text-surface-content-muted">
+              <p className="text-surface-content md:text-lg">
                 {entry.runner.teamNames && entry.runner.teamNames.length > 0
                   ? entry.runner.teamNames.join(', ')
                   : 'No teams'}
               </p>
-
+              <hr className="my-5 text-surface" />
               <div className="grid grid-cols-2 md:grid-cols-[2fr_3fr] gap-3 mt-6">
                 <div className="bg-surface rounded-2xl p-4 h-35 flex justify-between">
                   <StatCard
