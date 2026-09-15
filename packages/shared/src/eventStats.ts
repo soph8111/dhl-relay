@@ -52,7 +52,7 @@ export function calculateEventStats(
 
     if (runnerId === reference.runnerId) continue;
 
-    const { age, gender } = runnerResults[0].runner;
+    const { age, gender } = runnerResults[0]!.runner;
     const targetSeconds = calculateTargetSeconds(
       age,
       gender,
