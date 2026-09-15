@@ -3,7 +3,7 @@ import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import { sanityClient } from './sanityClient';
+import { sanityClient } from './sanityClient.js';
 import type { RunnerPosition } from '@dhl-relay/shared';
 import { getPendingResultQuery } from '@dhl-relay/shared';
 
