@@ -8,6 +8,7 @@ export interface Notification {
   id: string;
   text: string;
   isExiting: boolean;
+  isError?: boolean;
 }
 
 export function useNotifications() {
@@ -19,11 +20,14 @@ export function useNotifications() {
     // },
   ]);
 
-  const push = (text: string) => {
+  const push = (text: string, options?: { isError?: boolean }) => {
     const id = `${Date.now()}-${Math.random()}`;
 
     setNotifications((prev) => {
-      const next = [...prev, { id, text, isExiting: false }];
+      const next = [
+        ...prev,
+        { id, text, isExiting: false, isError: options?.isError },
+      ];
       return next.length > MAX_NOTIFICATIONS
         ? next.slice(next.length - MAX_NOTIFICATIONS)
         : next;

@@ -56,8 +56,10 @@ export function RunEventNotifications({
     }: {
       runnerId: string;
       hasError: boolean;
+      isError: boolean;
     }) => {
-      if (hasError) push(`${getRunnerName(runnerId)} lost GPS signal`);
+      if (hasError)
+        push(`${getRunnerName(runnerId)} lost GPS signal`, { isError: true });
     };
 
     const handleFinished = ({
