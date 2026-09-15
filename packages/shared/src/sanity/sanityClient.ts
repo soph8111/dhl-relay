@@ -14,7 +14,7 @@ export function createSanityClient(config: SanityConfig): SanityClient {
     projectId: config.projectId,
     dataset: config.dataset,
     apiVersion: '2024-01-01',
-    token: config.token,
     useCdn: config.useCdn ?? true,
+    ...(config.token ? { token: config.token } : {}),
   });
 }
