@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import ArrowIcon from '@dhl-relay/ui/src/icons/ArrowIcon';
 import CloseIcon from '@dhl-relay/ui/src/icons/CloseIcon';
 import { CtaButton } from './CtaButton';
+import { useEffect } from 'react';
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -20,6 +21,16 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
+  useEffect(() => {
+    if (!open) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [open]);
   return (
     <AnimatePresence>
       {open && (
@@ -37,7 +48,7 @@ export function ConfirmDialog({
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             transition={{ type: 'spring', stiffness: 500, damping: 40 }}
-            className="absolute inset-x-0 bottom-0 bg-modal-background rounded-t-3xl px-10 pt-6 pb-8 h-1/2"
+            className="absolute inset-x-0 bottom-0 bg-modal-background rounded-t-3xl px-10 pt-6 pb-28 h-fit"
           >
             <CloseIcon
               className="absolute top-4 right-4 w-6 h-6 text-surface-content"
@@ -54,7 +65,7 @@ export function ConfirmDialog({
               />
               <button
                 onClick={onConfirm}
-                className="text-surface-content text-sm px-4 pt-4 items-center fixed bottom-28 left-0 right-0 flex justify-center"
+                className="text-surface-content text-sm px-4 pt-4 items-center flex justify-center"
                 aria-label="Cancel run"
               >
                 <ArrowIcon className="w-6 h-6 inline-block mr-2" />{' '}

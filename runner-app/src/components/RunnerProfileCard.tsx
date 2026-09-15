@@ -18,18 +18,18 @@ export function RunnerProfileCard({
   children,
 }: RunnerProfileCardProps) {
   return (
-    <div className="flex flex-col gap-6 text-center bg-surface rounded-3xl w-full p-8">
+    <div className="flex flex-col gap-4 text-center bg-surface rounded-3xl w-full p-4">
       {imageUrl ? (
         <img
           src={imageUrl}
           alt=""
-          className="w-25 h-25 rounded-full object-cover mx-auto"
+          className="w-22 h-22 rounded-full object-cover mx-auto"
         />
       ) : (
-        <div className="w-25 h-25 rounded-full bg-surface-content-muted/30 mx-auto" />
+        <div className="w-22 h-22 rounded-full bg-surface-content-muted/30 mx-auto" />
       )}
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2">
         <h1 className="text-xl font-semibold text-surface-content">{name}</h1>
 
         {age != null && gender && (

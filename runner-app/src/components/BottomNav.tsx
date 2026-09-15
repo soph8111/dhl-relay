@@ -23,7 +23,7 @@ export function BottomNav() {
           `flex-1 py-3 text-center text-sm font-medium ${isActive ? 'text-accent' : 'text-surface-content-muted'}`
         }
       >
-        <StarFilled className="mx-auto w-6 h-6 m-1" />
+        <StarFilled className="mx-auto w-5 h-5 m-1" />
         <p>Leaderboard</p>
       </NavLink>
       <NavLink
@@ -32,7 +32,7 @@ export function BottomNav() {
           `flex-1 py-3 text-center text-sm font-medium ${isActive ? 'text-accent' : 'text-surface-content-muted'}`
         }
       >
-        <RunIcon className="mx-auto w-6 h-6 m-1" />
+        <RunIcon className="mx-auto w-5 h-5 m-1" />
         <p>My Race</p>
       </NavLink>
     </nav>

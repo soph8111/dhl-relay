@@ -77,7 +77,7 @@ export default function SelectRunnerPage() {
   return (
     <>
       {selectedTeam && (
-        <h1 className="text-2xl font-semibold text-surface-content pb-4 text-center">
+        <h1 className="text-xl font-semibold text-surface-content pb-4 text-left">
           {selectedTeam.teamName}
         </h1>
       )}
@@ -113,7 +113,9 @@ export default function SelectRunnerPage() {
         )}
       </div>
 
-      <BackButton to="/select-team" />
+      <div className="flex justify-center mt-8">
+        <BackButton to="/select-team" />
+      </div>
     </>
   );
 }

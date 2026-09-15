@@ -8,7 +8,7 @@ export default function SelectTeamPage() {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold text-surface-content pb-4 text-center">
+      <h1 className="text-xl font-semibold text-surface-content pb-4 text-left">
         Select Team
       </h1>
 

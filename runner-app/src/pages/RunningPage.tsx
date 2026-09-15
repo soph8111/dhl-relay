@@ -61,27 +61,26 @@ export default function RunningPage() {
   };
 
   return (
-    <div className="items-center flex flex-col min-h-[58vh] justify-between">
-      <RunnerProfileCard
-        name={name}
-        imageUrl={runner?.imageUrl}
-        age={runner?.age}
-        gender={runner?.gender}
-        teamName={selectedTeam?.teamName}
-      />
+    <div className="items-center flex flex-col h-[52vh] justify-between">
+      <>
+        <RunnerProfileCard
+          name={name}
+          imageUrl={runner?.imageUrl}
+          age={runner?.age}
+          gender={runner?.gender}
+          teamName={selectedTeam?.teamName}
+        />
 
-      <div className="flex flex-col items-center gap-2">
-        <p className="text-6xl font-bold tabular-nums text-surface-content">
+        <p className="text-5xl font-bold tabular-nums text-surface-content my-3">
           {formatElapsed(elapsed)}
         </p>
-        <p>Running time</p>
-      </div>
 
-      {!isRunning ? (
-        <CtaButton label="Start timer" onClick={start} variant="start" />
-      ) : (
-        <CtaButton label="Stop timer" onClick={handleStop} variant="stop" />
-      )}
+        {!isRunning ? (
+          <CtaButton label="Start timer" onClick={start} variant="start" />
+        ) : (
+          <CtaButton label="Stop timer" onClick={handleStop} variant="stop" />
+        )}
+      </>
       <BackButton
         to="/select-runner"
         confirmMessage={
