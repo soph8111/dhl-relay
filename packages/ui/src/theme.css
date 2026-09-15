@@ -94,3 +94,13 @@
   transition-duration: 200ms;
   transition-timing-function: ease-out;
 }
+
+/* Hide scrollbars */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge legacy */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge (Chromium) */
+}
