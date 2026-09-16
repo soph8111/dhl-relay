@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Runner-app
+ios/App/Pods/
+ios/App/App.xcworkspace/
+ios/App/build/

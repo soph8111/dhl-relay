@@ -24,3 +24,8 @@ logs
 sanity/node_modules/
 sanity/.env
 sanity/.env.*
+
+# Runner-app
+ios/App/Pods/
+ios/App/App.xcworkspace/
+ios/App/build/
