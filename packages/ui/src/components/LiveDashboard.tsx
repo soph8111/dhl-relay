@@ -17,6 +17,7 @@ interface LiveDashboardProps {
   socket: Socket;
   cartoApiKey: string;
   hasBottomNav?: boolean;
+  isApp?: boolean;
 }
 
 export function LiveDashboard({
@@ -25,6 +26,7 @@ export function LiveDashboard({
   socket,
   cartoApiKey,
   hasBottomNav,
+  isApp,
 }: LiveDashboardProps) {
   const [selectedEntry, setSelectedEntry] = useState<LeaderboardEntry | null>(
     null,
@@ -32,7 +34,11 @@ export function LiveDashboard({
 
   return (
     <>
-      <RunEventNotifications client={sanityClientFresh} socket={socket} />
+      <RunEventNotifications
+        client={sanityClientFresh}
+        socket={socket}
+        isApp={isApp}
+      />
 
       <LiveIndicator />
       <div

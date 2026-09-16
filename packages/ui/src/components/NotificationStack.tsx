@@ -2,13 +2,21 @@ import type { Notification } from '../hooks/useNotifications';
 
 interface NotificationStackProps {
   notifications: Notification[];
+  isApp?: boolean;
 }
 
-export function NotificationStack({ notifications }: NotificationStackProps) {
+export function NotificationStack({
+  notifications,
+  isApp,
+}: NotificationStackProps) {
   if (notifications.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-2 fixed top-5 md:top-10 left-1/2 -translate-x-1/2 z-1100 w-full md:w-lg px-4 pointer-events-none">
+    <div
+      className={`flex flex-col gap-2 fixed left-1/2 -translate-x-1/2 z-1100 w-full md:w-lg px-4 pointer-events-none ${
+        isApp ? 'top-20' : 'top-5 md:top-10'
+      }`}
+    >
       {notifications.map((n) => (
         <NotificationItem
           key={n.id}

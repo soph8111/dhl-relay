@@ -14,11 +14,13 @@ import { NotificationStack } from './NotificationStack';
 interface RunEventNotificationsProps {
   client: SanityClient;
   socket: Socket;
+  isApp?: boolean;
 }
 
 export function RunEventNotifications({
   client,
   socket,
+  isApp,
 }: RunEventNotificationsProps) {
   const { notifications, push } = useNotifications();
   const reference = useReferenceRunner(client);
@@ -92,7 +94,7 @@ export function RunEventNotifications({
     };
 
     const handleTimedOut = ({ runnerId }: { runnerId: string }) => {
-      push(`${getRunnerName(runnerId)} lost connection`);
+      push(`${getRunnerName(runnerId)} lost connection`, { isError: true });
     };
 
     socket.on('gps-error', handleGpsError);
@@ -106,5 +108,5 @@ export function RunEventNotifications({
     };
   }, [socket, reference]);
 
-  return <NotificationStack notifications={notifications} />;
+  return <NotificationStack notifications={notifications} isApp={isApp} />;
 }

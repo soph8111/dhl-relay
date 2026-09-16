@@ -13,11 +13,11 @@ export interface Notification {
 
 export function useNotifications() {
   const [notifications, setNotifications] = useState<Notification[]>([
-    // {
-    //   id: 'dev-test',
-    //   text: '🌟 Test Testesen slog chefen med en tid på 22:15!',
-    //   isExiting: false,
-    // },
+    {
+      id: 'dev-test',
+      text: '🌟 Test Testesen slog chefen med en tid på 22:15!',
+      isExiting: false,
+    },
   ]);
 
   const push = (text: string, options?: { isError?: boolean }) => {
