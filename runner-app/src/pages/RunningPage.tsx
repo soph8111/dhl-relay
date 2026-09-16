@@ -25,7 +25,10 @@ export default function RunningPage() {
     cancel,
   } = useRunSession();
   const navigate = useNavigate();
-  const [elapsed, setElapsed] = useState(0);
+  const [elapsed, setElapsed] = useState(() => {
+    if (!startedAt) return 0;
+    return Math.floor((Date.now() - startedAt) / 1000);
+  });
 
   useEffect(() => {
     if (!selectedRunnerId) {
