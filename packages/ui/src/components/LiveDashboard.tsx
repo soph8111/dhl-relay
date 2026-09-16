@@ -16,6 +16,7 @@ interface LiveDashboardProps {
   sanityClientFresh: SanityClient;
   socket: Socket;
   cartoApiKey: string;
+  hasBottomNav?: boolean;
 }
 
 export function LiveDashboard({
@@ -23,6 +24,7 @@ export function LiveDashboard({
   sanityClientFresh,
   socket,
   cartoApiKey,
+  hasBottomNav,
 }: LiveDashboardProps) {
   const [selectedEntry, setSelectedEntry] = useState<LeaderboardEntry | null>(
     null,
@@ -71,7 +73,7 @@ export function LiveDashboard({
       <RunnerDetailModal
         entry={selectedEntry}
         onClose={() => setSelectedEntry(null)}
-        bottomPadding="pb-20"
+        hasBottomNav={hasBottomNav}
       />
     </>
   );

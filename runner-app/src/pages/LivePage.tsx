@@ -9,6 +9,7 @@ export default function LivePage() {
       sanityClientFresh={sanityClientFresh}
       socket={socket}
       cartoApiKey={import.meta.env.VITE_CARTO_API_KEY}
+      hasBottomNav={true}
     />
   );
 }
