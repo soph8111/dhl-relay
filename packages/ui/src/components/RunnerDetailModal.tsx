@@ -10,6 +10,7 @@ import { StatCard } from './StatCard';
 interface RunnerDetailModalProps {
   entry: LeaderboardEntry | null;
   onClose: () => void;
+  bottomPadding?: string;
 }
 
 function useIsDesktop() {
@@ -37,7 +38,11 @@ function runnerName(runner: {
   return runner.alias ?? `${runner.firstName} ${runner.lastName}`;
 }
 
-export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
+export function RunnerDetailModal({
+  entry,
+  onClose,
+  bottomPadding,
+}: RunnerDetailModalProps) {
   const isDesktop = useIsDesktop();
   const offscreen = isDesktop ? { x: '100%' } : { y: '100%' };
 
@@ -61,9 +66,9 @@ export function RunnerDetailModal({ entry, onClose }: RunnerDetailModalProps) {
             animate={{ x: 0, y: 0 }}
             exit={offscreen}
             transition={{ type: 'spring', stiffness: 500, damping: 40 }}
-            className="
+            className={`
               absolute bg-background shadow-2xl inset-x-0 bottom-0 h-full max-h-fit rounded-t-3xl
-              md:left-auto md:w-xl md:mr-8"
+              md:left-auto md:w-xl md:mr-8 ${bottomPadding}`}
           >
             <div className="relative bg-accent h-35 md:h-50 md:mt-0 rounded-t-3xl">
               <button

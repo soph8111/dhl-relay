@@ -34,7 +34,7 @@ export function LiveDashboard({
 
       <LiveIndicator />
       <div
-        className="flex flex-col gap-5
+        className="flex flex-col gap-8
         md:h-[75vh] md:min-h-0
         md:grid md:gap-3
         md:[grid-template-areas:'board_map_side'] md:grid-cols-[2fr_1fr_auto]
@@ -71,6 +71,7 @@ export function LiveDashboard({
       <RunnerDetailModal
         entry={selectedEntry}
         onClose={() => setSelectedEntry(null)}
+        bottomPadding="pb-20"
       />
     </>
   );

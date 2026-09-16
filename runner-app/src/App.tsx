@@ -12,21 +12,23 @@ import { BottomNav } from './components/BottomNav';
 export default function App() {
   return (
     <ThemeProvider>
-      <div className="m-4 bg-background pb-22 overflow-hidden h-full">
+      <div className="m-8 mt-10 bg-background h-full">
         <Header />
         <BrowserRouter>
           <RunSessionProvider>
-            <Routes>
-              <Route
-                path="/"
-                element={<Navigate to="/select-team" replace />}
-              />
-              <Route path="/live" element={<LivePage />} />
-              <Route path="/select-team" element={<SelectTeamPage />} />
-              <Route path="/select-runner" element={<SelectRunnerPage />} />
-              <Route path="/running" element={<RunningPage />} />
-              <Route path="/finished" element={<FinishedPage />} />
-            </Routes>
+            <div className="pb-22">
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Navigate to="/select-team" replace />}
+                />
+                <Route path="/live" element={<LivePage />} />
+                <Route path="/select-team" element={<SelectTeamPage />} />
+                <Route path="/select-runner" element={<SelectRunnerPage />} />
+                <Route path="/running" element={<RunningPage />} />
+                <Route path="/finished" element={<FinishedPage />} />
+              </Routes>
+            </div>
             <BottomNav />
           </RunSessionProvider>
         </BrowserRouter>
