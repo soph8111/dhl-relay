@@ -13,8 +13,14 @@ interface ListItem {
 }
 
 export default function SelectRunnerPage() {
-  const { teams, runners, selectedTeamId, selectRunner, takenRunnerIds } =
-    useRunSession();
+  const {
+    teams,
+    runners,
+    runnersLoading,
+    selectedTeamId,
+    selectRunner,
+    takenRunnerIds,
+  } = useRunSession();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -82,10 +88,11 @@ export default function SelectRunnerPage() {
         </h1>
       )}
       <div className="flex flex-col gap-6">
-        {available.length > 0 && (
+        {(runnersLoading || available.length > 0) && (
           <SelectionList
             title={`Select Runner (${available.length})`}
             items={available}
+            loading={runnersLoading}
             onSelect={(id) => {
               selectRunner(id);
               void navigate('/running');

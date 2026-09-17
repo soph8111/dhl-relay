@@ -63,14 +63,14 @@ io.on('connection', (socket) => {
         if (existingResults >= slotsForRunner) {
           socket.emit('start-error', {
             message:
-              'Denne løber har allerede løbet det maksimale antal gange for dette hold.',
+              'This runner has already run the maximum number of times for this team.',
           });
           return;
         }
       } catch (err) {
         console.error('Could not verify team slots:', err);
         socket.emit('start-error', {
-          message: 'Kunne ikke bekræfte hold-status, prøv igen.',
+          message: 'Could not verify team status, please try again.',
         });
         return;
       }

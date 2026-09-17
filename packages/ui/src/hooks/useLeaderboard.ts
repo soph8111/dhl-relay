@@ -36,13 +36,13 @@ export function useLeaderboard(client: SanityClient) {
         ]);
 
         if (!reference) {
-          setError('Ingen referenceløber er markeret i Sanity endnu.');
+          setError('No reference runner has been marked in Sanity yet.');
           setLoading(false);
           return;
         }
 
         if (reference.resultSeconds == null) {
-          setError('Referenceløberen er ikke kommet i mål endnu.');
+          setError('The reference runner has not finished yet.');
           setLoading(false);
           return;
         }
@@ -60,7 +60,7 @@ export function useLeaderboard(client: SanityClient) {
         setLoading(false);
       } catch (err) {
         console.error(err);
-        setError('Kunne ikke hente leaderboard-data');
+        setError('Could not fetch leaderboard data');
         setLoading(false);
       }
     };
