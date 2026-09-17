@@ -59,7 +59,7 @@ export default function RunningPage() {
   const selectedTeam = teams.find((team) => team._id === selectedTeamId);
 
   const handleStop = () => {
-    stop();
+    void stop();
     void navigate('/finished');
   };
 
@@ -79,7 +79,11 @@ export default function RunningPage() {
         </p>
 
         {!isRunning ? (
-          <CtaButton label="Start timer" onClick={start} variant="start" />
+          <CtaButton
+            label="Start timer"
+            onClick={() => void start()}
+            variant="start"
+          />
         ) : (
           <CtaButton label="Stop timer" onClick={handleStop} variant="stop" />
         )}
@@ -91,7 +95,7 @@ export default function RunningPage() {
         }
         confirmLabel="Cancel run"
         cancelLabel="Keep running"
-        onConfirmAction={cancel}
+        onConfirmAction={() => void cancel()}
       />
 
       {hasGpsError && (
