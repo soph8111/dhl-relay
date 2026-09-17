@@ -21,9 +21,9 @@ export interface RunSessionContextValue {
   hasGpsError: boolean;
   startedAt: number | null;
   finalResultSeconds: number | null;
-  start: () => Promise<void>;
-  stop: () => Promise<void>;
-  cancel: () => Promise<void>;
+  start: () => void;
+  stop: () => void;
+  cancel: () => void;
   reset: () => void;
 }
 
