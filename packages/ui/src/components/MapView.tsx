@@ -152,9 +152,9 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
             center={DHL_ROUTE_2026[DHL_ROUTE_2026.length - 1]}
             radius={4}
             pathOptions={{
-              color: 'var(--color-red)',
+              color: 'var(--color-orange)',
               weight: 1,
-              fillColor: 'var(--color-red)',
+              fillColor: 'var(--color-orange)',
               fillOpacity: 1,
             }}
             className="pointer-events-none!"

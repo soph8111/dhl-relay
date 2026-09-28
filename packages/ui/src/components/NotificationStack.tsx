@@ -43,11 +43,11 @@ function NotificationItem({
       className={`relative rounded-xl shadow-lg px-4 py-3 text-sm pointer-events-auto
         transition-all duration-300 ease-out
         starting:opacity-0 starting:-translate-y-4
-        ${isError ? 'bg-red text-white' : 'bg-accent text-accent-content'}
+        ${isError ? 'bg-orange text-white' : 'bg-accent text-accent-content'}
         ${isExiting ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}
     >
       {isError && (
-        <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red border border-white flex items-center justify-center text-white font-bold leading-none">
+        <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-orange border border-white flex items-center justify-center text-white font-bold leading-none">
           !
         </div>
       )}

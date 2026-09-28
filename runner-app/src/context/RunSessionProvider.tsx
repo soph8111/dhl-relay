@@ -6,7 +6,7 @@ import { useTeamRunners } from '@dhl-relay/ui';
 import type { RunnerPosition } from '@dhl-relay/shared';
 import { RunSessionContext } from './RunSessionContext';
 
-const POSITION_INTERVAL_MS = 2000;
+const POSITION_INTERVAL_MS = 3000;
 
 export function RunSessionProvider({ children }: { children: ReactNode }) {
   const { teams, loading: teamsLoading } = useTeamsForYear(sanityClient);
