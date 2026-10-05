@@ -1,6 +1,5 @@
 import { useTheme } from '../context/ThemeContext';
-import MoonIcon from '../icons/Moon';
-import SunIcon from '../icons/Sun';
+import { MoonIcon, SunIcon } from '@dhl-relay/ui';
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();

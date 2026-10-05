@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { socket } from '@/socketClient';
 import { sanityClient, sanityClientFresh } from '@/sanityClient';
-import { useTeamsForYear } from '@dhl-relay/ui/src/hooks/useTeamsForYear';
-import { useTeamRunners } from '@dhl-relay/ui';
+import { useTeamsForYear, useTeamRunners } from '@dhl-relay/ui';
 import type { RunnerPosition } from '@dhl-relay/shared';
 import { RunSessionContext } from './RunSessionContext';
 

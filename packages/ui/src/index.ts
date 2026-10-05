@@ -22,3 +22,4 @@ export { RunEventNotifications } from './components/RunEventNotifications';
 export { useReferenceRunner } from './hooks/useReferenceRunner';
 export { RunnerDetailModal } from './components/RunnerDetailModal';
 export { LiveDashboard } from './components/LiveDashboard';
+export * from './icons';

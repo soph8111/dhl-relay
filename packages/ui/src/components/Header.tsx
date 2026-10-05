@@ -1,5 +1,5 @@
 import { ThemeToggle } from './ThemeToggle';
-import DhlLogo from '../icons/DhlLogo';
+import { DhlLogo } from '@dhl-relay/ui';
 
 export function Header() {
   return (

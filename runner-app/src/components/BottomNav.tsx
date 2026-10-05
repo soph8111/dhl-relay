@@ -1,7 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useRunSession } from '../context/RunSessionContext';
-import RunIcon from '@dhl-relay/ui/src/icons/RunIcon';
-import StarFilled from '@dhl-relay/ui/src/icons/StarFilled';
+import { RunIcon, StarFilled } from '@dhl-relay/ui';
 
 const MY_RACE_ROUTES = [
   '/select-team',

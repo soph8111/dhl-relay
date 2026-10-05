@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import ArrowIcon from '@dhl-relay/ui/src/icons/ArrowIcon';
+import { ArrowIcon } from '@dhl-relay/ui';
 import { ConfirmDialog } from './ConfirmDialog';
 
 interface BackButtonProps {

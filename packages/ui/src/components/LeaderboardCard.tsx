@@ -1,7 +1,6 @@
 import { formatSignedSeconds } from '@dhl-relay/shared';
 import type { LeaderboardEntry } from '@dhl-relay/shared';
-import StarFilled from '../icons/StarFilled';
-import StarOutline from '../icons/StarOutline';
+import { StarFilled, StarOutline } from '@dhl-relay/ui';
 
 function formatTime(totalSeconds: number): string {
   const m = Math.floor(totalSeconds / 60);

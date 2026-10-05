@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { formatSeconds, formatSignedSeconds } from '@dhl-relay/shared';
 import type { LeaderboardEntry } from '@dhl-relay/shared';
-import StarFilled from '../icons/StarFilled';
-import StarOutline from '../icons/StarOutline';
-import CloseIcon from '../icons/CloseIcon';
+import { StarFilled, StarOutline, CloseIcon } from '../icons';
 import { StatCard } from './StatCard';
 
 interface RunnerDetailModalProps {
