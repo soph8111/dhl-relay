@@ -1,129 +1,72 @@
-{"_id": "runner-d-m-moln-r", "_type": "runner", "firstName": "Ádám", "lastName": "Molnár", "age": 31, "gender": "male"}
-{"_id": "runner-alan-bryce-paton", "_type": "runner", "firstName": "Alan Bryce", "lastName": "Paton", "age": 25, "gender": "male"}
-{"_id": "runner-albert-dolso", "_type": "runner", "firstName": "Albert", "lastName": "Dolsø", "age": 41, "gender": "male"}
-{"_id": "runner-aleksander-fjellvang", "_type": "runner", "firstName": "Aleksander", "lastName": "Fjellvang", "age": 39, "gender": "male"}
-{"_id": "runner-anders-drost-mickleit", "_type": "runner", "firstName": "Anders Drost", "lastName": "Mickleit", "age": 38, "gender": "male"}
-{"_id": "runner-anders-ostergaard-nielsen", "_type": "runner", "firstName": "Anders Østergaard", "lastName": "Nielsen", "age": 32, "gender": "male"}
-{"_id": "runner-andreas-ackermann", "_type": "runner", "firstName": "Andreas", "lastName": "Ackermann", "age": 30, "gender": "male"}
-{"_id": "runner-andreas-elmertoft", "_type": "runner", "firstName": "Andreas", "lastName": "Elmertoft", "age": 58, "gender": "male"}
-{"_id": "runner-andreas-fau-andersen", "_type": "runner", "firstName": "Andreas Fau", "lastName": "Andersen", "age": 29, "gender": "male"}
-{"_id": "runner-andreas-harteg", "_type": "runner", "firstName": "Andreas", "lastName": "Harteg", "age": 51, "gender": "male"}
-{"_id": "runner-caroline-madsen", "_type": "runner", "firstName": "Caroline", "lastName": "Madsen", "age": 26, "gender": "female"}
-{"_id": "runner-cecilie-grue-jacobsen", "_type": "runner", "firstName": "Cecilie Grue", "lastName": "Jacobsen", "age": 25, "gender": "female"}
-{"_id": "runner-cecilie-yde", "_type": "runner", "firstName": "Cecilie", "lastName": "Yde", "age": 29, "gender": "female"}
-{"_id": "runner-christian-brandt-thomassen", "_type": "runner", "firstName": "Christian Brandt", "lastName": "Thomassen", "age": 37, "gender": "male"}
-{"_id": "runner-christian-hastrup", "_type": "runner", "firstName": "Christian", "lastName": "Hastrup", "age": 38, "gender": "male"}
-{"_id": "runner-christian-vang", "_type": "runner", "firstName": "Christian", "lastName": "Vang", "age": 56, "gender": "male"}
-{"_id": "runner-david-adalberth", "_type": "runner", "firstName": "David", "lastName": "Adalberth", "age": 25, "gender": "male"}
-{"_id": "runner-edmir-suljic", "_type": "runner", "firstName": "Edmir", "lastName": "Suljic", "age": 36, "gender": "non-binary"}
-{"_id": "runner-emil-schlichter", "_type": "runner", "firstName": "Emil", "lastName": "Schlichter", "age": 58, "gender": "male"}
-{"_id": "runner-emilie-noer", "_type": "runner", "firstName": "Emilie", "lastName": "Noer", "age": 50, "gender": "female"}
-{"_id": "runner-emma-andersson", "_type": "runner", "firstName": "Emma", "lastName": "Andersson", "age": 38, "gender": "female"}
-{"_id": "runner-esben-fisker", "_type": "runner", "firstName": "Esben", "lastName": "Fisker", "age": 52, "gender": "male"}
-{"_id": "runner-fie-grondahl-kornerup", "_type": "runner", "firstName": "Fie Grøndahl", "lastName": "Kornerup", "age": 41, "gender": "female"}
-{"_id": "runner-filip-stojanovic", "_type": "runner", "firstName": "Filip", "lastName": "Stojanovic", "age": 24, "gender": "male"}
-{"_id": "runner-flemming-westberg", "_type": "runner", "firstName": "Flemming", "lastName": "Westberg", "age": 34, "gender": "male"}
-{"_id": "runner-frederic-widding", "_type": "runner", "firstName": "Frederic", "lastName": "Widding", "age": 51, "gender": "male"}
-{"_id": "runner-frederik-alexander-bering", "_type": "runner", "firstName": "Frederik Alexander", "lastName": "Bering", "age": 45, "gender": "male"}
-{"_id": "runner-frederik-buus-sauer", "_type": "runner", "firstName": "Frederik Buus", "lastName": "Sauer", "age": 41, "gender": "male"}
-{"_id": "runner-frederik-jorgensen", "_type": "runner", "firstName": "Frederik", "lastName": "Jørgensen", "age": 33, "gender": "male"}
-{"_id": "runner-gustav-staal-hoite", "_type": "runner", "firstName": "Gustav Staal", "lastName": "Høite", "age": 37, "gender": "male"}
-{"_id": "runner-hana-al-mousawi", "_type": "runner", "firstName": "Hana", "lastName": "Al-Mousawi", "age": 45, "gender": "prefer-not-to-say"}
-{"_id": "runner-hannah-genzmer", "_type": "runner", "firstName": "Hannah", "lastName": "Genzmer", "age": 30, "gender": "female"}
-{"_id": "runner-jakob-skov-olsen", "_type": "runner", "firstName": "Jakob Skov", "lastName": "Olsen", "age": 29, "gender": "male"}
-{"_id": "runner-jens-hojgaard", "_type": "runner", "firstName": "Jens", "lastName": "Højgaard", "age": 48, "gender": "male"}
-{"_id": "runner-jeppe-snestrup-bjorholm", "_type": "runner", "firstName": "Jeppe Snestrup", "lastName": "Bjorholm", "age": 30, "gender": "male"}
-{"_id": "runner-jesper-moller-madsen", "_type": "runner", "firstName": "Jesper Møller", "lastName": "Madsen", "age": 46, "gender": "male"}
-{"_id": "runner-jesper-scherling-olesen", "_type": "runner", "firstName": "Jesper Scherling", "lastName": "Olesen", "age": 46, "gender": "male"}
-{"_id": "runner-jesper-sondergaard-filtenborg", "_type": "runner", "firstName": "Jesper Søndergaard", "lastName": "Filtenborg", "age": 40, "gender": "male"}
-{"_id": "runner-judith-kothnig", "_type": "runner", "firstName": "Judith", "lastName": "Köthnig", "age": 26, "gender": "female"}
-{"_id": "runner-kasper-friis", "_type": "runner", "firstName": "Kasper", "lastName": "Friis", "age": 53, "gender": "male"}
-{"_id": "runner-kasper-moller", "_type": "runner", "firstName": "Kasper", "lastName": "Møller", "age": 58, "gender": "male"}
-{"_id": "runner-kasper-schou-alling", "_type": "runner", "firstName": "Kasper Schou", "lastName": "Alling", "age": 31, "gender": "male"}
-{"_id": "runner-katja-elm-sandal", "_type": "runner", "firstName": "Katja Elm", "lastName": "Sandal", "age": 48, "gender": "female"}
-{"_id": "runner-katja-hvid-krogh", "_type": "runner", "firstName": "Katja Hvid", "lastName": "Krogh", "age": 29, "gender": "female"}
-{"_id": "runner-kim-skjoldborg", "_type": "runner", "firstName": "Kim", "lastName": "Skjoldborg", "age": 42, "gender": "male"}
-{"_id": "runner-lars-berntsen", "_type": "runner", "firstName": "Lars", "lastName": "Berntsen", "age": 47, "gender": "male", "isReferenceRunner": true}
-{"_id": "runner-madeleine-lebech", "_type": "runner", "firstName": "Madeleine", "lastName": "Lebech", "age": 36, "gender": "female"}
-{"_id": "runner-mads-bie", "_type": "runner", "firstName": "Mads", "lastName": "Bie", "age": 28, "gender": "male"}
-{"_id": "runner-mads-brodt-nielsen", "_type": "runner", "firstName": "Mads Brodt", "lastName": "Nielsen", "age": 26, "gender": "male"}
-{"_id": "runner-maiken-kock-rask", "_type": "runner", "firstName": "Maiken Kock", "lastName": "Rask", "age": 38, "gender": "female"}
-{"_id": "runner-majken-sofie-jakobsen", "_type": "runner", "firstName": "Majken Sofie", "lastName": "Jakobsen", "age": 42, "gender": "female"}
-{"_id": "runner-maria-helena-jensen", "_type": "runner", "firstName": "Maria Helena", "lastName": "Jensen", "age": 29, "gender": "female"}
-{"_id": "runner-martin-holm-jensen", "_type": "runner", "firstName": "Martin Holm", "lastName": "Jensen", "age": 38, "gender": "male"}
-{"_id": "runner-martin-moi", "_type": "runner", "firstName": "Martin", "lastName": "Moi", "age": 30, "gender": "male"}
-{"_id": "runner-martin-moller-larsen", "_type": "runner", "firstName": "Martin Møller", "lastName": "Larsen", "age": 48, "gender": "male"}
-{"_id": "runner-mathilde-fjeldgaard-hansen", "_type": "runner", "firstName": "Mathilde Fjeldgaard", "lastName": "Hansen", "age": 41, "gender": "female"}
-{"_id": "runner-max-moller-hoffmeyer", "_type": "runner", "firstName": "Max Møller", "lastName": "Hoffmeyer", "age": 53, "gender": "male"}
-{"_id": "runner-mette-gronne", "_type": "runner", "firstName": "Mette", "lastName": "Grønne", "age": 47, "gender": "female"}
-{"_id": "runner-mie-holm", "_type": "runner", "firstName": "Mie", "lastName": "Holm", "age": 34, "gender": "female"}
-{"_id": "runner-nikolaj-king", "_type": "runner", "firstName": "Nikolaj", "lastName": "King", "age": 47, "gender": "male"}
-{"_id": "runner-ole-jakobsen", "_type": "runner", "firstName": "Ole", "lastName": "Jakobsen", "age": 46, "gender": "male"}
-{"_id": "runner-peter-gronne", "_type": "runner", "firstName": "Peter", "lastName": "Grønne", "age": 37, "gender": "male"}
-{"_id": "runner-peter-overgard-clausen", "_type": "runner", "firstName": "Peter Øvergård", "lastName": "Clausen", "age": 41, "gender": "male"}
-{"_id": "runner-rahim-ismaili", "_type": "runner", "firstName": "Rahim", "lastName": "Ismaili", "age": 28, "gender": "male"}
-{"_id": "runner-rasmus-ackey-wolf", "_type": "runner", "firstName": "Rasmus Ackey", "lastName": "Wolf", "age": 34, "gender": "male"}
-{"_id": "runner-rasmus-bidstrup", "_type": "runner", "firstName": "Rasmus", "lastName": "Bidstrup", "age": 58, "gender": "male"}
-{"_id": "runner-rasmus-grundtmann-jensen", "_type": "runner", "firstName": "Rasmus Grundtmann", "lastName": "Jensen", "age": 39, "gender": "male"}
-{"_id": "runner-sam-pour-mozafari", "_type": "runner", "firstName": "Sam Pour", "lastName": "Mozafari", "age": 34, "gender": "male"}
-{"_id": "runner-signe-hummeluhr-dammeyer", "_type": "runner", "firstName": "Signe Hummeluhr", "lastName": "Dammeyer", "age": 53, "gender": "female"}
-{"_id": "runner-signe-ollgaard", "_type": "runner", "firstName": "Signe", "lastName": "Øllgaard", "age": 48, "gender": "female"}
-{"_id": "runner-sophie-amalie-seide-zimling", "_type": "runner", "firstName": "Sophie Amalie Seide", "lastName": "Zimling", "age": 41, "gender": "female"}
-{"_id": "runner-sophie-van-moorselaar", "_type": "runner", "firstName": "Sophie", "lastName": "van Moorselaar", "age": 38, "gender": "female"}
-{"_id": "runner-stine-braunschweig-andersen", "_type": "runner", "firstName": "Stine Braunschweig", "lastName": "Andersen", "age": 44, "gender": "female"}
-{"_id": "runner-thomas-schmidt", "_type": "runner", "firstName": "Thomas", "lastName": "Schmidt", "age": 27, "gender": "male"}
-{"_id": "runner-thor-repstock-due", "_type": "runner", "firstName": "Thor Repstock", "lastName": "Due", "age": 38, "gender": "male"}
-{"_id": "team-2026-1", "_type": "team", "teamName": "Frontend Force", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-katja-elm-sandal", "_key": "53lc58drc11e"}, {"_type": "reference", "_ref": "runner-mette-gronne", "_key": "rtj5pht0hl9x"}, {"_type": "reference", "_ref": "runner-emil-schlichter", "_key": "pseimvihcwi6"}, {"_type": "reference", "_ref": "runner-mads-bie", "_key": "4ciyhe7ur23g"}, {"_type": "reference", "_ref": "runner-andreas-ackermann", "_key": "dppq0y9dom5i"}]}
-{"_id": "team-2026-2", "_type": "team", "teamName": "MarTech Marauders", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-emilie-noer", "_key": "gqpki7p5tb94"}, {"_type": "reference", "_ref": "runner-fie-grondahl-kornerup", "_key": "874frhocn9j2"}, {"_type": "reference", "_ref": "runner-judith-kothnig", "_key": "qp89uzfk8ut0"}, {"_type": "reference", "_ref": "runner-cecilie-grue-jacobsen", "_key": "cvs4f8cgvyie"}, {"_type": "reference", "_ref": "runner-stine-braunschweig-andersen", "_key": "6ivwpvs7hzio"}]}
-{"_id": "team-2026-3", "_type": "team", "teamName": "Design Dwarfs", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-alan-bryce-paton", "_key": "ykl1cq99chj7"}, {"_type": "reference", "_ref": "runner-frederik-alexander-bering", "_key": "55nf4zw9xa3k"}, {"_type": "reference", "_ref": "runner-albert-dolso", "_key": "x7eedtjvzhwj"}, {"_type": "reference", "_ref": "runner-cecilie-yde", "_key": "r64dpja1wj0t"}, {"_type": "reference", "_ref": "runner-ole-jakobsen", "_key": "pac56t4ufel6"}]}
-{"_id": "team-2026-4", "_type": "team", "teamName": ".NET Ninjas", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-rasmus-bidstrup", "_key": "246hid25owf7"}, {"_type": "reference", "_ref": "runner-madeleine-lebech", "_key": "5935a0l7253j"}, {"_type": "reference", "_ref": "runner-maiken-kock-rask", "_key": "2d54i3qk2iag"}, {"_type": "reference", "_ref": "runner-kim-skjoldborg", "_key": "l58kxo9t7e8g"}, {"_type": "reference", "_ref": "runner-christian-brandt-thomassen", "_key": "8jdp0lvsnujz"}]}
-{"_id": "team-2026-5", "_type": "team", "teamName": "UX Unicorns", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-kasper-schou-alling", "_key": "a7tz0yncxll4"}, {"_type": "reference", "_ref": "runner-frederik-jorgensen", "_key": "zklookep7y6w"}, {"_type": "reference", "_ref": "runner-kasper-friis", "_key": "ktakpuxqphr6"}, {"_type": "reference", "_ref": "runner-emma-andersson", "_key": "2gdswm31yiha"}, {"_type": "reference", "_ref": "runner-mathilde-fjeldgaard-hansen", "_key": "ir4cowgzrixa"}]}
-{"_id": "team-2026-6", "_type": "team", "teamName": "Studio BennyBox", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-katja-elm-sandal", "_key": "11dpg8sbi4q2"}, {"_type": "reference", "_ref": "runner-edmir-suljic", "_key": "y9v86wzs3t60"}, {"_type": "reference", "_ref": "runner-hana-al-mousawi", "_key": "rjiw1swjckjl"}, {"_type": "reference", "_ref": "runner-katja-hvid-krogh", "_key": "teiyzcotohp6"}, {"_type": "reference", "_ref": "runner-majken-sofie-jakobsen", "_key": "vz41nam148p0"}]}
-{"_id": "team-2026-7", "_type": "team", "teamName": "Partner Pack", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-esben-fisker", "_key": "tvhhpbmyofqe"}, {"_type": "reference", "_ref": "runner-d-m-moln-r", "_key": "waouaxeqbnhl"}, {"_type": "reference", "_ref": "runner-frederik-alexander-bering", "_key": "1n13jcat9mx2"}, {"_type": "reference", "_ref": "runner-jens-hojgaard", "_key": "x18hafeyuhz1"}, {"_type": "reference", "_ref": "runner-gustav-staal-hoite", "_key": "gv0e38daly8o"}]}
-{"_id": "team-2026-8", "_type": "team", "teamName": "Backend Bandits", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-jesper-scherling-olesen", "_key": "zcywd14ve92m"}, {"_type": "reference", "_ref": "runner-flemming-westberg", "_key": "pnsm43d8w3zp"}, {"_type": "reference", "_ref": "runner-thor-repstock-due", "_key": "08j3trp0j43d"}, {"_type": "reference", "_ref": "runner-martin-moi", "_key": "5iqvnb4gh2m5"}, {"_type": "reference", "_ref": "runner-caroline-madsen", "_key": "zja8dzr1yxr2"}]}
-{"_id": "team-2026-9", "_type": "team", "teamName": "Leadership Legends", "year": 2026, "runners": [{"_type": "reference", "_ref": "runner-lars-berntsen", "_key": "dhylurtp0lzj"}, {"_type": "reference", "_ref": "runner-andreas-harteg", "_key": "jeget1ghr09s"}, {"_type": "reference", "_ref": "runner-emil-schlichter", "_key": "kdgigatj9tze"}, {"_type": "reference", "_ref": "runner-ole-jakobsen", "_key": "5r5uqpgb7r3o"}, {"_type": "reference", "_ref": "runner-jakob-skov-olsen", "_key": "cwbfuk9e1v2i"}]}
-{"_id": "result-team-2026-1-runner-katja-elm-sandal", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-1"}, "runner": {"_type": "reference", "_ref": "runner-katja-elm-sandal"}, "cutoff": 1620, "result": 1644}
-{"_id": "result-team-2026-1-runner-mette-gronne", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-1"}, "runner": {"_type": "reference", "_ref": "runner-mette-gronne"}, "cutoff": 2304, "result": 2009}
-{"_id": "result-team-2026-1-runner-emil-schlichter", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-1"}, "runner": {"_type": "reference", "_ref": "runner-emil-schlichter"}, "cutoff": 1809, "result": 1751}
-{"_id": "result-team-2026-1-runner-mads-bie", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-1"}, "runner": {"_type": "reference", "_ref": "runner-mads-bie"}, "cutoff": 1919, "result": 2103}
-{"_id": "result-team-2026-1-runner-andreas-ackermann", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-1"}, "runner": {"_type": "reference", "_ref": "runner-andreas-ackermann"}, "cutoff": 1609, "result": 1793}
-{"_id": "result-team-2026-2-runner-emilie-noer", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-2"}, "runner": {"_type": "reference", "_ref": "runner-emilie-noer"}, "cutoff": 988, "result": 1161}
-{"_id": "result-team-2026-2-runner-fie-grondahl-kornerup", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-2"}, "runner": {"_type": "reference", "_ref": "runner-fie-grondahl-kornerup"}, "cutoff": 1613, "result": 1721}
-{"_id": "result-team-2026-2-runner-judith-kothnig", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-2"}, "runner": {"_type": "reference", "_ref": "runner-judith-kothnig"}, "cutoff": 1956, "result": 1844}
-{"_id": "result-team-2026-2-runner-cecilie-grue-jacobsen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-2"}, "runner": {"_type": "reference", "_ref": "runner-cecilie-grue-jacobsen"}, "cutoff": 2054, "result": 1822}
-{"_id": "result-team-2026-2-runner-stine-braunschweig-andersen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-2"}, "runner": {"_type": "reference", "_ref": "runner-stine-braunschweig-andersen"}, "cutoff": 1840, "result": 1755}
-{"_id": "result-team-2026-3-runner-alan-bryce-paton", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-3"}, "runner": {"_type": "reference", "_ref": "runner-alan-bryce-paton"}, "cutoff": 1560, "result": 1539}
-{"_id": "result-team-2026-3-runner-frederik-alexander-bering", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-3"}, "runner": {"_type": "reference", "_ref": "runner-frederik-alexander-bering"}, "cutoff": 2263, "result": 2061}
-{"_id": "result-team-2026-3-runner-albert-dolso", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-3"}, "runner": {"_type": "reference", "_ref": "runner-albert-dolso"}, "cutoff": 1186, "result": 1259}
-{"_id": "result-team-2026-3-runner-cecilie-yde", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-3"}, "runner": {"_type": "reference", "_ref": "runner-cecilie-yde"}, "cutoff": 1588, "result": 1695}
-{"_id": "result-team-2026-3-runner-ole-jakobsen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-3"}, "runner": {"_type": "reference", "_ref": "runner-ole-jakobsen"}, "cutoff": 1933, "result": 1824}
-{"_id": "result-team-2026-4-runner-rasmus-bidstrup", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-4"}, "runner": {"_type": "reference", "_ref": "runner-rasmus-bidstrup"}, "cutoff": 1618, "result": 1621}
-{"_id": "result-team-2026-4-runner-madeleine-lebech", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-4"}, "runner": {"_type": "reference", "_ref": "runner-madeleine-lebech"}, "cutoff": 1100, "result": 1123}
-{"_id": "result-team-2026-4-runner-maiken-kock-rask", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-4"}, "runner": {"_type": "reference", "_ref": "runner-maiken-kock-rask"}, "cutoff": 1184, "result": 1350}
-{"_id": "result-team-2026-4-runner-kim-skjoldborg", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-4"}, "runner": {"_type": "reference", "_ref": "runner-kim-skjoldborg"}, "cutoff": 2028, "result": 1983}
-{"_id": "result-team-2026-4-runner-christian-brandt-thomassen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-4"}, "runner": {"_type": "reference", "_ref": "runner-christian-brandt-thomassen"}, "cutoff": 2272, "result": 2160}
-{"_id": "result-team-2026-5-runner-kasper-schou-alling", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-5"}, "runner": {"_type": "reference", "_ref": "runner-kasper-schou-alling"}, "cutoff": 1209, "result": 1123}
-{"_id": "result-team-2026-5-runner-frederik-jorgensen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-5"}, "runner": {"_type": "reference", "_ref": "runner-frederik-jorgensen"}, "cutoff": 2007, "result": 1784}
-{"_id": "result-team-2026-5-runner-kasper-friis", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-5"}, "runner": {"_type": "reference", "_ref": "runner-kasper-friis"}, "cutoff": 1781, "result": 1712}
-{"_id": "result-team-2026-5-runner-emma-andersson", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-5"}, "runner": {"_type": "reference", "_ref": "runner-emma-andersson"}, "cutoff": 1125, "result": 1179}
-{"_id": "result-team-2026-5-runner-mathilde-fjeldgaard-hansen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-5"}, "runner": {"_type": "reference", "_ref": "runner-mathilde-fjeldgaard-hansen"}, "cutoff": 1998, "result": 1804}
-{"_id": "result-team-2026-6-runner-katja-elm-sandal", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-6"}, "runner": {"_type": "reference", "_ref": "runner-katja-elm-sandal"}, "cutoff": 1713, "result": 1829}
-{"_id": "result-team-2026-6-runner-edmir-suljic", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-6"}, "runner": {"_type": "reference", "_ref": "runner-edmir-suljic"}, "cutoff": 1988, "result": 1959}
-{"_id": "result-team-2026-6-runner-hana-al-mousawi", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-6"}, "runner": {"_type": "reference", "_ref": "runner-hana-al-mousawi"}, "cutoff": 1345, "result": 1420}
-{"_id": "result-team-2026-6-runner-katja-hvid-krogh", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-6"}, "runner": {"_type": "reference", "_ref": "runner-katja-hvid-krogh"}, "cutoff": 1524, "result": 1517}
-{"_id": "result-team-2026-6-runner-majken-sofie-jakobsen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-6"}, "runner": {"_type": "reference", "_ref": "runner-majken-sofie-jakobsen"}, "cutoff": 1813, "result": 1790}
-{"_id": "result-team-2026-7-runner-esben-fisker", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-7"}, "runner": {"_type": "reference", "_ref": "runner-esben-fisker"}, "cutoff": 1230, "result": 1283}
-{"_id": "result-team-2026-7-runner-d-m-moln-r", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-7"}, "runner": {"_type": "reference", "_ref": "runner-d-m-moln-r"}, "cutoff": 1892, "result": 1755}
-{"_id": "result-team-2026-7-runner-frederik-alexander-bering", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-7"}, "runner": {"_type": "reference", "_ref": "runner-frederik-alexander-bering"}, "cutoff": 1888, "result": 1673}
-{"_id": "result-team-2026-7-runner-jens-hojgaard", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-7"}, "runner": {"_type": "reference", "_ref": "runner-jens-hojgaard"}, "cutoff": 1626, "result": 1834}
-{"_id": "result-team-2026-7-runner-gustav-staal-hoite", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-7"}, "runner": {"_type": "reference", "_ref": "runner-gustav-staal-hoite"}, "cutoff": 1602, "result": 1738}
-{"_id": "result-team-2026-8-runner-jesper-scherling-olesen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-8"}, "runner": {"_type": "reference", "_ref": "runner-jesper-scherling-olesen"}, "cutoff": 1701, "result": 1675}
-{"_id": "result-team-2026-8-runner-flemming-westberg", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-8"}, "runner": {"_type": "reference", "_ref": "runner-flemming-westberg"}, "cutoff": 2419, "result": 2152}
-{"_id": "result-team-2026-8-runner-thor-repstock-due", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-8"}, "runner": {"_type": "reference", "_ref": "runner-thor-repstock-due"}, "cutoff": 1327, "result": 1207}
-{"_id": "result-team-2026-8-runner-martin-moi", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-8"}, "runner": {"_type": "reference", "_ref": "runner-martin-moi"}, "cutoff": 1859}
-{"_id": "result-team-2026-8-runner-caroline-madsen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-8"}, "runner": {"_type": "reference", "_ref": "runner-caroline-madsen"}, "cutoff": 1513}
-{"_id": "result-team-2026-9-runner-lars-berntsen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-9"}, "runner": {"_type": "reference", "_ref": "runner-lars-berntsen"}, "cutoff": 1975, "result": 1402}
-{"_id": "result-team-2026-9-runner-andreas-harteg", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-9"}, "runner": {"_type": "reference", "_ref": "runner-andreas-harteg"}, "cutoff": 1683, "result": 1494}
-{"_id": "result-team-2026-9-runner-emil-schlichter", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-9"}, "runner": {"_type": "reference", "_ref": "runner-emil-schlichter"}, "cutoff": 2252, "result": 2030}
-{"_id": "result-team-2026-9-runner-ole-jakobsen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-9"}, "runner": {"_type": "reference", "_ref": "runner-ole-jakobsen"}, "cutoff": 1884, "result": 1933}
-{"_id": "result-team-2026-9-runner-jakob-skov-olsen", "_type": "result", "team": {"_type": "reference", "_ref": "team-2026-9"}, "runner": {"_type": "reference", "_ref": "runner-jakob-skov-olsen"}, "cutoff": 1785, "result": 1628}
+{"_id":"runner-anna-lind","_type":"runner","firstName":"Anna","lastName":"Lind","age":29,"gender":"female"}
+{"_id":"runner-benjamin-holm","_type":"runner","firstName":"Benjamin","lastName":"Holm","age":34,"gender":"male"}
+{"_id":"runner-clara-vester","_type":"runner","firstName":"Clara","lastName":"Vester","age":27,"gender":"female"}
+{"_id":"runner-daniel-frost","_type":"runner","firstName":"Daniel","lastName":"Frost","age":41,"gender":"male"}
+{"_id":"runner-ella-nord","_type":"runner","firstName":"Ella","lastName":"Nord","age":32,"gender":"female"}
+{"_id":"runner-felix-lund","_type":"runner","firstName":"Felix","lastName":"Lund","age":25,"gender":"male"}
+{"_id":"runner-freja-dahl","_type":"runner","firstName":"Freja","lastName":"Dahl","age":38,"gender":"female"}
+{"_id":"runner-gustav-birk","_type":"runner","firstName":"Gustav","lastName":"Birk","age":30,"gender":"male"}
+{"_id":"runner-ida-storm","_type":"runner","firstName":"Ida","lastName":"Storm","age":45,"gender":"female"}
+{"_id":"runner-jonas-vinter","_type":"runner","firstName":"Jonas","lastName":"Vinter","age":36,"gender":"male"}
+{"_id":"runner-karla-bach","_type":"runner","firstName":"Karla","lastName":"Bach","age":24,"gender":"female"}
+{"_id":"runner-lucas-engel","_type":"runner","firstName":"Lucas","lastName":"Engel","age":28,"gender":"male"}
+{"_id":"runner-maja-ravn","_type":"runner","firstName":"Maja","lastName":"Ravn","age":33,"gender":"female"}
+{"_id":"runner-noah-kirk","_type":"runner","firstName":"Noah","lastName":"Kirk","age":39,"gender":"male"}
+{"_id":"runner-olivia-skov","_type":"runner","firstName":"Olivia","lastName":"Skov","age":31,"gender":"female"}
+{"_id":"runner-oscar-falk","_type":"runner","firstName":"Oscar","lastName":"Falk","age":43,"gender":"male"}
+{"_id":"runner-rosa-munk","_type":"runner","firstName":"Rosa","lastName":"Munk","age":26,"gender":"female"}
+{"_id":"runner-simon-bro","_type":"runner","firstName":"Simon","lastName":"Bro","age":35,"gender":"male"}
+{"_id":"runner-thea-winther","_type":"runner","firstName":"Thea","lastName":"Winther","age":40,"gender":"female"}
+{"_id":"runner-victor-nygaard","_type":"runner","firstName":"Victor","lastName":"Nygaard","age":29,"gender":"male"}
+{"_id":"runner-alma-friis","_type":"runner","firstName":"Alma","lastName":"Friis","age":37,"gender":"female"}
+{"_id":"runner-emil-hart","_type":"runner","firstName":"Emil","lastName":"Hart","age":46,"gender":"male"}
+{"_id":"runner-frida-moller","_type":"runner","firstName":"Frida","lastName":"Møller","age":28,"gender":"female"}
+{"_id":"runner-malthe-borg","_type":"runner","firstName":"Malthe","lastName":"Borg","age":33,"gender":"male"}
+{"_id":"runner-nora-kjeld","_type":"runner","firstName":"Nora","lastName":"Kjeld","age":42,"gender":"female"}
+{"_id":"runner-william-berg","_type":"runner","firstName":"William","lastName":"Berg","age":27,"gender":"male"}
+{"_id":"runner-astrid-lowe","_type":"runner","firstName":"Astrid","lastName":"Løwe","age":35,"gender":"female"}
+{"_id":"runner-mikkel-rode","_type":"runner","firstName":"Mikkel","lastName":"Røde","age":48,"gender":"male","isReferenceRunner":true}
+{"_id":"runner-sofie-brand","_type":"runner","firstName":"Sofie","lastName":"Brand","age":30,"gender":"female"}
+{"_id":"runner-tobias-lyng","_type":"runner","firstName":"Tobias","lastName":"Lyng","age":31,"gender":"male"}
+{"_id":"team-2026-1","_type":"team","teamName":"Fast & Curious","year":2026,"runners":[{"_type":"reference","_ref":"runner-anna-lind","_key":"45ty4734jmo6"},{"_type":"reference","_ref":"runner-benjamin-holm","_key":"7y5offw7hs93"},{"_type":"reference","_ref":"runner-clara-vester","_key":"wdpsvvfvqg0u"},{"_type":"reference","_ref":"runner-daniel-frost","_key":"mdbyz3hq2t5f"},{"_type":"reference","_ref":"runner-ella-nord","_key":"uaok2nnj6159"}]}
+{"_id":"team-2026-2","_type":"team","teamName":"Sole Mates","year":2026,"runners":[{"_type":"reference","_ref":"runner-felix-lund","_key":"cxcbss9wh47e"},{"_type":"reference","_ref":"runner-freja-dahl","_key":"1bey0obxh4g3"},{"_type":"reference","_ref":"runner-gustav-birk","_key":"g90cq9sws6bz"},{"_type":"reference","_ref":"runner-ida-storm","_key":"tsub3rqw3e7l"},{"_type":"reference","_ref":"runner-jonas-vinter","_key":"fihwkf5ux0k2"}]}
+{"_id":"team-2026-3","_type":"team","teamName":"Run Like the Wind","year":2026,"runners":[{"_type":"reference","_ref":"runner-karla-bach","_key":"sm36t7jkkwr2"},{"_type":"reference","_ref":"runner-lucas-engel","_key":"ph8qy8lrdajd"},{"_type":"reference","_ref":"runner-maja-ravn","_key":"ikm1lq3y713o"},{"_type":"reference","_ref":"runner-noah-kirk","_key":"i8a78ereqrwm"},{"_type":"reference","_ref":"runner-olivia-skov","_key":"q3as0ay6048o"}]}
+{"_id":"team-2026-4","_type":"team","teamName":"The Pace Makers","year":2026,"runners":[{"_type":"reference","_ref":"runner-oscar-falk","_key":"d6da8q5b9t8z"},{"_type":"reference","_ref":"runner-rosa-munk","_key":"eaezz404vmy8"},{"_type":"reference","_ref":"runner-simon-bro","_key":"k2cbrwdatvy2"},{"_type":"reference","_ref":"runner-thea-winther","_key":"qwevt8jaa9xy"},{"_type":"reference","_ref":"runner-victor-nygaard","_key":"csb1fuirkbwb"}]}
+{"_id":"team-2026-5","_type":"team","teamName":"Ctrl Alt Elite","year":2026,"runners":[{"_type":"reference","_ref":"runner-alma-friis","_key":"ilig1ii5zz74"},{"_type":"reference","_ref":"runner-emil-hart","_key":"v0kyhknhrdal"},{"_type":"reference","_ref":"runner-frida-moller","_key":"g8elrnwqqfoy"},{"_type":"reference","_ref":"runner-malthe-borg","_key":"dcsoa8gph1iy"},{"_type":"reference","_ref":"runner-nora-kjeld","_key":"27wxw5z03z54"}]}
+{"_id":"team-2026-6","_type":"team","teamName":"404 Pace Not Found","year":2026,"runners":[{"_type":"reference","_ref":"runner-william-berg","_key":"m8gvahxufj0b"},{"_type":"reference","_ref":"runner-astrid-lowe","_key":"o2kvf42omvfr"},{"_type":"reference","_ref":"runner-mikkel-rode","_key":"ivqo0wnvp102"},{"_type":"reference","_ref":"runner-sofie-brand","_key":"i9qpxdk19ymz"},{"_type":"reference","_ref":"runner-tobias-lyng","_key":"e3md2oz8jnpb"}]}
+{"_id":"team-2026-7","_type":"team","teamName":"Second Wind","year":2026,"runners":[{"_type":"reference","_ref":"runner-anna-lind","_key":"ervnso4x0ool"},{"_type":"reference","_ref":"runner-gustav-birk","_key":"38mfiioko3v8"},{"_type":"reference","_ref":"runner-maja-ravn","_key":"7q7j9jqval76"},{"_type":"reference","_ref":"runner-simon-bro","_key":"6hnh16pg9j8l"},{"_type":"reference","_ref":"runner-frida-moller","_key":"tzs2y257s3vc"}]}
+{"_id":"result-team-2026-1-runner-anna-lind","_type":"result","team":{"_type":"reference","_ref":"team-2026-1"},"runner":{"_type":"reference","_ref":"runner-anna-lind"},"cutoff":1650,"result":1598}
+{"_id":"result-team-2026-1-runner-benjamin-holm","_type":"result","team":{"_type":"reference","_ref":"team-2026-1"},"runner":{"_type":"reference","_ref":"runner-benjamin-holm"},"cutoff":1500,"result":1534}
+{"_id":"result-team-2026-1-runner-clara-vester","_type":"result","team":{"_type":"reference","_ref":"team-2026-1"},"runner":{"_type":"reference","_ref":"runner-clara-vester"},"cutoff":1800,"result":1749}
+{"_id":"result-team-2026-1-runner-daniel-frost","_type":"result","team":{"_type":"reference","_ref":"team-2026-1"},"runner":{"_type":"reference","_ref":"runner-daniel-frost"},"cutoff":1560,"result":1512}
+{"_id":"result-team-2026-1-runner-ella-nord","_type":"result","team":{"_type":"reference","_ref":"team-2026-1"},"runner":{"_type":"reference","_ref":"runner-ella-nord"},"cutoff":1740,"result":1788}
+{"_id":"result-team-2026-2-runner-felix-lund","_type":"result","team":{"_type":"reference","_ref":"team-2026-2"},"runner":{"_type":"reference","_ref":"runner-felix-lund"},"cutoff":1380,"result":1361}
+{"_id":"result-team-2026-2-runner-freja-dahl","_type":"result","team":{"_type":"reference","_ref":"team-2026-2"},"runner":{"_type":"reference","_ref":"runner-freja-dahl"},"cutoff":1770,"result":1815}
+{"_id":"result-team-2026-2-runner-gustav-birk","_type":"result","team":{"_type":"reference","_ref":"team-2026-2"},"runner":{"_type":"reference","_ref":"runner-gustav-birk"},"cutoff":1530,"result":1497}
+{"_id":"result-team-2026-2-runner-ida-storm","_type":"result","team":{"_type":"reference","_ref":"team-2026-2"},"runner":{"_type":"reference","_ref":"runner-ida-storm"},"cutoff":1920,"result":1872}
+{"_id":"result-team-2026-2-runner-jonas-vinter","_type":"result","team":{"_type":"reference","_ref":"team-2026-2"},"runner":{"_type":"reference","_ref":"runner-jonas-vinter"},"cutoff":1620,"result":1659}
+{"_id":"result-team-2026-3-runner-karla-bach","_type":"result","team":{"_type":"reference","_ref":"team-2026-3"},"runner":{"_type":"reference","_ref":"runner-karla-bach"},"cutoff":1710,"result":1684}
+{"_id":"result-team-2026-3-runner-lucas-engel","_type":"result","team":{"_type":"reference","_ref":"team-2026-3"},"runner":{"_type":"reference","_ref":"runner-lucas-engel"},"cutoff":1470,"result":1462}
+{"_id":"result-team-2026-3-runner-maja-ravn","_type":"result","team":{"_type":"reference","_ref":"team-2026-3"},"runner":{"_type":"reference","_ref":"runner-maja-ravn"},"cutoff":1830,"result":1791}
+{"_id":"result-team-2026-3-runner-noah-kirk","_type":"result","team":{"_type":"reference","_ref":"team-2026-3"},"runner":{"_type":"reference","_ref":"runner-noah-kirk"},"cutoff":1590,"result":1618}
+{"_id":"result-team-2026-3-runner-olivia-skov","_type":"result","team":{"_type":"reference","_ref":"team-2026-3"},"runner":{"_type":"reference","_ref":"runner-olivia-skov"},"cutoff":1760,"result":1733}
+{"_id":"result-team-2026-4-runner-oscar-falk","_type":"result","team":{"_type":"reference","_ref":"team-2026-4"},"runner":{"_type":"reference","_ref":"runner-oscar-falk"},"cutoff":1680,"result":1644}
+{"_id":"result-team-2026-4-runner-rosa-munk","_type":"result","team":{"_type":"reference","_ref":"team-2026-4"},"runner":{"_type":"reference","_ref":"runner-rosa-munk"},"cutoff":1860,"result":1827}
+{"_id":"result-team-2026-4-runner-simon-bro","_type":"result","team":{"_type":"reference","_ref":"team-2026-4"},"runner":{"_type":"reference","_ref":"runner-simon-bro"},"cutoff":1510,"result":1488}
+{"_id":"result-team-2026-4-runner-thea-winther","_type":"result","team":{"_type":"reference","_ref":"team-2026-4"},"runner":{"_type":"reference","_ref":"runner-thea-winther"},"cutoff":1950,"result":1912}
+{"_id":"result-team-2026-4-runner-victor-nygaard","_type":"result","team":{"_type":"reference","_ref":"team-2026-4"},"runner":{"_type":"reference","_ref":"runner-victor-nygaard"},"cutoff":1440,"result":1427}
+{"_id":"result-team-2026-5-runner-alma-friis","_type":"result","team":{"_type":"reference","_ref":"team-2026-5"},"runner":{"_type":"reference","_ref":"runner-alma-friis"},"cutoff":1810,"result":1768}
+{"_id":"result-team-2026-5-runner-emil-hart","_type":"result","team":{"_type":"reference","_ref":"team-2026-5"},"runner":{"_type":"reference","_ref":"runner-emil-hart"},"cutoff":1740}
+{"_id":"result-team-2026-5-runner-frida-moller","_type":"result","team":{"_type":"reference","_ref":"team-2026-5"},"runner":{"_type":"reference","_ref":"runner-frida-moller"},"cutoff":1690}
+{"_id":"result-team-2026-5-runner-malthe-borg","_type":"result","team":{"_type":"reference","_ref":"team-2026-5"},"runner":{"_type":"reference","_ref":"runner-malthe-borg"},"cutoff":1550}
+{"_id":"result-team-2026-5-runner-nora-kjeld","_type":"result","team":{"_type":"reference","_ref":"team-2026-5"},"runner":{"_type":"reference","_ref":"runner-nora-kjeld"},"cutoff":1880}
+{"_id":"result-team-2026-6-runner-william-berg","_type":"result","team":{"_type":"reference","_ref":"team-2026-6"},"runner":{"_type":"reference","_ref":"runner-william-berg"},"cutoff":1430,"result":1416}
+{"_id":"result-team-2026-6-runner-astrid-lowe","_type":"result","team":{"_type":"reference","_ref":"team-2026-6"},"runner":{"_type":"reference","_ref":"runner-astrid-lowe"},"cutoff":1790}
+{"_id":"result-team-2026-6-runner-mikkel-rode","_type":"result","team":{"_type":"reference","_ref":"team-2026-6"},"runner":{"_type":"reference","_ref":"runner-mikkel-rode"},"cutoff":1600,"result":1578}
+{"_id":"result-team-2026-6-runner-sofie-brand","_type":"result","team":{"_type":"reference","_ref":"team-2026-6"},"runner":{"_type":"reference","_ref":"runner-sofie-brand"},"cutoff":1720}
+{"_id":"result-team-2026-6-runner-tobias-lyng","_type":"result","team":{"_type":"reference","_ref":"team-2026-6"},"runner":{"_type":"reference","_ref":"runner-tobias-lyng"},"cutoff":1490}
+{"_id":"result-team-2026-7-runner-anna-lind","_type":"result","team":{"_type":"reference","_ref":"team-2026-7"},"runner":{"_type":"reference","_ref":"runner-anna-lind"},"cutoff":1640}
+{"_id":"result-team-2026-7-runner-gustav-birk","_type":"result","team":{"_type":"reference","_ref":"team-2026-7"},"runner":{"_type":"reference","_ref":"runner-gustav-birk"},"cutoff":1510}
+{"_id":"result-team-2026-7-runner-maja-ravn","_type":"result","team":{"_type":"reference","_ref":"team-2026-7"},"runner":{"_type":"reference","_ref":"runner-maja-ravn"},"cutoff":1810}
+{"_id":"result-team-2026-7-runner-simon-bro","_type":"result","team":{"_type":"reference","_ref":"team-2026-7"},"runner":{"_type":"reference","_ref":"runner-simon-bro"},"cutoff":1500}
+{"_id":"result-team-2026-7-runner-frida-moller","_type":"result","team":{"_type":"reference","_ref":"team-2026-7"},"runner":{"_type":"reference","_ref":"runner-frida-moller"},"cutoff":1670}
