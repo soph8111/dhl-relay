@@ -1,16 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useRunSession } from '../context/RunSessionContext';
 import { useReferenceRunner } from '@dhl-relay/ui';
-import { calculateTargetSeconds } from '@dhl-relay/shared';
 import { sanityClientFresh } from '../sanityClient';
 import { CtaButton } from '@/components/CtaButton';
 import { RunnerProfileCard } from '@/components/RunnerProfileCard';
-
-function formatSeconds(totalSeconds: number): string {
-  const m = Math.floor(totalSeconds / 60);
-  const s = totalSeconds % 60;
-  return `${m}:${String(s).padStart(2, '0')}`;
-}
+import { calculateRunnerResult, formatSeconds } from '@dhl-relay/shared';
 
 export default function FinishedPage() {
   const {
@@ -32,15 +26,13 @@ export default function FinishedPage() {
     : '';
   const selectedTeam = teams.find((team) => team._id === selectedTeamId);
 
-  const calculatedSeconds =
+  const calculatedResult =
     runner && reference?.resultSeconds != null && finalResultSeconds != null
-      ? calculateTargetSeconds(
-          runner.age,
-          runner.gender,
-          reference.resultSeconds,
-          reference.age,
-          reference.gender,
-        )
+      ? calculateRunnerResult(runner, finalResultSeconds, {
+          age: reference.age,
+          gender: reference.gender,
+          resultSeconds: reference.resultSeconds,
+        })
       : null;
 
   return (
@@ -64,8 +56,8 @@ export default function FinishedPage() {
           <div className="flex justify-between">
             <span className="text-surface-content-muted">Calculated time</span>
             <span className="text-surface-content font-semibold tabular-nums">
-              {calculatedSeconds != null
-                ? formatSeconds(calculatedSeconds)
+              {calculatedResult
+                ? formatSeconds(calculatedResult.comparedResultSeconds)
                 : '—'}
             </span>
           </div>

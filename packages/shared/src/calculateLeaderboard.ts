@@ -73,6 +73,31 @@ interface ReferenceRunnerInfo {
   resultSeconds: number;
 }
 
+export function calculateRunnerResult(
+  runner: Pick<Runner, 'age' | 'gender'>,
+  resultSeconds: number,
+  reference: Pick<ReferenceRunnerInfo, 'age' | 'gender' | 'resultSeconds'>,
+) {
+  const targetSeconds = calculateTargetSeconds(
+    runner.age,
+    runner.gender,
+    reference.resultSeconds,
+    reference.age,
+    reference.gender,
+  );
+
+  return {
+    targetSeconds,
+    comparedResultSeconds: comparedResultSeconds(
+      resultSeconds,
+      targetSeconds,
+      reference.resultSeconds,
+    ),
+    marginSeconds: resultSeconds - targetSeconds,
+    beatsReference: beatsReference(resultSeconds, targetSeconds),
+  };
+}
+
 export function buildLeaderboard(
   results: Array<{
     runner: Runner;
@@ -89,28 +114,17 @@ export function buildLeaderboard(
 
   return bestResults
     .map(({ runner, resultSeconds }) => {
-      const targetSeconds = calculateTargetSeconds(
-        runner.age,
-        runner.gender,
-        reference.resultSeconds,
-        reference.age,
-        reference.gender,
-      );
-
-      const comparedSeconds = comparedResultSeconds(
+      const calculated = calculateRunnerResult(
+        runner,
         resultSeconds,
-        targetSeconds,
-        reference.resultSeconds,
+        reference,
       );
 
       return {
         runner,
         resultSeconds,
-        targetSeconds,
         isReference: runner._id === reference._id,
-        comparedResultSeconds: comparedSeconds,
-        marginSeconds: resultSeconds - targetSeconds,
-        beatsReference: beatsReference(resultSeconds, targetSeconds),
+        ...calculated,
       };
     })
     .sort((a, b) => a.resultSeconds - b.resultSeconds);
