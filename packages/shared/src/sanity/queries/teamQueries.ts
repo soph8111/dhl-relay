@@ -17,7 +17,12 @@ export const getTeamRunnersQuery = /* groq */ `
       age,
       gender,
       "imageUrl": image.asset->url,
-      "resultCount": count(*[_type == "result" && runner._ref == ^._id && team._ref == $teamId])
+      "resultCount": count(*[
+        _type == "result" &&
+        runner._ref == ^._id &&
+        team._ref == $teamId &&
+        defined(result)
+      ])
     }
   }.runners
 `;
