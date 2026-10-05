@@ -13,15 +13,18 @@ export const result = defineType({
     select: {
       firstName: 'runner.firstName',
       lastName: 'runner.lastName',
+      teamName: 'team.teamName',
       media: 'runner.image',
       result: 'result',
     },
-    prepare({firstName, lastName, media, result}) {
+    prepare({firstName, lastName, teamName, media, result}) {
+      const formattedResult = result
+        ? `${Math.floor(result / 60)}:${String(result % 60).padStart(2, '0')} min`
+        : 'Intet resultat endnu'
+
       return {
         title: [firstName, lastName].filter(Boolean).join(' ') || 'Ukendt løber',
-        subtitle: result
-          ? `Resultat: ${Math.floor(result / 60)}:${String(result % 60).padStart(2, '0')} min`
-          : 'Intet resultat endnu',
+        subtitle: `${teamName ?? 'Ukendt hold'} · ${formattedResult}`,
         media: media || UserIcon,
       }
     },
