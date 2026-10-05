@@ -1,12 +1,6 @@
-import { formatSignedSeconds } from '@dhl-relay/shared';
+import { formatSeconds, formatSignedSeconds } from '@dhl-relay/shared';
 import type { LeaderboardEntry } from '@dhl-relay/shared';
 import { StarFilled, StarOutline } from '@dhl-relay/ui';
-
-function formatTime(totalSeconds: number): string {
-  const m = Math.floor(totalSeconds / 60);
-  const s = Math.round(totalSeconds % 60);
-  return `${m}:${String(s).padStart(2, '0')}`;
-}
 
 function runnerName(runner: {
   firstName: string;
@@ -74,7 +68,7 @@ export function LeaderboardCard({
       </div>
 
       <div className="w-15 md:w-24 text-right">
-        {formatTime(entry.resultSeconds)}
+        {formatSeconds(entry.resultSeconds)}
       </div>
 
       <div className="w-15 md:w-24 text-right">
@@ -82,7 +76,7 @@ export function LeaderboardCard({
           '—'
         ) : (
           <>
-            <div>{formatTime(entry.comparedResultSeconds)}</div>
+            <div>{formatSeconds(entry.comparedResultSeconds)}</div>
             <div className="text-xs text-surface-content-muted">
               {formatSignedSeconds(entry.marginSeconds)}
             </div>
