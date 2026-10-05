@@ -38,7 +38,9 @@ export function TeamStandingsCard({ client }: TeamStandingsCardProps) {
                   </span>
                 </span>
                 <span className="text-surface-content text-sm">
-                  {formatDuration(team.totalSeconds)}
+                  {team.finishedCount > 0
+                    ? formatDuration(team.totalSeconds)
+                    : '–'}
                 </span>
               </div>
             ))}
