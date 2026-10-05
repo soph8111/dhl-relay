@@ -1,3 +1,5 @@
+import { RUNNER_FRAGMENT } from '../fragments/runnerFragment';
+
 // Teams a given runner is a member of, for the current year - used in runner-app's team dropdown when starting a run
 export const getTeamsForYearQuery = /* groq */ `
   *[_type == "team" && year == $year]{
@@ -10,13 +12,7 @@ export const getTeamsForYearQuery = /* groq */ `
 export const getTeamRunnersQuery = /* groq */ `
   *[_type == "team" && _id == $teamId][0]{
     "runners": runners[]->{
-      _id,
-      firstName,
-      lastName,
-      alias,
-      age,
-      gender,
-      "imageUrl": image.asset->url,
+      ${RUNNER_FRAGMENT},
       "resultCount": count(*[
         _type == "result" &&
         runner._ref == ^._id &&
