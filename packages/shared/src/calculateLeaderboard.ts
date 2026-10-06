@@ -49,7 +49,7 @@ export function calculateTargetSeconds(
   return Math.round((normalizedReferenceSeconds + diff) * runnerFactor);
 }
 
-//
+// Calculate the runner's result in seconds compared to the reference's result, given the target time
 export function comparedResultSeconds(
   actualSeconds: number,
   targetSeconds: number,

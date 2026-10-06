@@ -28,7 +28,7 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-  console.log('User connected');
+  console.log('Runner connected');
 
   const sendActiveRunners = () => {
     socket.emit('active-runners', Array.from(activeRunners.values()));
@@ -79,6 +79,8 @@ io.on('connection', (socket) => {
         lastSeenAt: now,
       });
 
+      console.log('Run started');
+
       io.emit('active-runners', Array.from(activeRunners.values()));
     },
   );
@@ -92,6 +94,8 @@ io.on('connection', (socket) => {
       ...data,
       lastSeenAt: Date.now(),
     });
+
+    console.log('Position received and sent to clients');
 
     io.emit('update-runners', data);
   });

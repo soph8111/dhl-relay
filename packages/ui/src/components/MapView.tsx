@@ -72,11 +72,13 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
     socket.on(
       'gps-error',
       ({ runnerId, hasError }: { runnerId: string; hasError: boolean }) => {
+        console.log('GPS error received');
         setGpsErrors((prev) => ({ ...prev, [runnerId]: hasError }));
       },
     );
 
     socket.on('update-runners', (data: RunnerPosition) => {
+      console.log('Runner position received');
       setPositions((prev) => ({
         ...prev,
         [data.runnerId]: [data.lat, data.lng],

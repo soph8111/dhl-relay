@@ -80,6 +80,8 @@ export function RunSessionProvider({ children }: { children: ReactNode }) {
   const start = () => {
     if (!selectedTeamId || !selectedRunnerId) return;
 
+    console.log('[Runner] Run started');
+
     socket.emit('start', {
       runnerId: selectedRunnerId,
       teamId: selectedTeamId,
@@ -91,6 +93,8 @@ export function RunSessionProvider({ children }: { children: ReactNode }) {
     const id = navigator.geolocation.watchPosition(
       (position) => {
         if (lastGpsErrorState.current) {
+          console.log('GPS connection restored');
+
           lastGpsErrorState.current = false;
           setHasGpsError(false);
           socket.emit('gps-error', {
@@ -104,6 +108,9 @@ export function RunSessionProvider({ children }: { children: ReactNode }) {
         lastSentAt.current = now;
 
         const { latitude, longitude } = position.coords;
+
+        console.log('GPS position received');
+
         socket.emit('position', {
           runnerId: selectedRunnerId,
           lat: latitude,
@@ -111,6 +118,8 @@ export function RunSessionProvider({ children }: { children: ReactNode }) {
         });
       },
       () => {
+        console.log('GPS error');
+
         if (!lastGpsErrorState.current) {
           lastGpsErrorState.current = true;
           setHasGpsError(true);
@@ -133,6 +142,8 @@ export function RunSessionProvider({ children }: { children: ReactNode }) {
     }
 
     if (selectedRunnerId) {
+      console.log('Run finished');
+
       socket.emit('stop', { runnerId: selectedRunnerId });
     }
 
