@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
             { teamId, runnerId },
           ),
           sanityClient.fetch<number>(
-            `count(*[_type == "result" && runner._ref == $runnerId && team._ref == $teamId])`,
+            `count(*[_type == "result" && runner._ref == $runnerId && team._ref == $teamId && defined(result)])`,
             { teamId, runnerId },
           ),
         ]);
