@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
@@ -22,10 +21,7 @@ const activeRunners = new Map<string, ActiveRunner>();
 const TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes without a position
 const TIMEOUT_CHECK_INTERVAL_MS = 30 * 1000;
 
-const app = express();
-app.use(cors());
-
-const server = http.createServer(app);
+const server = http.createServer();
 
 const io = new Server(server, {
   cors: { origin: '*' },
