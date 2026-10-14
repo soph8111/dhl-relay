@@ -11,6 +11,7 @@ export interface Notification {
   isError?: boolean;
 }
 
+// Custom hook to manage notifications in the application
 export function useNotifications() {
   const [notifications, setNotifications] = useState<Notification[]>([
     // {
@@ -20,9 +21,12 @@ export function useNotifications() {
     // },
   ]);
 
+  // Function to add a new notification to the state
   const push = (text: string, options?: { isError?: boolean }) => {
+    // Generate a unique ID for the notification
     const id = `${Date.now()}-${Math.random()}`;
 
+    // Add the new notification to the state (maximum of 3)
     setNotifications((prev) => {
       const next = [
         ...prev,
@@ -33,6 +37,7 @@ export function useNotifications() {
         : next;
     });
 
+    // Set a timeout to mark the notification as exiting and remove it after the duration
     setTimeout(() => {
       setNotifications((prev) =>
         prev.map((n) => (n.id === id ? { ...n, isExiting: true } : n)),

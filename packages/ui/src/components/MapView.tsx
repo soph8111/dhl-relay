@@ -21,6 +21,7 @@ interface MapViewProps {
 }
 
 export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
+  // Get the current theme (light or dark) from the ThemeContext
   const { theme } = useTheme();
 
   const tileUrl =
@@ -28,27 +29,34 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
       ? `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${cartoApiKey}`
       : `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${cartoApiKey}`;
 
+  // Local state to keep track of runner positions and GPS errors
   const [positions, setPositions] = useState<Record<string, [number, number]>>(
     {},
   );
   const [gpsErrors, setGpsErrors] = useState<Record<string, boolean>>({});
 
+  // Fetch runners data using the custom useRunners hook
   const { runners, loading, error } = useRunners(client);
 
+  // Create a map of runner IDs to runner data for quick lookup
   const runnerMap = useMemo(() => {
     return Object.fromEntries(runners.map((runner) => [runner._id, runner]));
   }, [runners]);
 
+  // React effect to handle socket events for active runners and their positions
   useEffect(() => {
+    // Request the list of active runners from the server (before the socket connects)
     const requestActiveRunners = () => {
       socket.emit('request-active-runners');
     };
 
+    // When the socket connects, request the active runners
     socket.on('connect', requestActiveRunners);
     if (socket.connected) {
       requestActiveRunners();
     }
 
+    // Listen for the 'active-runners' event from the server (sendt from the runner-app)
     socket.on('active-runners', (activeRunners: RunnerPosition[]) => {
       setPositions((prev) => {
         const next = { ...prev };
@@ -69,6 +77,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
       });
     });
 
+    // Listen for GPS error events from the server
     socket.on(
       'gps-error',
       ({ runnerId, hasError }: { runnerId: string; hasError: boolean }) => {
@@ -77,6 +86,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
       },
     );
 
+    // Listen for runner position updates from the server
     socket.on('update-runners', (data: RunnerPosition) => {
       console.log('Runner position received');
       setPositions((prev) => ({
@@ -85,6 +95,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
       }));
     });
 
+    // Function to handle runner stopped or timed out events by removing their positions and GPS errors
     const remove = ({ runnerId }: { runnerId: string }) => {
       setPositions((prev) => {
         const next = { ...prev };
@@ -98,9 +109,11 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
       });
     };
 
+    // Call the remove function when a runner stops or times out
     socket.on('runner-stopped', remove);
     socket.on('runner-timed-out', remove);
 
+    // Cleanup function. Stop listening to socket events
     return () => {
       socket.off('connect', requestActiveRunners);
       socket.off('active-runners');
@@ -111,6 +124,7 @@ export function MapView({ client, socket, cartoApiKey }: MapViewProps) {
     };
   }, [socket]);
 
+  // Default center coordinates for the map (Copenhagen, Denmark)
   const defaultCenter: [number, number] = [
     55.70107442646823, 12.568908098436069,
   ];

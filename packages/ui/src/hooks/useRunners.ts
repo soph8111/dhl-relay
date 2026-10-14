@@ -7,6 +7,7 @@ export function useRunners(client: SanityClient) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Fetch runners from Sanity and update the state
   useEffect(() => {
     client
       .fetch(getRunnersQuery)

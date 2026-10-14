@@ -16,6 +16,7 @@ export function useTeamRunners(client: SanityClient, teamId: string | null) {
 
     setLoading(true);
 
+    // Fetch runners for the given team from Sanity and update the state
     const fetchRunners = () => {
       client
         .fetch<TeamRunner[]>(getTeamRunnersQuery, { teamId })
@@ -31,6 +32,7 @@ export function useTeamRunners(client: SanityClient, teamId: string | null) {
 
     fetchRunners();
 
+    // Subscribe to changes in the "result" documents to update the runners when results change
     const subscription = client
       .listen(`*[_type == "result"]`, {}, { visibility: 'query' })
       .subscribe(() => fetchRunners());

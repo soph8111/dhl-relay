@@ -8,6 +8,7 @@ import {
   type Gender,
 } from '@dhl-relay/shared';
 
+// Custom hook to fetch leaderboard data from Sanity and listen for changes in the "result" documents
 interface ReferenceRunnerResult {
   _id: string;
   age: number;
@@ -24,10 +25,12 @@ export function useLeaderboard(client: SanityClient) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Get current year
     const year = new Date().getFullYear();
 
     const fetchLeaderboard = async () => {
       try {
+        // Fetch reference runner and results. Using queries from shared package
         const [reference, results] = await Promise.all([
           client.fetch<ReferenceRunnerResult | null>(getReferenceRunnerQuery, {
             year,
@@ -47,6 +50,7 @@ export function useLeaderboard(client: SanityClient) {
           return;
         }
 
+        // Build leaderboard using the buildLeaderboard function from the shared package
         const leaderboard = buildLeaderboard(results, {
           runnerId: reference._id,
           age: reference.age,
@@ -54,6 +58,7 @@ export function useLeaderboard(client: SanityClient) {
           resultSeconds: reference.resultSeconds,
         });
 
+        // Update state with the fetched leaderboard data
         setError(null);
         setReferenceRunnerId(reference._id);
         setEntries(leaderboard);
@@ -67,6 +72,7 @@ export function useLeaderboard(client: SanityClient) {
 
     fetchLeaderboard();
 
+    // Subscribe to changes in the "result" documents to update the leaderboard when results change
     const subscription = client
       .listen(`*[_type == "result"]`, {}, { visibility: 'query' })
       .subscribe(() => fetchLeaderboard());
