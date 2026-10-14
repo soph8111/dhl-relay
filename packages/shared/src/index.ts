@@ -1,8 +1,11 @@
 export * from './types';
-export { getRunnersQuery } from './sanity/queries/runnerQueries';
+export {
+  getRunnersQuery,
+  getReferenceRunnerQuery,
+} from './sanity/queries/runnerQueries';
 export {
   getResultsQuery,
-  getReferenceRunnerQuery,
+  getPendingResultQuery,
 } from './sanity/queries/resultQueries';
 export { createSanityClient, type SanityConfig } from './sanity/sanityClient';
 export { createSocket } from './socketClient';
@@ -23,4 +26,3 @@ export {
   getTeamRunnersQuery,
 } from './sanity/queries/teamQueries';
 export { buildTeamStandings, type TeamStanding } from './teamStats';
-export { getPendingResultQuery } from './sanity/queries/resultQueries';

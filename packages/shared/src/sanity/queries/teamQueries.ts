@@ -1,6 +1,6 @@
 import { RUNNER_FRAGMENT } from '../fragments/runnerFragment';
 
-// Teams a given runner is a member of, for the current year - used in runner-app's team dropdown when starting a run
+// Get all teams for a given year
 export const getTeamsForYearQuery = /* groq */ `
   *[_type == "team" && year == $year]{
     _id,
@@ -8,7 +8,7 @@ export const getTeamsForYearQuery = /* groq */ `
   }
 `;
 
-// Members of a specific team, for the "choose runner" dropdown that appears once a team is selected.
+// Get all runners for a given team
 export const getTeamRunnersQuery = /* groq */ `
   *[_type == "team" && _id == $teamId][0]{
     "runners": runners[]->{
@@ -23,6 +23,7 @@ export const getTeamRunnersQuery = /* groq */ `
   }.runners
 `;
 
+// Get the team and results for a given year
 export const getTeamStandingsQuery = /* groq */ `
   {
     "teams": *[_type == "team" && year == $year]{

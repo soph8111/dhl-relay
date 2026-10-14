@@ -1,4 +1,4 @@
-import type { Gender } from './types';
+import type { Gender, ReferenceRunner } from './types';
 import { calculateTargetSeconds, beatsReference } from './calculateLeaderboard';
 
 export interface EventStats {
@@ -16,22 +16,16 @@ interface FinishedResult {
   cutoffSeconds: number | null;
   runner: { age: number; gender: Gender };
 }
-interface ReferenceInfo {
-  runnerId: string;
-  age: number;
-  gender: Gender;
-  resultSeconds: number;
-}
 
 const ROUTE_DISTANCE_KM = 5;
 
+// Function that returns all the stats giving in the EventStats interface
 export function calculateEventStats(
   results: FinishedResult[],
   totalCount: number,
-  reference: ReferenceInfo,
+  reference: ReferenceRunner,
 ): EventStats {
-  const finishedCount = results.length;
-
+  // Group results by runnerId. Used for counting how many runners beat the reference and closest miss
   const resultsByRunner = new Map<string, FinishedResult[]>();
   for (const r of results) {
     const list = resultsByRunner.get(r.runnerId) ?? [];
@@ -43,16 +37,13 @@ export function calculateEventStats(
   let beatsCutoffCount = 0;
   let closestMissSeconds: number | null = null;
 
+  // Count how many runners beat the reference and find the closest miss
   for (const [runnerId, runnerResults] of resultsByRunner) {
-    for (const r of runnerResults) {
-      if (r.cutoffSeconds != null && r.resultSeconds <= r.cutoffSeconds) {
-        beatsCutoffCount++;
-      }
-    }
-
     if (runnerId === reference.runnerId) continue;
 
     const { age, gender } = runnerResults[0]!.runner;
+
+    // Calculate the target seconds for this runner based on their age and gender
     const targetSeconds = calculateTargetSeconds(
       age,
       gender,
@@ -61,28 +52,43 @@ export function calculateEventStats(
       reference.gender,
     );
 
+    // Check if any of the runner's results beat the reference
     const wonDayOff = runnerResults.some((r) =>
       beatsReference(r.resultSeconds, targetSeconds),
     );
 
+    // Update counts and closest miss
     if (wonDayOff) {
       beatsReferenceCount++;
     } else {
+      // Find the best margin for this runner
       const bestMargin = Math.min(
         ...runnerResults.map((r) => r.resultSeconds - targetSeconds),
       );
+      // Update closest miss if this is the best margin we've seen so far
       if (closestMissSeconds === null || bestMargin < closestMissSeconds) {
         closestMissSeconds = bestMargin;
       }
     }
   }
 
+  // Count how many runners beat the cutoff
+  for (const r of results) {
+    if (r.cutoffSeconds != null && r.resultSeconds <= r.cutoffSeconds) {
+      beatsCutoffCount++;
+    }
+  }
+
+  const finishedCount = results.length;
+
+  // Calculate average pace
   const averagePaceSecondsPerKm =
     finishedCount === 0
       ? null
       : results.reduce((sum, r) => sum + r.resultSeconds, 0) /
         (finishedCount * ROUTE_DISTANCE_KM);
 
+  // Calculate average time
   const averageTimeSeconds =
     finishedCount === 0
       ? null

@@ -16,6 +16,14 @@ export interface RunnerPosition {
   timestamp?: number;
 }
 
+export interface ReferenceRunner {
+  runnerId: string;
+  age: number;
+  gender: Gender;
+  resultSeconds: number;
+}
+
+// Not used. Should be removed
 export interface Result {
   _id: string;
   year: number;

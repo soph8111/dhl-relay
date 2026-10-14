@@ -1,16 +1,6 @@
 import { RUNNER_FRAGMENT } from '../fragments/runnerFragment';
 
-export const getReferenceRunnerQuery = /* groq */ `
-  *[_type == "runner" && isReferenceRunner == true][0]{
-    _id,
-    firstName,
-    alias,
-    age,
-    gender,
-    "resultSeconds": *[_type == "result" && references(^._id) && team->year == $year][0].result
-  }
-`;
-
+// Get the results for a given year
 export const getResultsQuery = /* groq */ `
   *[_type == "result" && team->year == $year && defined(result)]{
     "resultSeconds": result,
@@ -20,6 +10,7 @@ export const getResultsQuery = /* groq */ `
   }
 `;
 
+// Get unfinished result for a given runner and team
 export const getPendingResultQuery = /* groq */ `
   *[_type == "result" && runner._ref == $runnerId && team._ref == $teamId && !defined(result)][0]{
     _id,

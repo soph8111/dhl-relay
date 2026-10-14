@@ -23,10 +23,9 @@ export function buildTeamStandings(
   teams: TeamResult[],
   results: RunnerResult[],
 ): TeamStanding[] {
+  // Calculate total seconds and finished count for each team
   const withStats = teams.map((team) => {
-    const teamResults = results.filter(
-      (r) => r.teamId === team._id && team.runnerIds.includes(r.runnerId),
-    );
+    const teamResults = results.filter((r) => r.teamId === team._id);
 
     const totalSeconds = teamResults.reduce(
       (sum, r) => sum + r.resultSeconds,
@@ -43,10 +42,12 @@ export function buildTeamStandings(
     };
   });
 
+  // Sort complete teams by total seconds
   const complete = withStats
     .filter((t) => t.isComplete)
     .sort((a, b) => a.totalSeconds - b.totalSeconds);
 
+  // Sort incomplete teams by finished count
   const incomplete = withStats
     .filter((t) => !t.isComplete)
     .sort((a, b) => b.finishedCount - a.finishedCount);

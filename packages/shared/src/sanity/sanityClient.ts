@@ -1,4 +1,6 @@
 // Sanity client configuration. Used by client and runner-app (read-only) and server (read/write) to talk to Sanity.
+// useCdn=true, faster response, but may return outdated data. useCdn=false, slower response, but always the latest data.
+// Token is only needed for write operations (server)
 
 import { createClient, type SanityClient } from '@sanity/client';
 
