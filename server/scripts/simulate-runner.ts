@@ -1,14 +1,14 @@
 import { io } from 'socket.io-client';
-import { DHL_ROUTE_2026 } from '@dhl-relay/ui';
+import { DHL_ROUTE_2026 } from '../scripts/dhlRoute2026';
 
-// In terminal: run "npx tsx server/scripts/simulate-runner.ts <RUNNER_ID>" to simulate a runner moving along the DHL route
-// The runner will move at a constant speed of 30 km/h and send its position to the server every 5 seconds
+// In terminal: run "npx tsx server/scripts/simulate-runner.ts <RUNNER_ID> <TEAM_ID> <RENDER-SERVER-URL>" to simulate a runner moving along the DHL route
+// The runner will move at a constant speed of 30 km/h and send its position to the server every 3 seconds
 // The simulation will stop when the runner reaches the end of the route
 
 const ROUTE = DHL_ROUTE_2026;
 
-const SPEED_KMH = 30; // sped up on purpose for fast testing
-const SEND_INTERVAL_MS = 5000; // matches runner-app's throttle interval
+const SPEED_KMH = 100; // sped up on purpose for fast testing
+const SEND_INTERVAL_MS = 3000; // matches runner-app's throttle interval
 
 function haversine(
   [lat1, lng1]: [number, number],
@@ -44,12 +44,16 @@ function positionAtDistance(distance: number): [number, number] {
 }
 
 const runnerId = process.argv[2];
-if (!runnerId) {
-  console.error('Usage: npx tsx server/scripts/simulate-runner.ts <runnerId>');
+const teamId = process.argv[3];
+
+if (!runnerId || !teamId) {
+  console.error(
+    'Usage: npx tsx scripts/simulate-runner.ts <runnerId> <teamId> [serverUrl]',
+  );
   process.exit(1);
 }
 
-const serverUrl = process.argv[3] ?? 'http://localhost:3000';
+const serverUrl = process.argv[4] ?? 'http://localhost:3000';
 const socket = io(serverUrl);
 
 console.log(`Route length: ${(totalDistance / 1000).toFixed(2)} km`);
@@ -59,7 +63,7 @@ const speedMps = (SPEED_KMH * 1000) / 3600;
 
 socket.on('connect', () => {
   console.log(`Simulated runner connected (${runnerId})`);
-  socket.emit('start', { runnerId });
+  socket.emit('start', { runnerId, teamId });
 
   const interval = setInterval(() => {
     distanceCovered += speedMps * (SEND_INTERVAL_MS / 1000);
@@ -77,6 +81,11 @@ socket.on('connect', () => {
     const [lat, lng] = positionAtDistance(distanceCovered);
     socket.emit('position', { runnerId, lat, lng });
   }, SEND_INTERVAL_MS);
+});
+
+socket.on('start-error', ({ message }: { message: string }) => {
+  console.error(`Could not start simulation: ${message}`);
+  socket.disconnect();
 });
 
 socket.on('disconnect', () => {
