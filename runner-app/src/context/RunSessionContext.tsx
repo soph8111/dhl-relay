@@ -5,6 +5,7 @@ interface Team {
   teamName: string;
 }
 
+// How the context value should look like
 export interface RunSessionContextValue {
   teams: Team[];
   teamsLoading: boolean;
@@ -27,6 +28,7 @@ export interface RunSessionContextValue {
   reset: () => void;
 }
 
+// Create the context
 export const RunSessionContext = createContext<
   RunSessionContextValue | undefined
 >(undefined);
