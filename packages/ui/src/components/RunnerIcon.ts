@@ -11,7 +11,11 @@ export function RunnerIcon(
     className: 'transition-transform duration-[3000ms] ease-linear',
     html: `
       <div class="relative w-6 h-6 group">
-        <span class="animate-ping absolute -z-10 inset-0 rounded-full bg-accent opacity-70"></span>
+        ${
+          !hasGpsError
+            ? `<span class="animate-ping absolute -z-10 inset-0 rounded-full bg-accent opacity-70"></span>`
+            : ''
+        }
         <div class="w-6 h-6 rounded-full border border-white shadow-lg overflow-hidden ${!imageUrl ? 'bg-gray-300' : ''}">
           ${
             imageUrl

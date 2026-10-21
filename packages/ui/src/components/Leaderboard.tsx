@@ -41,10 +41,14 @@ export function Leaderboard({ client, onSelectEntry }: LeaderboardProps) {
                 <motion.div
                   key={entry.runner._id}
                   layout
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+                  initial={{ opacity: 0, y: '100vh' }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, transition: { duration: 0.3 } }}
+                  transition={{
+                    duration: 1.2,
+                    ease: 'easeOut',
+                    layout: { duration: 0.8, ease: 'easeInOut' },
+                  }}
                 >
                   <LeaderboardCard
                     rank={index + 1}
